@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  color: #{$black};
+}
+
+// login/SignUp標題
+h2 {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+// 橫幅標題, Navbar項目, 卡片標題
+h3 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+// 推文 icon 文字: heart, comments
+h6 {
+  font-size: 13px;
+  font-weight:500
+}
+
+// label default
+.input-group {
+  width: 350px;
+  // label
+  .label {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 52px;
+    border-bottom: 2px solid #{$black};
+    border-radius: 4px 4px 0px 0px;
+    padding: 5px 10px;
+    font-size: 15px;
+    color: #{$label-font};
+    background-color: #{$label-background};
+    &:hover, &:focus {
+      outline: 0;
+      border-bottom: 2px solid #{$blue};
+    }
+  }
+  // input
+  input[type="text"] {
+    border: none;
+    outline: none;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 100%;
+    color: #{$black};
+    background-color: unset;
+    font-size: 19px;
+    font-weight: 500;
+    &:hover, &:focus {
+      outline: 0;
+      border: 0
+    }
+  }
+  // wordLimit
+  .wordLimit {
+    margin-top: 5px;
+    text-align: right;
+    color: #{$label-font};
+  }
+  // error 樣式 (聯動字數限制之樣式)
+  .isInvalid {
+    outline: 0;
+    border-bottom: 2px solid #{$red};
+    ~ .wordLimit {
+      color: #{$red};
+    }
+  }
+}
+
+
+// default buttons: 登入/推文/跟隨
+.btn {
+  border: 1px solid #{$orange};
+  border-radius: 100px;
+  padding: 10px 15px;
+  color: #{$orange};
+  background-color: unset;
+}
+.active {
+  color: #{$white};
+  background-color: #{$orange};
+}

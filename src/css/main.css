@@ -1,0 +1,89 @@
+* {
+  font-family: 'Noto Sans TC', sans-serif;
+  color: #1C1C1C;
+}
+
+h2 {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn, .btnActive {
+  border: 1px solid #FF6600;
+  border-radius: 100px;
+  padding: 10px 15px;
+}
+
+.label {
+  display: inline-block;
+  position: relative;
+  width: 350px;
+  height: 52px;
+  border-bottom: 2px solid #1C1C1C;
+  border-radius: 4px 4px 0px 0px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: #657786;
+  background-color: #F5F8FA;
+}
+
+.label:hover, .label:focus {
+  outline: 0;
+  border-bottom: 2px solid #0099FF;
+}
+
+.isInvalid {
+  outline: 0;
+  border-bottom: 2px solid #FC5A5A;
+}
+
+input[type="text"] {
+  border: none;
+  outline: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  color: #1C1C1C;
+  background-color: unset;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+input[type="text"]:hover, input[type="text"]:focus {
+  outline: 0;
+  border: 0;
+}
+
+.btn {
+  color: #FF6600;
+  background-color: unset;
+}
+
+.btnActive {
+  color: #FFFFFF;
+  background-color: #FF6600;
+}
+/*# sourceMappingURL=main.css.map */

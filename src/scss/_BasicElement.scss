@@ -36,13 +36,12 @@ h6 {
 }
 
 // label default
-.input-group {
-  width: 350px;
+.form-wrapper {
+  width: 100%;
   // label
   .label {
-    display: inline-block;
+    display: block;
     position: relative;
-    width: 100%;
     height: 52px;
     border-bottom: 2px solid #{$black};
     border-radius: 4px 4px 0px 0px;
@@ -65,7 +64,7 @@ h6 {
     position: absolute;
     bottom: 0;
     left: 10px;
-    width: 100%;
+    width: 520px;
     color: #{$black};
     background-color: unset;
     font-size: 19px;
@@ -76,29 +75,33 @@ h6 {
     }
   }
   // wordLimit
-  .wordLimit {
-    margin-top: 5px;
-    text-align: right;
+  .wordLimit-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
     color: #{$label-font};
+    h5 {
+      margin: 5px 0 10px;
+    }
   }
   // error 樣式 (聯動字數限制之樣式)
   .isInvalid {
-    outline: 0;
-    border-bottom: 2px solid #{$red};
-    ~ .wordLimit {
+    border-color: #{$red};
+    + .wordLimit-wrapper {
       color: #{$red};
     }
   }
 }
 
-
 // default buttons: 登入/推文/跟隨
 .btn {
+  width: 100%;
   border: 1px solid #{$orange};
   border-radius: 100px;
   padding: 10px 15px;
   color: #{$orange};
   background-color: unset;
+  cursor: pointer;
 }
 .active {
   color: #{$white};

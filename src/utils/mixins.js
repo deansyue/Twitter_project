@@ -35,3 +35,9 @@ export const numberFormatEndFilter = {
     }
   }
 }//回傳資料為字串時適用若為數字需更改
+
+// email格式驗證，參考 https://hackmd.io/@FortesHuang/rJf6CYynS
+export const checkEmail = (val) => {
+  const validate = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+  return validate.test(val)
+}

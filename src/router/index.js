@@ -20,7 +20,12 @@ const routes = [
     path: '*',
     name: 'Not-found',
     component: NotFound
-  }
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('../views/Setting.vue')
+  },
 ]
 
 const router = new VueRouter({

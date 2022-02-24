@@ -1,0 +1,35 @@
+.formContainer{
+  width: 640px;
+  margin: 65px 0 65px 16px;
+  h2 {
+    text-align: center;
+    margin: 25px 0 40px;
+  }
+  button {
+    margin: 10px 0 20px 530px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 116px;
+  }
+  .link-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #{$blue};
+    .link {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 26px;
+      &:visited {
+        color: #{$blue};
+      }
+      &:hover {
+        color: #{$orange};
+      }
+    }
+    span {
+      font-size: 10px;
+      margin: 0 5px;
+    }
+  }
+}

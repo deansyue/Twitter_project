@@ -1,5 +1,5 @@
 <template>
-  <div class="formContainer">
+  <div class="signEditing-wrapper">
     <div class="form-wrapper">
       <form id="signEditingForm" @submit.prevent.stop="handleFormSubmit">
         <!-- 輸入框 -->

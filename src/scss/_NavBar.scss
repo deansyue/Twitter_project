@@ -1,4 +1,4 @@
-.navBar {
+.navBar-wrapper {
   height: 100%;
   width: 100%;
   position: relative;
@@ -8,9 +8,7 @@
     left: 30%;
     background: #{$white};
   }
-  .logo{
-    width: 30px;
-    height: 30px;
+  .logo{  
     margin-left: 5px;
   }
   .navItem {
@@ -27,13 +25,7 @@
       margin-right: 24px;
     }
   }
-  .content,
-  .logoutTab {
-    img {
-      width: 23px;
-      height: 23px;
-    }
-  }
+  
   
   .router-link-exact-active,
   .navItem:hover {
@@ -60,7 +52,7 @@
   .logoutTab {
     position: absolute;
     left: 30%;
-    bottom: 5%;
+    top: 95%;
   }
   .logoutButton {
     background-color: unset;

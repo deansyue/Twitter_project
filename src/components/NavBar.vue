@@ -1,5 +1,5 @@
 <template>
-  <div class="navBar">
+  <div class="navBar-wrapper">
     <div class="container">
       <div class="logoContainer">
         <router-link to="/main">

@@ -1,0 +1,24 @@
+.signup-wrapper{
+  margin-top: 65px;
+  h2 {
+    text-align: center;
+    margin: 25px 0 40px;
+  }
+  .formContainer{
+    width: 540px;
+    margin: 0 auto;
+    button{
+      width: 540px;
+      margin: 10px 0 20px 0;
+    }
+  }
+  .cancel-wrapper{
+    text-align: center;
+    font-weight: 700;
+    font-size: 19px;
+    .link{
+      text-decoration: none;
+      color: #{$blue};
+    }
+  }
+}

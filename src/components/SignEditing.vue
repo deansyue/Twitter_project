@@ -1,7 +1,7 @@
 <template>
   <div class="formContainer">
     <div class="form-wrapper">
-      <form id="signInForm" @submit.prevent.stop="handleFormSubmit">
+      <form id="signEditingForm" @submit.prevent.stop="handleFormSubmit">
         <!-- 輸入框 -->
         <label for="" :class="['label', { isInvalid: account.isInvalid }]">
           帳號
@@ -54,13 +54,13 @@
           <h5>{{ worLimitMessage(passwordCheck) }}</h5>
           <h5>{{ wordLimitCount(passwordCheck) }}</h5>
         </div>
-        <button type="submit" form="signInForm" class="btn active">儲存</button>
+        <button type="submit" form="signEditingForm" class="btn active">儲存</button>
       </form>
     </div>
   </div>
 </template>
 <script>
-
+import { Toast } from "../utils/helpers";
 export default {
   props: {
     currentUser: {
@@ -130,13 +130,32 @@ export default {
     },
     handleFormSubmit(e) {
       // todo: sweet alert 2
-      if (!this.account.text) return console.log("帳號不可空白");
-      else if (!this.name.text) return console.log("名稱不可空白");
-      else if (!this.email.text) return console.log("信箱不可空白");
-      else if (!this.password.text) return console.log("密碼不可空白");
-      else if (!this.passwordCheck.text) return console.log("密碼確認不可空白");
-      else if (this.password.text !== this.passwordCheck.text)
-        return console.log("密碼確認與密碼不同");
+      const account = this.account.text;
+      const name = this.name.text;
+      const email = this.email.text;
+      const password = this.password.text;
+      const passwordCheck = this.passwordCheck.text;
+      if (!account || !name || !email || !password || !passwordCheck)
+        return Toast.fire({
+          icon: "error",
+          title: "尚有未填寫欄位",
+        });
+      else if (password !== passwordCheck)
+        return Toast.fire({
+          icon: "error",
+          title: "密碼確認與密碼不同",
+        });
+      else if (
+        account.length > 50 ||
+        name.length > 50 ||
+        email.length > 50 ||
+        password.length > 50 ||
+        passwordCheck.length > 50
+      )
+        return Toast.fire({
+          icon: "error",
+          title: "字數超過上限",
+        });
       // todo: connect API - POST
       const form = e.target;
       const formData = new FormData(form);

@@ -1,0 +1,123 @@
+// 上半部：變數
+// 下半部：icon className (部分有大小之分)
+// 使用 <img class="className" alt=""> 即可
+// 並未設定 :hover → 各分頁配合 .router-link-exact-active使用
+
+$logo: url("./assets/icon/Logo.png");
+$arrow: url("./assets/icon/arrow.png");
+$cross-or: url("./assets/icon/cross-or.png");
+$cross-wt: url("./assets/icon/cross-wt.png");
+$heartActive: url("./assets/icon/heartActive.png");
+$heart: url("./assets/icon/heart.png");
+$home: url("./assets/icon/home.png");
+$homeActive: url("./assets/icon/homeActive.png");
+$logout: url("./assets/icon/logout.png");
+$message: url("./assets/icon/message.png");
+$notice: url("./assets/icon/notice.png");
+$noticeActive: url("./assets/icon/noticeActive.png");
+$person: url("./assets/icon/person.png");
+$personActive: url("./assets/icon/personActive.png");
+$reply: url("./assets/icon/reply.png");
+$setting: url("./assets/icon/setting.png");
+$settingActive: url("./assets/icon/settingActive.png");
+$uploadPhoto: url("./assets/icon/uploadPhoto.png");
+
+%icon {
+  width: 25px;
+}
+
+// 登入、管理者登入、註冊頁面使用
+.logo-big {
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 0 auto;
+  content: #{$logo};
+}
+
+// 導覽列使用
+.logo {
+  @extend %icon;
+  content: #{$logo};
+}
+
+.home {
+  @extend %icon;
+  content: #{$home};
+}
+
+.person {
+  width: 17px;
+  content: #{$person};
+}
+
+.setting {
+  @extend %icon;
+  content: #{$setting};
+}
+
+.logout {
+  @extend %icon;
+  content: #{$logout};
+}
+
+// 貼文使用
+.heart {
+  width: 13px;
+  height: 13px;
+  content: #{$heart};
+}
+
+.heart-big {
+  @extend %icon;
+  content: #{$heart};
+}
+
+.reply {
+  width: 13px;
+  height: 13px;
+  content: #{$reply};
+}
+
+.reply-big {
+  @extend %icon;
+  content: #{$reply};
+}
+
+// UserCard 使用
+.message {
+  width: 35px;
+  height: 35px;
+  content: #{$message};
+}
+
+.notice {
+  width: 35px;
+  height: 35px;
+  content: #{$notice};
+}
+
+// other
+.arrow {
+  width: 17px;
+  height: 14px;
+  content: #{$arrow};
+}
+
+.cross-orange {
+  width: 15px;
+  height: 15px;
+  content: #{$cross-or};
+}
+
+.cross-white {
+  width: 15px;
+  height: 15px;
+  content: #{$cross-wt};
+}
+
+.camera {
+  width: 20px;
+  height: 20px;
+  content: #{$uploadPhoto}
+}

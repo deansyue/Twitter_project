@@ -1,0 +1,87 @@
+.navBar {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  .container {
+    position: absolute;
+    top: 14px;
+    left: 103px;
+    background: #{$white};
+  }
+  .logoImg {
+    content: #{$logo};
+  }
+  .navItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    color: #{$black};
+    margin-top: 30px;
+    .icon {
+      margin-left: 10px;
+      margin-right: 24px;
+    }
+  }
+  .content,
+  .logoutTab {
+    img {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .homeImg {
+    content: #{$home};
+  }
+  .personImg {
+    content: #{$person};
+  }
+  .settingImg {
+    content: #{$setting};
+  }
+  .router-link-exact-active,
+  .navItem:hover {
+    color: #{$orange};
+    .homeImg{
+      content: #{$homeActive};
+    }
+    .personImg {
+      content: #{$personActive};
+    }
+    .settingImg {
+      content: #{$settingActive};
+    }
+  }
+  .btn {
+    width: 210px;
+    background: #{$orange};
+    color: #{$white};
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 30px;
+  }
+  .logoutImg{
+  content: #{$logout};
+  }
+
+  .logoutTab {
+    position: absolute;
+    left: 114px;
+    bottom: 5%;
+  }
+  .logoutButton {
+    background-color: unset;
+    border: unset;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    .icon {
+      margin-left: 10px;
+      margin-right: 24px;
+    }
+  }
+}

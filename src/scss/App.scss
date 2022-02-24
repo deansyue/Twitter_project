@@ -1,9 +1,19 @@
+// basic
 @import "/node_modules/reset-css/sass/reset"; // reset-css
 @import "../scss/Color";
 @import "../scss/Framework";
 @import "../scss/BasicElement";
 @import "../scss/Icon";
 @import "../scss/Utils"; // for sweet alert 2
+
+// login
 @import "../scss/SignIn";
+@import "../scss/SignUp";
+@import "../scss/SignEditing";
+
+// component
 @import "../scss/NavBar";
 @import "../scss/TweetCard";
+
+// views
+@import "../scss/Setting";

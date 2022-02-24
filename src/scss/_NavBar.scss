@@ -1,15 +1,15 @@
-.navBar {
+.navBar-wrapper {
   height: 100%;
   width: 100%;
   position: relative;
   .container {
     position: absolute;
     top: 14px;
-    left: 103px;
+    left: 30%;
     background: #{$white};
   }
-  .logoImg {
-    content: #{$logo};
+  .logo{  
+    margin-left: 5px;
   }
   .navItem {
     display: flex;
@@ -25,32 +25,18 @@
       margin-right: 24px;
     }
   }
-  .content,
-  .logoutTab {
-    img {
-      width: 25px;
-      height: 25px;
-    }
-  }
-  .homeImg {
-    content: #{$home};
-  }
-  .personImg {
-    content: #{$person};
-  }
-  .settingImg {
-    content: #{$setting};
-  }
+  
+  
   .router-link-exact-active,
   .navItem:hover {
     color: #{$orange};
-    .homeImg{
+    .home{
       content: #{$homeActive};
     }
-    .personImg {
+    .person {
       content: #{$personActive};
     }
-    .settingImg {
+    .setting {
       content: #{$settingActive};
     }
   }
@@ -62,14 +48,11 @@
     font-size: 18px;
     margin-top: 30px;
   }
-  .logoutImg{
-  content: #{$logout};
-  }
 
   .logoutTab {
     position: absolute;
-    left: 114px;
-    bottom: 5%;
+    left: 30%;
+    top: 95%;
   }
   .logoutButton {
     background-color: unset;

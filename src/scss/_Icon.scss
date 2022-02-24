@@ -22,10 +22,6 @@ $setting: url("./assets/icon/setting.png");
 $settingActive: url("./assets/icon/settingActive.png");
 $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 
-%icon {
-  width: 25px;
-}
-
 // 登入、管理者登入、註冊頁面使用
 .logo-big {
   width: 50px;
@@ -37,27 +33,32 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 
 // 導覽列使用
 .logo {
-  @extend %icon;
+  width: 30px;
+  height: 30px;
   content: #{$logo};
 }
 
 .home {
-  @extend %icon;
+  width: 23px;
+  height: 23px;
   content: #{$home};
 }
 
 .person {
-  width: 17px;
+  width: 23px;
+  height: 23px;
   content: #{$person};
 }
 
 .setting {
-  @extend %icon;
+  width: 23px;
+  height: 23px;
   content: #{$setting};
 }
 
 .logout {
-  @extend %icon;
+  width: 23px;
+  height: 23px;
   content: #{$logout};
 }
 
@@ -69,7 +70,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 }
 
 .heart-big {
-  @extend %icon;
+  width: 25px;
   content: #{$heart};
 }
 
@@ -80,7 +81,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 }
 
 .reply-big {
-  @extend %icon;
+  width: 25px;
   content: #{$reply};
 }
 

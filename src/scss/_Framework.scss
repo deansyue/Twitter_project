@@ -1,0 +1,25 @@
+// APP 單欄框架
+.app-single-column {
+  width: 540px;
+  margin: 0 auto;
+}
+
+// APP 雙欄框架
+.app-double-column {
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: 26% 74%;
+  margin: 0 auto;
+}
+
+// APP 三欄框架
+.app-tripple-column {
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: 26% 42% 32%;
+  margin: 0 auto;
+  .middle-container {
+  border-left: 1px solid #{$frameColor};
+  border-right: 1px solid #{$frameColor};
+  }
+}

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
+import Main from '../views/Main.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -13,8 +14,13 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'SignIn',
+    name: 'sign-in',
     component: SignIn
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: Main
   },
   {
     path: '/setting',
@@ -23,7 +29,7 @@ const routes = [
   },
   {
     path: '*',
-    name: 'Not-found',
+    name: 'not-found',
     component: NotFound
   },
 ]

@@ -1,16 +1,16 @@
 <template>
   <div class="navBar">
     <div class="container">
-      <div class="logo">
+      <div class="logoContainer">
         <router-link to="/main">
-          <img class="logoImg" alt="" />
+          <img class="logo" alt="" />
         </router-link>
       </div>
       <div class="content">
         <div class="homeTab">
           <router-link class="navItem" to="/main">
             <div class="icon">
-              <img class="homeImg" alt="" />
+              <img class="home" alt="" />
             </div>
             首頁
           </router-link>
@@ -18,7 +18,7 @@
         <div class="selfTab">
           <router-link class="navItem" to="/users/self">
             <div class="icon">
-              <img class="personImg" alt="" />
+              <img class="person" alt="" />
             </div>
             個人資料
           </router-link>
@@ -26,7 +26,7 @@
         <div class="settingTab">
           <router-link class="navItem" to="/setting">
             <div class="icon">
-              <img class="settingImg" alt="" />
+              <img class="setting" alt="" />
             </div>
             設定
           </router-link>
@@ -37,7 +37,7 @@
     <div class="logoutTab">
       <button class="logoutButton">
         <div class="icon">
-          <img class="logoutImg" alt="" />
+          <img class="logout" alt="" />
         </div>
         登出
       </button>

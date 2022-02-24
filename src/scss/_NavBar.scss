@@ -5,11 +5,13 @@
   .container {
     position: absolute;
     top: 14px;
-    left: 103px;
+    left: 30%;
     background: #{$white};
   }
-  .logoImg {
-    content: #{$logo};
+  .logo{
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
   }
   .navItem {
     display: flex;
@@ -28,29 +30,21 @@
   .content,
   .logoutTab {
     img {
-      width: 25px;
-      height: 25px;
+      width: 23px;
+      height: 23px;
     }
   }
-  .homeImg {
-    content: #{$home};
-  }
-  .personImg {
-    content: #{$person};
-  }
-  .settingImg {
-    content: #{$setting};
-  }
+  
   .router-link-exact-active,
   .navItem:hover {
     color: #{$orange};
-    .homeImg{
+    .home{
       content: #{$homeActive};
     }
-    .personImg {
+    .person {
       content: #{$personActive};
     }
-    .settingImg {
+    .setting {
       content: #{$settingActive};
     }
   }
@@ -62,13 +56,10 @@
     font-size: 18px;
     margin-top: 30px;
   }
-  .logoutImg{
-  content: #{$logout};
-  }
 
   .logoutTab {
     position: absolute;
-    left: 114px;
+    left: 30%;
     bottom: 5%;
   }
   .logoutButton {

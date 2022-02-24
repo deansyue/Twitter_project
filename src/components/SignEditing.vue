@@ -60,7 +60,20 @@
   </div>
 </template>
 <script>
+
 export default {
+  props: {
+    currentUser: {
+      type: Object,
+      default: () => ({
+        id: "",
+        account: "",
+        name: "",
+        email: "",
+        password: "",
+      }),
+    },
+  },
   data() {
     return {
       // input 一個輸入框為一組
@@ -106,18 +119,34 @@ export default {
       };
     },
   },
+  created() {
+    this.fetchUser();
+  },
   methods: {
+    fetchUser() {
+      this.account.text = this.currentUser.account;
+      this.name.text = this.currentUser.name;
+      this.email.text = this.currentUser.email;
+    },
     handleFormSubmit(e) {
       // todo: sweet alert 2
       if (!this.account.text) return console.log("帳號不可空白");
+      else if (!this.name.text) return console.log("名稱不可空白");
+      else if (!this.email.text) return console.log("信箱不可空白");
       else if (!this.password.text) return console.log("密碼不可空白");
+      else if (!this.passwordCheck.text) return console.log("密碼確認不可空白");
+      else if (this.password.text !== this.passwordCheck.text)
+        return console.log("密碼確認與密碼不同");
       // todo: connect API - POST
       const form = e.target;
       const formData = new FormData(form);
       // for check
       console.log(formData);
       console.log(formData.get("account"));
+      console.log(formData.get("name"));
+      console.log(formData.get("email"));
       console.log(formData.get("password"));
+      console.log(formData.get("passwordCheck"));
     },
   },
 };

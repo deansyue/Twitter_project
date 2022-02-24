@@ -1,0 +1,70 @@
+.navBar {
+  height: 100%;
+  position: relative;
+}
+.container {
+  position: absolute;
+  top: 14px;
+  left: 103px;
+  background: white;
+}
+.navItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #1c1c1c;
+  margin-top: 30px;
+  .icon {
+    margin-left: 10px;
+    margin-right: 24px;
+  }
+}
+.content,
+.logoutTab {
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+.activeImg {
+  display: none;
+}
+.router-link-exact-active,
+.navItem:hover {
+  color: #ff6600;
+  .activeImg {
+    display: inline;
+  }
+  .normalImg {
+    display: none;
+  }
+}
+.btn {
+  width: 210px;
+  background: #ff6600;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 30px;
+}
+.logoutTab {
+  position: absolute;
+  left: 114px;
+  bottom: 5%;
+}
+.logoutButton {
+  background-color: unset;
+  border: unset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  .icon {
+    margin-left: 10px;
+    margin-right: 24px;
+  }
+}

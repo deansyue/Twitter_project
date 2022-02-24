@@ -3,23 +3,14 @@
     <div class="container">
       <div class="logo">
         <router-link to="/main">
-          <img :src="require('../assets/icon/Logo.png')" alt="" />
+          <img class="logoImg" alt="" />
         </router-link>
       </div>
       <div class="content">
         <div class="homeTab">
           <router-link class="navItem" to="/main">
             <div class="icon">
-              <img
-                class="normalImg"
-                :src="require('../assets/icon/home.png')"
-                alt=""
-              />
-              <img
-                class="activeImg"
-                :src="require('../assets/icon/homeActive.png')"
-                alt=""
-              />
+              <img class="homeImg" alt="" />
             </div>
             首頁
           </router-link>
@@ -27,16 +18,7 @@
         <div class="selfTab">
           <router-link class="navItem" to="/users/self">
             <div class="icon">
-              <img
-                class="normalImg"
-                :src="require('../assets/icon/person.png')"
-                alt=""
-              />
-              <img
-                class="activeImg"
-                :src="require('../assets/icon/personActive.png')"
-                alt=""
-              />
+              <img class="personImg" alt="" />
             </div>
             個人資料
           </router-link>
@@ -44,16 +26,7 @@
         <div class="settingTab">
           <router-link class="navItem" to="/setting">
             <div class="icon">
-              <img
-                class="normalImg"
-                :src="require('../assets/icon/setting.png')"
-                alt=""
-              />
-              <img
-                class="activeImg"
-                :src="require('../assets/icon/settingActive.png')"
-                alt=""
-              />
+              <img class="settingImg" alt="" />
             </div>
             設定
           </router-link>
@@ -64,12 +37,10 @@
     <div class="logoutTab">
       <button class="logoutButton">
         <div class="icon">
-        <img :src="require('../assets/icon/logout.png')" alt="" />
-        </div>登出
+          <img class="logoutImg" alt="" />
+        </div>
+        登出
       </button>
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-@import "/src/scss/NavBar.scss";
-</style>

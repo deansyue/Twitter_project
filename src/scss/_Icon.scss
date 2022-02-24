@@ -39,26 +39,36 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 .logo {
   @extend %icon;
   content: #{$logo};
+  width: 30px;
+  height: 30px;
 }
 
 .home {
   @extend %icon;
   content: #{$home};
+  width: 23px;
+  height: 23px;
 }
 
 .person {
   width: 17px;
   content: #{$person};
+  width: 23px;
+  height: 23px;
 }
 
 .setting {
   @extend %icon;
   content: #{$setting};
+  width: 23px;
+  height: 23px;
 }
 
 .logout {
   @extend %icon;
   content: #{$logout};
+  width: 23px;
+  height: 23px;
 }
 
 // 貼文使用

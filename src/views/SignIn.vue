@@ -1,6 +1,7 @@
 <template>
-  <div class="login-wrapper">
-    <!-- todo: add icon -->
+  <div class="signin-wrapper">
+    <!-- todo: 從共用scss變數中引用icon -->
+    <img class="logo-big" alt="">
     <h2>登入 Alphaitter</h2>
     <div class="form-wrapper">
       <form id="signInForm" @submit.prevent.stop="handleFormSubmit">
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+import { Toast } from "../utils/helpers";
 export default {
   data() {
     return {
@@ -81,9 +83,16 @@ export default {
   },
   methods: {
     handleFormSubmit(e) {
-      // todo: sweet alert 2
-      if(!this.account.text) return console.log('帳號不可空白')
-      else if (!this.password.text) return console.log('密碼不可空白')
+      const account = this.account.text
+      const password = this.password.text
+      if(!account || !password) return Toast.fire({
+        icon: 'error',
+        title: '帳號密碼不可空白'
+      })
+      else if (account.length > 50 || password.length > 50) return Toast.fire({
+        icon: 'error',
+        title: '字數超過上限'
+      })
       // todo: connect API - POST
       const form = e.target
       const formData = new FormData(form)

@@ -10,7 +10,7 @@
       <div class="card-head">
         <h5 class="card-name">{{ tweetCard.User.name }}</h5>
         <h5 class="card-account">{{ tweetCard.User.account | accountTag }}</h5>
-        <span>●</span>
+        <span>．</span>
         <h5 class="card-time">{{ tweetCard.createdAt | fromNow}}</h5>
       </div>
       <p>

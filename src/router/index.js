@@ -17,14 +17,14 @@ const routes = [
     component: SignIn
   },
   {
-    path: '*',
-    name: 'Not-found',
-    component: NotFound
-  },
-  {
     path: '/setting',
     name: 'setting',
     component: () => import('../views/Setting.vue')
+  },
+  {
+    path: '*',
+    name: 'Not-found',
+    component: NotFound
   },
 ]
 

@@ -1,0 +1,32 @@
+// for sweet alert 2 style
+
+$swal-error: url("./assets/icon/error.png");
+$swal-success: url("./assets/icon/success.png");
+
+.customClass .swal2-icon.swal2-error {
+  border: unset;
+  content: #{$swal-error};
+}
+
+.customClass .swal2-icon.swal2-success {
+  border: unset;
+  content: #{$swal-success};
+}
+
+.swal2-popup.swal2-toast .swal2-icon {
+  grid-column: 3 !important;
+  margin: 0 !important;
+  width: 56px !important;
+  height: 56px !important;
+}
+
+.swal2-popup.swal2-toast .swal2-title {
+  margin: 0 !important;
+  font-size: 20px !important;
+  font-weight: 700;
+}
+
+.swal2-popup.swal2-toast {
+  grid-template-rows: 100%;
+  align-items: center;
+}

@@ -38,6 +38,17 @@ const routes = [
     component: () => import('../views/Setting.vue')
   },
   {
+    path: '/tweets/:id',
+    name: 'tweet',
+    component: () => import('../views/Tweet.vue')
+  },
+  {
+    // 測試，待修改 name & component
+    path: '/users/:id',
+    name: 'user',
+    component: NotFound
+  },
+  {
     path: '*',
     name: 'not-found',
     component: NotFound

@@ -65,23 +65,34 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 // 貼文使用
 .heart {
   width: 13px;
-  height: 13px;
   content: #{$heart};
+  cursor: pointer;
+}
+
+.heart-active {
+  width: 20px;
+  content: #{$heartActive};
+  cursor: pointer;
 }
 
 .heart-big {
   width: 25px;
   content: #{$heart};
+  cursor: pointer;
+}
+
+.heart-big-active {
+  @extend .heart-big;
+  content: #{$heartActive};
 }
 
 .reply {
-  width: 13px;
-  height: 13px;
+  width: 15px;
   content: #{$reply};
 }
 
 .reply-big {
-  width: 25px;
+  width: 30px;
   content: #{$reply};
 }
 

@@ -89,11 +89,13 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 .reply {
   width: 15px;
   content: #{$reply};
+  cursor: pointer;
 }
 
 .reply-big {
   width: 30px;
   content: #{$reply};
+  cursor: pointer;
 }
 
 // UserCard 使用

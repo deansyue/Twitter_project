@@ -39,12 +39,12 @@ const routes = [
   },
   {
     path: '/users/:id/followers',
-    name: 'users-follower',
+    name: 'users-followers',
     component: () => import('../views/UserFollowers')
   },
   {
     path: '/users/:id/followings',
-    name: 'users-following',
+    name: 'users-followings',
     component: () => import('../views/UserFollowings')
   },
   {

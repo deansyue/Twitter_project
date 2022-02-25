@@ -116,6 +116,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   width: 17px;
   height: 14px;
   content: #{$arrow};
+  cursor: pointer;
 }
 
 .cross-orange {

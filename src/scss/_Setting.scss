@@ -2,14 +2,12 @@
   display: grid;
   grid-template-columns: 26% 74%;
   max-width: 1440px;
-
+  margin: 0 auto;
   .leftContainer {
     height: 100vh;
-    grid-column:1/2;
   }
   .rightContainer {
     border: 1px solid #e6ecf0;
-    grid-column:2/3;
   }
   .title {
     border-bottom: 1px solid #e6ecf0;

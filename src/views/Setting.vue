@@ -3,7 +3,7 @@
     <div class="leftContainer"><NavBar /></div>
     <div class="rightContainer">
       <div class="title">帳戶設定</div>
-      <signEditing :currentUser="currentUser" />
+      <signEditing :currentUser="currentUser" :pageNow="pageNow" />
     </div>
   </div>
 </template>
@@ -15,6 +15,11 @@ export default {
   components: {
     NavBar,
     signEditing,
+  },
+  data(){
+    return{
+      pageNow:true
+    }
   },
   computed: {
     ...mapState(["currentUser"]),

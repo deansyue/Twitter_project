@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="right-container">
-
+      <Popular />
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import ReplyCard from '../components/ReplyCard.vue'
+import Popular from '../components/Popular.vue'
 
 // 單篇推文的回覆內容：
 // const dataOne
@@ -130,7 +131,8 @@ const dummyDataTwo = {
 export default {
   components: {
     NavBar,
-    ReplyCard
+    ReplyCard,
+    Popular
   },
   data () {
     return {

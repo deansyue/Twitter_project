@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="right-container">
-
+      <Popular />
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import TweetCard from '../components/TweetCard.vue'
+import Popular from '../components/Popular.vue'
 
 // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
 const dummyData = [
@@ -503,7 +504,8 @@ const dummyData = [
 export default {
   components: {
     NavBar,
-    TweetCard
+    TweetCard,
+    Popular
   },
   data () {
     return {

@@ -1,0 +1,57 @@
+.popular-wrapper{
+  background: #{$Popular-background};
+  width: 350px;
+  border-radius: 3%;
+  margin-left: 30px;
+  margin-top: 15px;
+  .title{
+    height: 45px;
+    padding-top: 11px;
+    padding-left: 15px;
+    font-weight: 700;
+    font-size: 18px;
+    border-bottom: 1px solid #e6ecf0;
+  }
+  .popularCard{
+    border-bottom: 1px solid #e6ecf0;
+    position: relative;
+    height: 70px;
+    img{
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      left: 15px;
+      top: 10px;
+    }
+    .name-wrapper{
+      position: absolute;
+      top: 18px;
+      left: 75px;
+      font-weight: 700;
+      font-size: 15px;
+      .account-wrapper{
+        color: #{$label-font};
+      }
+    }
+    .addFollow{
+      position: absolute;
+      width: 65px;
+      font-weight: 700;
+      font-size: 15px;
+      right: 15px;
+      top: 15px;
+    }
+    .deleteFollow{
+      position: absolute;
+      width: 95px;
+      font-weight: 700;
+      font-size: 15px;
+      background: #{$orange};
+      color: #{$white};
+      right: 15px;
+      top: 15px;
+    }
+
+  }
+}

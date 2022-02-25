@@ -22,6 +22,7 @@
       color: #{$tweet-grey};
       text-decoration: none;
     }
+    .userFollows-tab-active,
     .router-link-exact-active {
       color: #{$orange};
       border-bottom: 2px solid #{$orange};

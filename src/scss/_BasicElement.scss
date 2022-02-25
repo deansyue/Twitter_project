@@ -104,6 +104,7 @@ h6 {
   cursor: pointer;
 }
 .active {
+  border: unset;
   color: #{$white};
   background-color: #{$orange};
 }

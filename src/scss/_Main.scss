@@ -1,0 +1,23 @@
+.main-wrapper {
+  .main-title {
+    margin: 15px 0 14px 15px;
+  }
+  .main-body {
+    position: relative;
+    display: flex;
+    border-top: 1px solid #{$frameColor};
+    border-bottom: 10px solid #{$frameColor};
+    padding: 10px 15px;
+    height: 120px;
+    p {
+      margin: 10px;
+    }
+    .btn {
+      position: absolute;
+      right: 15px;
+      bottom: 10px;
+      width: 66px;
+      height: 38px;
+    }
+  }
+}

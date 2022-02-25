@@ -12,7 +12,7 @@
         <div class="tweet-main">
           <div class="card-head">
             <div class="card-head-left">
-              <img class="avatar" src="	https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
+              <img class="avatar" src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
             </div>
             <div class="card-head-right">
               <h5>名稱</h5>

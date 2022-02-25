@@ -4,7 +4,20 @@
       <NavBar />
     </div>
     <div class="middle-container">
-      <div v-for="tweetCard in tweetCards" :key="tweetCard.id">
+      <div class="main-wrapper">
+        <h3 class="main-title">首頁</h3>
+        <div class="main-body">
+          <img class="avatar"
+            src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539"
+          >
+          <p>有什麼新鮮事？</p>
+          <!-- todo: modal -->
+          <button class="btn active">推文</button>
+        </div>
+      </div>
+      <div class="main-tweets"
+        v-for="tweetCard in tweetCards" :key="tweetCard.id"
+      >
         <TweetCard :tweet-card="tweetCard"/>
       </div>
     </div>

@@ -2,14 +2,14 @@
   display: flex;
   border-bottom: 1px solid #{$frameColor};
   padding: 10px 15px;
-  font-size: 15px;
-  line-height: 22px;
   color: #{$tweet-grey};
   .card-left {
     width: 60px;
   }
   .card-right {
     width: calc(100% - 60px);
+    font-size: 15px;
+    line-height: 22px;
     .card-head {
       display: flex;
       align-items: center;

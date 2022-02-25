@@ -33,14 +33,14 @@
         </div>
       </div>
       <button class="btn">推文</button>
-    </div>
-    <div class="logoutTab">
-      <button class="logoutButton">
-        <div class="icon">
-          <img class="logout" alt="" />
-        </div>
-        登出
-      </button>
+      <div class="logoutTab">
+        <button class="logoutButton">
+          <div class="icon">
+            <img class="logout" alt="" />
+          </div>
+          登出
+        </button>
+      </div>
     </div>
   </div>
 </template>

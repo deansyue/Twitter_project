@@ -5,7 +5,7 @@
     </div>
     <div class="middle-container">
       <div v-for="tweetCard in tweetCards" :key="tweetCard.id">
-        <TweetCard :initial-tweet-card="tweetCard"/>
+        <TweetCard :tweet-card="tweetCard"/>
       </div>
     </div>
     <div class="right-container">
@@ -18,6 +18,7 @@
 import NavBar from '../components/NavBar.vue'
 import TweetCard from '../components/TweetCard.vue'
 
+// todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
 const dummyData = [
   {
     "id": 1,

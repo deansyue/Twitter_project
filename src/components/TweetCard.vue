@@ -42,7 +42,7 @@ import { fromNowFilter, accountTagFilter } from '../utils/mixins'
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {
-    initialTweetCard: {
+    tweetCard: {
       type: Object,
       required: true,
     }
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     fetchTweetCard() {
-      const { Likes, User, Replies, description, id, createdAt } = this.initialTweetCard
+      const { Likes, User, Replies, description, id, createdAt } = this.tweetCard
       this.id = id
       this.tweetUser = User
       this.description = description

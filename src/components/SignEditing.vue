@@ -54,7 +54,8 @@
           <h5>{{ worLimitMessage(passwordCheck) }}</h5>
           <h5>{{ wordLimitCount(passwordCheck) }}</h5>
         </div>
-        <button type="submit" form="signEditingForm" class="btn active">儲存</button>
+        <button type="submit" form="signEditingForm" v-if="pageNow" class="btn active">儲存</button>
+        <button type="submit" form="signEditingForm" v-else class="btn active">註冊</button>
       </form>
     </div>
   </div>
@@ -73,6 +74,10 @@ export default {
         password: "",
       }),
     },
+    pageNow: {
+      type: Boolean,
+      require:true,
+    }
   },
   data() {
     return {

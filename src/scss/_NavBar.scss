@@ -1,7 +1,7 @@
 .navBar-wrapper {
   height: 100%;
-  width: 100%;
-  position: relative;
+  width: 26%;
+  position: fixed;
   .container {
     position: absolute;
     top: 14px;
@@ -49,10 +49,9 @@
     margin-top: 30px;
   }
 
+  
   .logoutTab {
-    position: absolute;
-    left: 30%;
-    top: 95%;
+   margin-top: 570px;
   }
   .logoutButton {
     background-color: unset;

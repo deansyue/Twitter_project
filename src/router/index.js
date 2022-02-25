@@ -28,6 +28,11 @@ const routes = [
     component: Main
   },
   {
+    path: '/users/self',
+    name: 'userSelf',
+    component: () => import('../views/UserSelf.vue')
+  },
+  {
     path: '/setting',
     name: 'setting',
     component: () => import('../views/Setting.vue')

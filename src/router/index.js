@@ -33,6 +33,21 @@ const routes = [
     component: () => import('../views/UserSelf.vue')
   },
   {
+    path: '/users/:id',
+    name: 'user',
+    component: NotFound
+  },
+  {
+    path: '/users/:id/followers',
+    name: 'users-follower',
+    component: () => import('../views/UserFollowers')
+  },
+  {
+    path: '/users/:id/followings',
+    name: 'users-following',
+    component: () => import('../views/UserFollowings')
+  },
+  {
     path: '/setting',
     name: 'setting',
     component: () => import('../views/Setting.vue')
@@ -41,12 +56,6 @@ const routes = [
     path: '/tweets/:id',
     name: 'tweet',
     component: () => import('../views/Tweet.vue')
-  },
-  {
-    // 測試，待修改 name & component
-    path: '/users/:id',
-    name: 'user',
-    component: NotFound
   },
   {
     path: '*',

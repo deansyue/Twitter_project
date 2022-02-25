@@ -12,12 +12,13 @@
     p {
       margin: 10px;
     }
-    .btn {
+    button {
       position: absolute;
       right: 15px;
       bottom: 10px;
+      border: unset;
       width: 66px;
-      height: 38px;
+      font-size: 18px;
     }
   }
 }

@@ -5,7 +5,7 @@
     </div>
     <div class="middle-container">
       <div v-for="tweetCard in tweetCards" :key="tweetCard.id">
-        <TweetCard :tweet-card="tweetCard"/>
+        <TweetCard :initial-tweet-card="tweetCard"/>
       </div>
     </div>
     <div class="right-container">

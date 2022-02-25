@@ -3,39 +3,40 @@
 .tweetCard-wrapper {
   display: flex;
   border-bottom: 1px solid #{$frameColor};
+  padding: 13px 15px;
   color: #{$tweet-grey};
   .card-left {
-    width: 12.5%;
-    img {
-      position:relative;
-      left: 15px;
-      top: 15px;
-    }
+    width: 60px;
   }
   .card-right {
-    width: 87.5%;
+    width: calc(100% - 60px);
     .card-head {
       display: flex;
       align-items: center;
-      height: 38px;
+      line-height: 22px;
       .card-name {
         margin-right: 5px;
         font-weight: 700;
         color: #{$black};
+        text-decoration: none;
       }
     }
     p {
+      margin-bottom: 14px;
+      line-height: 22px;
       color: #{$black};
     }
     .card-foot {
       display: flex;
       align-items: center;
-      height: 41px;
-      img {
-        margin-right: 12px;
+      a {
+        display: flex;
+        img {
+          align-self: center
+        }
       }
       h6 {
-        margin-right: 52px;
+        margin: 0 52px 0 12px;
       }
     }
   }

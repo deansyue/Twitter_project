@@ -9,8 +9,20 @@
         {{ user.name }}
         <div class="account-wrapper">{{ user.account | accountTag }}</div>
       </div>
-      <button class="addFollow btn" v-if="!user.isFollow">跟隨</button>
-      <button class="deleteFollow btn" v-else>正在跟隨</button>
+      <button
+        class="addFollow btn"
+        @click.stop.prevent="addFollow(user.id)"
+        v-if="!user.isFollow"
+      >
+        跟隨
+      </button>
+      <button
+        class="deleteFollow btn"
+        @click.stop.prevent="deleteFollow(user.id)"
+        v-else
+      >
+        正在跟隨
+      </button>
     </div>
   </div>
 </template>
@@ -192,6 +204,28 @@ export default {
   methods: {
     fetchPopular() {
       this.popularUser = dummyData.popularUser;
+    },
+    addFollow(userId) {
+      this.popularUser = this.popularUser.map((user) => {
+        if (user.id === userId) {
+          return {
+            ...user,
+            isFollow: true,
+          };
+        }
+        return user;
+      });
+    },
+    deleteFollow(userId) {
+      this.popularUser = this.popularUser.map((user) => {
+        if (user.id === userId) {
+          return {
+            ...user,
+            isFollow: false,
+          };
+        }
+        return user;
+      });
     },
   },
 };

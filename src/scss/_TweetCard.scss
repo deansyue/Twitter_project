@@ -1,0 +1,42 @@
+// todo: 記得處理過長的單字
+// todo: 過長的內文，進行部分隱藏？
+.tweetCard-wrapper {
+  display: flex;
+  border-bottom: 1px solid #{$frameColor};
+  color: #{$tweet-grey};
+  .card-left {
+    width: 12.5%;
+    img {
+      position:relative;
+      left: 15px;
+      top: 15px;
+    }
+  }
+  .card-right {
+    width: 87.5%;
+    .card-head {
+      display: flex;
+      align-items: center;
+      height: 38px;
+      .card-name {
+        margin-right: 5px;
+        font-weight: 700;
+        color: #{$black};
+      }
+    }
+    p {
+      color: #{$black};
+    }
+    .card-foot {
+      display: flex;
+      align-items: center;
+      height: 41px;
+      img {
+        margin-right: 12px;
+      }
+      h6 {
+        margin-right: 52px;
+      }
+    }
+  }
+}

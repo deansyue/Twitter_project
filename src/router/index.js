@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
+import Main from '../views/Main.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -13,13 +14,18 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'SignIn',
+    name: 'sign-in',
     component: SignIn
   },
   {
     path: '/signup',
-    name: 'SignUp',
+    name: 'sign-up',
     component: () => import('../views/SignUp.vue')
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: Main
   },
   {
     path: '/users/self',
@@ -33,7 +39,7 @@ const routes = [
   },
   {
     path: '*',
-    name: 'Not-found',
+    name: 'not-found',
     component: NotFound
   },
 ]

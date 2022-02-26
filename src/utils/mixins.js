@@ -14,7 +14,7 @@ export const fromNowFilter = {
 export const timeFormatFilter = {
   filters: {
     timeFormat(datetime) {
-      return datetime ? moment(datetime).format('a h:mm．YYYY年MMM Do') : '-'
+      return datetime ? moment(datetime).format('a h:mm．YYYY年M月D日') : '-'
     }
   }
 }

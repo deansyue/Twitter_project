@@ -1,17 +1,13 @@
 <template>
   <div class="replyCard-wrapper">
-    <div class="card-left">
-      <router-link :to="{ name: 'user', params: { id: userId }}">
-        <img class="avatar" :src="image">
-      </router-link>
+    <div class="card-left avatar" @click="linkedUser(userId)">
+      <img class="avatar" :src="image">
     </div>
     <div class="card-right">
       <div class="card-head">
-        <router-link class="card-name"
-          :to="{ name: 'user', params: { id: userId }}"
-        >
+        <h5 class="card-name" @click="linkedUser(userId)">
           {{ userName }}
-        </router-link>
+        </h5>
         <h5 class="card-account">
           {{ userAccount | accountTag }}
         </h5>
@@ -20,13 +16,12 @@
           {{ createdAt | fromNow }}
         </h5>
       </div>
-      <h5>回覆
-        <router-link
-          class="card-replyer"
-          :to="{ name: 'user', params: { id: targetUserId }}"
-        >
+      <h5>
+        <span>回覆</span> 
+        <span class="card-replyer" @click="linkedUser(targetUserId)">
           {{ targetAccount | accountTag }}
-        </router-link>
+        </span>
+          
       </h5>
       <p>{{ comment }}</p>
     </div>
@@ -85,6 +80,9 @@ export default {
       this.userName = dummyData.userName
       this.userAccount = dummyData.userAccount
       this.image = dummyData.image
+    },
+    linkedUser(userId) {
+      this.$router.push({ name: 'user', params: { id: userId }})
     },
   },
   created() {

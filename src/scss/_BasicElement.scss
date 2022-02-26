@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Noto Sans TC', sans-serif;
   color: #{$black};
 }
@@ -104,6 +104,7 @@ h6 {
   cursor: pointer;
 }
 .active {
+  border: unset;
   color: #{$white};
   background-color: #{$orange};
 }

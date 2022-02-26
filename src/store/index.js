@@ -7,9 +7,9 @@ export default new Vuex.Store({
   state: {
     currentUser: {
       id: 1,
-      account: "vic123",
-      name: "vic",
-      email: "vvv123@gmail.com",
+      account: "heyJohn",
+      name: "John Doe",
+      email: "John123@gmail.com",
       password: "123",
     },
   },

@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/users/:id',
     name: 'user',
-    component: NotFound
+    component: () => import('../views/UserOther.vue')
   },
   {
     path: '/users/:id/followers',

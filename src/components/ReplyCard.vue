@@ -1,7 +1,7 @@
 <template>
   <div class="replyCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(userId)">
-      <img class="avatar" :src="image">
+      <img class="avatar" :src="avatar">
     </div>
     <div class="card-right">
       <div class="card-head">
@@ -31,29 +31,38 @@
 <script>
 import { fromNowFilter, accountTagFilter } from '../utils/mixins'
 
-// 假設傳入的資料
-const dummyData = {
-  // 被回覆的對象
-  targetAccount: '被回覆的對象',
-  targetUserId: 3,
-  // 此卡片的其他資料
-  tweetId: 13,
-  userId: 4,
-  comment: 'Maiores totam nobis corrupti dolores qui et est consectetur hic. Nec ess ita tibus rem quidem blanditiis iusto reiciendis ipsam id archi tecto.',
-  createdAt: '2022-02-24T08:19:31.000Z',
-  userName: '此卡片user',
-  userAccount: '此卡片account',
-  image: 'https://loremflickr.com/g/320/240/people/?random=91.66143782652539'
+// 假設：被回覆對象之資料
+const dummyUser = {
+  id: 25,
+  account: "被回覆的對象",
+  email: "user1@example.com",
+  password:
+    "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+  name: "被回覆的對象",
+  avatar:
+    "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+  cover:
+    "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+  introduction: "Nihil et error voluptatem incidunt.",
+  role: "user",
+  createdAt: "2022-02-26T13:31:32.000Z",
+  updatedAt: "2022-02-26T13:31:32.000Z",
 }
 
 export default {
   mixins: [fromNowFilter, accountTagFilter],
-  // props: {
-  //   replyCard: {
-  //     type: Object,
-  //     required: true,
-  //   }
-  // },
+  props: {
+    // 被回覆者的資料
+    // replyTarget: {
+    //   type: Object,
+    //   required: true,
+    // },
+    // 每筆回覆貼文的資料
+    replyCard: {
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
       // 被回覆的對象
@@ -66,20 +75,23 @@ export default {
       createdAt: '',
       userName: '',
       userAccount: '',
-      image: ''
+      avatar: ''
     }
   },
   methods: {
     fetchReplyCard() {
-      this.targetAccount = dummyData.targetAccount
-      this.targetUserId = dummyData.targetUserId
-      this.tweetId = dummyData.tweetId
-      this.userId = dummyData.userId
-      this.comment = dummyData.comment
-      this.createdAt = dummyData.createdAt
-      this.userName = dummyData.userName
-      this.userAccount = dummyData.userAccount
-      this.image = dummyData.image
+      // 被回覆的對象 // todo: 待 API 加入此值
+      this.targetAccount = dummyUser.account 
+      this.targetUserId = dummyUser.id 
+      // 此卡片的其他資料
+      const { id, comment, createdAt, User } = this.replyCard
+      this.tweetId = id
+      this.userId = dummyUser.id
+      this.comment = comment
+      this.createdAt = createdAt
+      this.userName = User.name
+      this.userAccount = User.account
+      this.avatar = User.avatar
     },
     linkedUser(userId) {
       this.$router.push({ name: 'user', params: { id: userId }})
@@ -87,6 +99,11 @@ export default {
   },
   created() {
     this.fetchReplyCard()
+  },
+  watch: {
+    replyCard (newValue) {
+      this.replyCard = newValue
+    }
   }
 }
 </script>

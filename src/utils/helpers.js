@@ -1,5 +1,14 @@
+import axios from 'axios'
 import Swal from 'sweetalert2'
 
+// axios
+const baseURL = "https://thawing-citadel-19528.herokuapp.com/"
+
+export const apiHelper = axios.create({
+  baseURL
+});
+
+// sweetalert2 Toast
 export const Toast = Swal.mixin({
   customClass: 'customClass',
   width: '394px',

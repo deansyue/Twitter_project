@@ -1,0 +1,43 @@
+.custom-modal {
+  top: 54px !important;
+  border-radius: 14px;
+  background-color: #{$white};
+}
+  
+.tweetCreate-wrapper {
+  height: 100%;
+  .tweetCreate-head {
+    height: 54px;
+    padding: 19.5px;
+    border-bottom: 1px solid #{$frameColor};
+  }
+  .tweetCreate-body {
+    display: flex;
+    padding: 15px;
+    height: calc(100% - 55px);
+    .tweetCreate-right {
+      position: relative;
+      margin-left: 10px;
+      flex-grow: 1;
+      textarea {
+        border: none;
+        resize : none;
+        overflow-y : hidden;
+        width: 100%;
+        height: calc(100% - 45px); // 預留下方按鈕空間
+        font-size: 18px;
+        line-height: 26px;
+        &:focus {
+          outline: none;
+        }
+      }
+      button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 66px;
+        font-size: 18px;
+      }
+    }
+  }
+}

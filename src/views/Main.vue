@@ -6,7 +6,8 @@
     <div class="middle-container">
       <div class="main-wrapper">
         <h3 class="main-title">首頁</h3>
-        <div class="main-body">
+        <div class="main-create" 
+          @click.prevent.stop="showModal('tweetCreate')">
           <img class="avatar"
             src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539"
           >
@@ -24,6 +25,9 @@
     <div class="right-container">
       <Popular />
     </div>
+    <!-- Modal -->
+      <TweetCreate />
+    <!-- Modal  -->
   </div>
 </template>
 
@@ -31,6 +35,7 @@
 import NavBar from '../components/NavBar.vue'
 import TweetCard from '../components/TweetCard.vue'
 import Popular from '../components/Popular.vue'
+import TweetCreate from '../components/TweetCreate.vue'
 
 // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
 const dummyData = [
@@ -518,7 +523,8 @@ export default {
   components: {
     NavBar,
     TweetCard,
-    Popular
+    Popular,
+    TweetCreate
   },
   data () {
     return {
@@ -529,7 +535,15 @@ export default {
     fetchTweetCards () {
       // todo: 串接 API
       this.tweetCards = [ ...dummyData ]
-    }
+    },
+    showModal() {
+      // 打開 modal
+      this.$modal.show('tweetCreate')
+    },
+    hideModal() {
+      // (預設)關閉 modal
+      this.$modal.hide('tweetCreate')
+    },
   },
   created () {
     this.fetchTweetCards ()

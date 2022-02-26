@@ -1,17 +1,13 @@
 <template>
   <div class="tweetCard-wrapper">
-    <div class="card-left">
-      <router-link :to="{ name: 'user', params: { id: tweetUser.id }}">
-        <img class="avatar" :src="tweetUser.avatar">
-      </router-link>
+    <div class="card-left avatar" @click="linkedUser(tweetUser.id)">
+      <img class="avatar" :src="tweetUser.avatar">
     </div>
     <div class="card-right">
       <div class="card-head">
-        <router-link class="card-name"
-          :to="{ name: 'user', params: { id: tweetUser.id }}"
-        >
+        <h5 class="card-name" @click="linkedUser(tweetUser.id)">
           {{ tweetUser.name }}
-        </router-link>
+        </h5>
         <h5 class="card-account">
           {{ tweetUser.account | accountTag }}
         </h5>
@@ -24,9 +20,7 @@
         {{ description }}
       <p>
       <div class="card-foot">
-        <router-link :to="{ name: 'tweet', params: { id: id }}">
-          <img class="reply" alt="">
-        </router-link>
+        <img class="reply" @click="linkedReply(id)">
         <h6>{{ replysCount }}</h6>
         <img v-if="isLiked" @click="deleteLikes()" class="heart-active">
         <img v-else @click="addLikes()" class="heart">
@@ -77,6 +71,12 @@ export default {
       // todo: connect API
       this.isLiked = false
       this.likesCount--
+    },
+    linkedUser(userId) {
+      this.$router.push({ name: 'user', params: { id: userId }})
+    },
+    linkedReply(tweetId) {
+      this.$router.push({ name: 'tweet', params: { id: tweetId }})
     }
   },
   created() {

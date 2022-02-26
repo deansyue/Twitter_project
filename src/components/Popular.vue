@@ -3,9 +3,9 @@
     <div class="title">Popular</div>
     <div class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
-        <img :src="user.avatar" alt="" />
+        <img :src="user.avatar" alt="" @click="linkedUser(user.id)"/>
       </div>
-      <div class="name-wrapper">
+      <div class="name-wrapper" @click="linkedUser(user.id)">
         {{ user.name }}
         <div class="account-wrapper">{{ user.account | accountTag }}</div>
       </div>
@@ -204,6 +204,9 @@ export default {
   methods: {
     fetchPopular() {
       this.popularUser = dummyData.popularUser;
+    },
+    linkedUser(userId) {
+      this.$router.push({ name: 'user', params: { id: userId }})
     },
     addFollow(userId) {
       this.popularUser = this.popularUser.map((user) => {

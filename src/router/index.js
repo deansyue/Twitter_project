@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/users/:id',
     name: 'user',
-    component: NotFound
+    component: () => import('../views/UserOther.vue')
   },
   {
     path: '/users/:id/followers',
@@ -46,6 +46,23 @@ const routes = [
     path: '/users/:id/followings',
     name: 'users-followings',
     component: () => import('../views/UserFollowings')
+  },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: () => import('../views/AdminLogin.vue')
+  },
+  {
+    path: '/admin/tweets',
+    name: 'admin-tweets',
+    component: () => import('../views/AdminTweets.vue'),
+    // beforeEnter: authorizeIsAdmin
+  },
+  {
+    path: '/admin/users',
+    name: 'admin-users',
+    component: () => import('../views/AdminUsers.vue'),
+    // beforeEnter: authorizeIsAdmin
   },
   {
     path: '/setting',

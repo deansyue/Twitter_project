@@ -7,10 +7,13 @@ export default new Vuex.Store({
   state: {
     currentUser: {
       id: 1,
-      account: "vic123",
-      name: "vic",
-      email: "vvv123@gmail.com",
-      password: "123",
+      account: "heyJohn",
+      name: "John Doe",
+      email: "John123@gmail.com",
+      avatar:
+        "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
+      cover: "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
+      introduction: "Culpa minus ea ullam.",
     },
   },
   mutations: {

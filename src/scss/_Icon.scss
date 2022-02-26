@@ -121,6 +121,11 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   cursor: pointer;
 }
 
+.notice-active {
+  width: 35px;
+  height: 35px;
+  content: #{$noticeActive};
+}
 // other
 .arrow {
   width: 17px;

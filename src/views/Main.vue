@@ -9,7 +9,7 @@
         <div class="main-create" 
           @click.prevent.stop="showModal('tweetCreate')">
           <img class="avatar"
-            src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539"
+            :src="currentUser.avatar"
           >
           <p>有什麼新鮮事？</p>
           <!-- todo: modal -->
@@ -36,6 +36,7 @@ import NavBar from '../components/NavBar.vue'
 import TweetCard from '../components/TweetCard.vue'
 import Popular from '../components/Popular.vue'
 import TweetCreate from '../components/TweetCreate.vue'
+import { mapState } from 'vuex'
 
 // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
 const dummyData = [
@@ -530,6 +531,9 @@ export default {
     return {
       tweetCards: []
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   },
   methods: {
     fetchTweetCards () {

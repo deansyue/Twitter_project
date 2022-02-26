@@ -29,7 +29,7 @@
               <h4><strong>808</strong> 喜歡次數</h4>
             </div>
             <div class="tweet-footer-buttons">
-              <img class="reply-big">
+              <img class="reply-big" @click="showModal()">
               <img v-if="isLiked" @click="deleteLike()" class="heart-big-active">
               <img v-else @click="addLike()" class="heart-big">
             </div>
@@ -48,6 +48,9 @@
     <div class="right-container">
       <Popular />
     </div>
+    <!-- Modal -->
+    <ReplyCreate />
+    <!-- Modal -->
   </div>
 </template>
 
@@ -55,6 +58,7 @@
 import NavBar from '../components/NavBar.vue'
 import ReplyCard from '../components/ReplyCard.vue'
 import Popular from '../components/Popular.vue'
+import ReplyCreate from '../components/ReplyCreate.vue'
 import { accountTagFilter, timeFormatFilter } from '../utils/mixins'
 
 // 個人主頁的回覆內容：
@@ -164,7 +168,8 @@ export default {
   components: {
     NavBar,
     ReplyCard,
-    Popular
+    Popular,
+    ReplyCreate
   },
   mixins: [accountTagFilter, timeFormatFilter],
   data () {
@@ -194,6 +199,14 @@ export default {
     linkedUser(userId) {
       // todo: check id after connect API
       this.$router.push({ name: 'user', params: { id: userId }})
+    },
+    showModal() {
+      // 打開 modal
+      this.$modal.show('replyCreate')
+    },
+    hideModal() {
+      // (預設)關閉 modal
+      this.$modal.hide('replyCreate')
     },
   },
   created () {

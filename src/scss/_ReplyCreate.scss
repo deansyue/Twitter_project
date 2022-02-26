@@ -1,0 +1,80 @@
+.replyCreate-model {
+  top: 54px !important;
+  border-radius: 14px;
+  background-color: #{$white};
+  .replyCreate-wrapper {
+    height: 100%;
+    position: relative;
+    .replyCreate-head {
+      height: 54px;
+      padding: 19.5px;
+      border-bottom: 1px solid #{$frameColor};
+    }
+    .replyCreate-body {
+      padding: 18px 15px 0 15px;
+      height: calc(100% - 54px - 70px); // 預留下方按鈕空間
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-template-rows: 1fr 1fr;
+      .target-image {
+        position: relative;
+        cursor: pointer;
+        span {
+          display: inline-block;
+          width: 2px;
+          height: calc(100% - 65px);
+          position: absolute;
+          left: 25px;
+          bottom: 10px;
+          transform: translateX(-50%);
+          background-color: #CCD6DD;
+        }
+      }
+      .target-tweet {
+        position: relative;
+        .target-tweet-head {
+          display: flex;
+          color: #{$tweet-grey};
+          margin-bottom: 5px;
+          .target-tweet-head-name {
+            margin-right: 5px;
+            font-weight: 700;
+            color: #{$black};
+            cursor: pointer;
+          }
+        }
+        p {
+          font-size: 15px;
+          line-height: 22px;
+        }
+        > h5 {
+          position: absolute;
+          bottom: 24px;
+          strong {
+            color: #{$orange};
+            cursor: pointer;
+          }
+        }
+      }
+      .replyer-tweet textarea {
+        border: none;
+        resize : none;
+        overflow-y : hidden;
+        width: 100%;
+        height: 100%;
+        font-size: 18px;
+        line-height: 26px;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    button {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      width: 66px;
+      font-size: 18px;
+    }
+  }
+}

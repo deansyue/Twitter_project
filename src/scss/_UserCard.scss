@@ -1,4 +1,5 @@
 .userCard-wrapper{
+  height: 375px;
   .title-wrapper{
     display: flex;
     height: 55px;
@@ -11,6 +12,7 @@
       cursor: pointer;
       background: unset;
       border: unset;
+      z-index: 2;
       img{
         width: 17px;
         height: 14px;
@@ -26,6 +28,85 @@
         font-size: 1px;
         margin-top: 2px;
         color: #{$tweet-grey};
+      }
+    }
+  }
+  .user-wrapper{
+    position: relative;
+    height: 320px;
+    .cover{
+      width: 100%;
+      height: 56%;
+    }
+    .avatar-big{
+      position: absolute;
+      width: 128px;
+      height: 128px;
+      border: #{$white} 3px solid;
+      border-radius: 50%;
+      left: 14px;
+      top: 35%;
+    }
+    .btn-edit{
+      position: absolute;
+      right: 15px;
+      top: 190px;
+      font-weight: 700;
+      font-size: 14px;
+      width: 125px;
+    }
+    .otherButton{
+      position: absolute;
+      right: 15px;
+      top: 190px;
+      display: flex;
+      .btnDeleteFollow{
+        width: 95px;
+        background: #{$orange};
+        color: #{$white};
+        margin-left: 10px;
+      }
+      .btnAddFollow{
+        width: 65px;
+        margin-left: 10px;
+      }
+      img{
+        margin-left: 10px;
+        margin-top: 4px;
+      }
+    }
+    .information-wrapper{
+      position: absolute;
+      top: 76%;
+      left: 15px;
+      .name{
+        font-weight: 900;
+        font-size: 19px;
+      }
+      .account{
+        font-weight: 500;
+        font-size: 15px;
+        color: #{$tweet-grey};
+      }
+      .introduce{
+        font-weight: 400;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+      .follow{
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 400;
+        .strong,
+        .strong2{
+          font-weight: 600;
+          cursor: pointer;
+          text-decoration: none;
+          color: #{$black};
+        }
+        .strong2{
+          margin-left: 20px;
+        }
       }
     }
   }

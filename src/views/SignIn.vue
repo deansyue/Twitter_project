@@ -100,14 +100,19 @@ export default {
           icon: 'error',
           title: '字數超過上限'
         })
+        // 當前端檢查過關：
         this.isProcessing = true
         const response = await authorizationAPI.SignIn({
           account,
           password
         })
         if (response.status === "error") throw new Error(response.message)
+        // 當串接成功：
         this.isProcessing = false
-            
+        localStorage.setItem('token', response.data.token)
+        this.$store.commit('setCurrentUser', response.data.user)
+        this.$router.push('/main')
+
       } catch (error) {
         this.isProcessing = false
         this.password.text = ''

@@ -15,8 +15,23 @@ export default new Vuex.Store({
       cover: "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
       introduction: "Culpa minus ea ullam.",
     },
+    isAuthenticated: false,
+    token: ''
   },
   mutations: {
+    setCurrentUser(state, currentUser) {
+      state.currentUser = {
+        ...state.currentUser,
+        ...currentUser
+      }
+      state.isAuthenticated = true
+      state.token = localStorage.getItem('token')
+    },
+    revokeAuthentication(state) {
+      state.currentUser = {}
+      state.isAuthenticated = false
+      localStorage.removeItem('token')
+    }
   },
   actions: {
   },

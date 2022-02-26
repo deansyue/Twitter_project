@@ -11,7 +11,6 @@
 import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
-import { mapState } from "vuex";
 const dummyData = {
   tweets: [
     {
@@ -545,14 +544,14 @@ const userDummyData = {
   userData: {
     user: {
       id: 2,
-      account: "user1",
-      email: "user1@example.com",
+      account: "mjjane",
+      email: "Mary@example.com",
       password: "$2a$10$.dq2MpPwCRQ6z95RFQQr1.cPXfV1ToXJM79qiZdTPp4MK0EnzAV1W",
-      name: "user1",
+      name: "Mary Jane",
       avatar:
         "https://loremflickr.com/g/320/240/people/?random=81.81418904058285",
       cover: "https://loremflickr.com/g/600/240/shop/?random=60.682696641592",
-      introduction: "Voluptas veritatis ut optio quia sint qui aut totam.",
+      introduction: "Voluptas veritatis utqui aut totam.",
       role: "user",
       createdAt: "2022-02-24T03:59:42.000Z",
       updatedAt: "2022-02-24T03:59:42.000Z",
@@ -595,8 +594,8 @@ const userDummyData = {
         },
       },
     },
-    followingCount: 20,
-    follwerCount: 10,
+    followingCount: 1174,
+    follwerCount: 63960,
   },
 }; //api/user/id這包幾乎包刮全部會用到的資料好像可以用currentuser.id去取這包再帶資料
 export default {
@@ -619,12 +618,10 @@ export default {
         followingCount: -1,
         follwerCount: -1,
       },
-      whichPage: true //true代表個人false代表他人
+      whichPage: false //true代表個人false代表他人
     };
   },
-  computed: {
-    ...mapState(["currentUser"]),
-  },
+
   methods: {
     fetchTweets() {
       // todo: 串接 API 用currentuser.id取出currentuser詳細資料

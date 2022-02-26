@@ -28,20 +28,20 @@ export const accountTagFilter = {
   }
 }
 
-//回傳資料為字串時適用若為數字需更改,數字改成XX萬
+//數字改成XX萬
 export const numberFormatTCFilter = {
   filters: {
     numberFormatTC(num) {
-      return num.length > 4 ? `${num.substr(0, num.length - 4)}.${num.substr(num.length - 4, 1)} 萬` : num
+      return num > 9999 ? `${Math.floor(num / 10000 * 10) / 10} 萬` : num
     }
   }
 }
 
-//回傳資料為字串時適用若為數字需更改,數字改成XX千
+//數字改成XX千
 export const numberFormatEndFilter = {
   filters: {
     numberFormatEnd(num) {
-      return num.length > 3 ? `${num.substr(0, num.length - 3)}.${num.substr(num.length - 3, 1)} k` : num
+      return num > 999 ? `${Math.floor(num / 1000 * 10) / 10} k` : num
     }
   }
 }

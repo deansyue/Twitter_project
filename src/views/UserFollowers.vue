@@ -5,7 +5,13 @@
     </div>
     <div class="middle-container">
       <UserFollowTabs :is-follower-page="isFollowerPage" :params-id="paramsId"/>
-      <UserFollowCards />
+      <div 
+        v-for="followerCard in followerCards"
+        :key="followerCard.id"
+      >
+        <UserFollowCards  :initial-follow-card="followerCard" />
+      </div>
+      
     </div>
     <div class="right-container">
       <Popular />
@@ -15,14 +21,15 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
-import UserFollowTabs from '../components/UserFollowTabs.vue'
-import UserFollowCards from '../components/UserFollowCards.vue'
+import UserFollowTabs from "../components/UserFollowTabs.vue"
+import UserFollowCards from "../components/UserFollowCards.vue"
 import Popular from "../components/Popular.vue";
 import usersAPI from "../apis/users"
 import { Toast } from "../utils/helpers"
 
 // todo: 串接 API 取得資料
 export default {
+  mame: "UserFollowers",
   components: {
     NavBar,
     UserFollowTabs,
@@ -39,12 +46,15 @@ export default {
   methods: {
     async fetchFollowerCards(paramsId) {
       try {
-        console.log('before')
-        console.log(paramsId)
-        const response = await usersAPI.getFollowers({ userId: paramsId })
-        console.log('finish')
-        console.log(response)
-        // todo: 待資料庫可連線後、確認資料內容
+        const { data, statusText } = await usersAPI.getFollowers({ userId: paramsId })
+        if (statusText !== "OK") throw new Error(statusText)
+        this.followerCards = data.map(card => {
+          const id = card.followerId
+          return {
+            ...card,
+            id: id
+          }
+        })
       } catch (error) {
         Toast.fire({
           icon: 'error',

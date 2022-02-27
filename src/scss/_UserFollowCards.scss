@@ -6,6 +6,13 @@
     position: relative;
     margin-left: 10px;
     width: 100%;
+    .name {
+      color: #{$black};
+      font-weight: 700;
+    }
+    .account {
+      color: #{$tweet-grey};
+    }
   }
   .btn {
     position: absolute;

@@ -4,7 +4,7 @@
     :width="600" :height="450">
     <div class="replyCreate-wrapper">
       <div class="replyCreate-head">
-        <img class="cross-orange" @click="closeModal">
+        <img class="cross-orange" @click="closeModal()">
       </div>
       <div class="replyCreate-body">
         <div class="target-image">

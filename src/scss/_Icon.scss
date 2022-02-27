@@ -29,6 +29,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   display: block;
   margin: 0 auto;
   content: #{$logo};
+  cursor: pointer;
 }
 
 // 導覽列使用
@@ -36,30 +37,35 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   width: 30px;
   height: 30px;
   content: #{$logo};
+  cursor: pointer;
 }
 
 .home {
   width: 23px;
   height: 23px;
   content: #{$home};
+  cursor: pointer;
 }
 
 .person {
   width: 23px;
   height: 23px;
   content: #{$person};
+  cursor: pointer;
 }
 
 .setting {
   width: 23px;
   height: 23px;
   content: #{$setting};
+  cursor: pointer;
 }
 
 .logout {
   width: 23px;
   height: 23px;
   content: #{$logout};
+  cursor: pointer;
 }
 
 // 貼文使用
@@ -84,6 +90,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
 .heart-big-active {
   @extend .heart-big;
   content: #{$heartActive};
+  cursor: pointer;
 }
 
 .reply {
@@ -96,6 +103,7 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   width: 30px;
   content: #{$reply};
   cursor: pointer;
+  cursor: pointer;
 }
 
 // UserCard 使用
@@ -103,12 +111,14 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   width: 35px;
   height: 35px;
   content: #{$message};
+  cursor: pointer;
 }
 
 .notice {
   width: 35px;
   height: 35px;
   content: #{$notice};
+  cursor: pointer;
 }
 
 .notice-active {
@@ -128,16 +138,19 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   width: 15px;
   height: 15px;
   content: #{$cross-or};
+  cursor: pointer;
 }
 
 .cross-white {
   width: 15px;
   height: 15px;
   content: #{$cross-wt};
+  cursor: pointer;
 }
 
 .camera {
   width: 20px;
   height: 20px;
-  content: #{$uploadPhoto}
+  content: #{$uploadPhoto};
+  cursor: pointer;
 }

@@ -108,6 +108,10 @@ h6 {
   color: #{$white};
   background-color: #{$orange};
 }
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
 
 // 大頭貼尺寸
 .avatar {

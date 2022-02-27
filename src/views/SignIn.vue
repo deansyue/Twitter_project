@@ -27,7 +27,10 @@
             <h5>{{ worLimitMessage(password) }}</h5>
             <h5>{{ wordLimitCount(password) }}</h5>
           </div>
-          <button type="submit" form="signInForm" class="btn active">
+          <button 
+            form="signInForm"
+            type="submit"  class="btn active"
+            :disabled="isProcessing">
             登入
           </button>
       </form>
@@ -45,6 +48,7 @@
 </template>
 
 <script>
+import authorizationAPI from '../apis/authorization'
 import { Toast } from "../utils/helpers";
 export default {
   data() {
@@ -58,6 +62,7 @@ export default {
         text: "",
         isInvalid: false,
       },
+      isProcessing: false
     }
   },
   computed: {
@@ -82,24 +87,42 @@ export default {
     },
   },
   methods: {
-    handleFormSubmit(e) {
-      const account = this.account.text
-      const password = this.password.text
-      if(!account || !password) return Toast.fire({
-        icon: 'error',
-        title: '帳號密碼不可空白'
-      })
-      else if (account.length > 50 || password.length > 50) return Toast.fire({
-        icon: 'error',
-        title: '字數超過上限'
-      })
-      // todo: connect API - POST
-      const form = e.target
-      const formData = new FormData(form)
-      // for check
-      console.log(formData)      
-      console.log(formData.get('account'))
-      console.log(formData.get('password'))
+    async handleFormSubmit() {
+      try{
+        // todo: 待測試 API 串接狀況
+        const account = this.account.text
+        const password = this.password.text
+        if(!account || !password) return Toast.fire({
+          icon: 'error',
+          title: '帳號密碼不可空白'
+        })
+        else if (account.length > 50 || password.length > 50) return Toast.fire({
+          icon: 'error',
+          title: '字數超過上限'
+        })
+        // 當前端檢查過關：
+        this.isProcessing = true
+        const response = await authorizationAPI.SignIn({
+          account,
+          password
+        })
+        if (response.status === "error") throw new Error(response.message)
+        // 當串接成功：
+        this.isProcessing = false
+        localStorage.setItem('token', response.data.token)
+        this.$store.commit('setCurrentUser', response.data.user)
+        this.$router.push('/main')
+
+      } catch (error) {
+        this.isProcessing = false
+        this.password.text = ''
+        // todo: 確認訊息內容是否需調整
+        // "Error: Network Error" 或 "帳號與密碼不存在" ?
+        Toast.fire({
+          icon: 'error',
+          title: error
+        })
+      }
     }
   }
 }

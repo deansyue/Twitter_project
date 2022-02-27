@@ -31,12 +31,12 @@
         />
         <button
           class="btn btnDeleteFollow"
-          v-if="isFollowed"
-          @click="isFollowed = false"
+          v-if="userData.isFollowed"
+          @click="userData.isFollowed = false"
         >
           正在追隨
         </button>
-        <button class="btn btnAddFollow" v-else @click="isFollowed = true">
+        <button class="btn btnAddFollow" v-else @click="userData.isFollowed = true">
           追隨
         </button>
       </div>
@@ -79,6 +79,7 @@ export default {
         introduction: "",
         followingCount: -1,
         follwerCount: -1,
+        isFollowed: ""
       }),
     },
     tweets: {
@@ -102,8 +103,8 @@ export default {
         introduction: "",
         followingCount: -1,
         follwerCount: -1,
+        isFollowed:""
       },
-      isFollowed: true,
       isNotice: true,
     };
   },
@@ -121,6 +122,7 @@ export default {
       this.userData.introduction = this.currentUserData.introduction;
       this.userData.followingCount = this.currentUserData.followingCount;
       this.userData.follwerCount = this.currentUserData.follwerCount;
+      this.userData.isFollowed = this.currentUserData.isFollowed;
     },
   },
 };

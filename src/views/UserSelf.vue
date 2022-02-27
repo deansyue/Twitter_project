@@ -37,7 +37,7 @@
       </div>
       <div class="self-reply-wrapper" v-else-if="tabNow === 2">
         <div class="self-reply" v-for="reply in replys" :key="reply.id">
-          <ReplyCard :tweet-card="reply" />
+          <ReplyCard :replyCard="reply" />
         </div>
       </div>
       <div class="self-like-wrapper" v-else>
@@ -60,759 +60,1260 @@ import { mapState } from "vuex";
 const dummyData = {
   tweets: [
     {
-      id: 1,
-      UserId: 2,
-      description: "a",
-      createdAt: "2022-02-23T23:19:20.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 3,
-          UserId: 4,
-          TweetId: 1,
-          comment:
-            "Quasi modi sint fuga recusandae. Et et ducimus consectetur soluta. Deleniti inventore error possimus nesciunt itaque ut sunt.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 504,
+        "UserId": 14,
+        "description": "1111",
+        "createdAt": "2022-02-26T13:57:17.000Z",
+        "updatedAt": "2022-02-26T13:57:17.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 2,
-          UserId: 2,
-          TweetId: 1,
-          comment: "odit",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 1,
-          UserId: 2,
-          TweetId: 1,
-          comment:
-            "Maiores totam nobis corrupti dolores qui et est consectetur hic. Necessitatibus rem quidem blanditiis iusto reiciendis ipsam id architecto. ",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 0,
+        "isLiked": false
     },
     {
-      id: 2,
-      UserId: 2,
-      description:
-        "Ipsam expedita natus accusamus eos expedita doloribus qui veniam est. Mollitia est eos et ratione eaque distinctio. Eum magnam dolor. Odio nobis minus at cum illum et ex dignissimos.",
-      createdAt: "2022-02-22T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 6,
-          UserId: 5,
-          TweetId: 2,
-          comment:
-            "Commodi optio quidem sint est laudantium quia reprehenderit libero consequatur.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 94,
+        "UserId": 14,
+        "description": "Dolor magnam sequi repudiandae.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 5,
-          UserId: 3,
-          TweetId: 2,
-          comment:
-            "Facilis rerum nesciunt veniam incidunt dolor.\nIusto facere omnis optio rerum mollitia odit est.\nUt odio autem molestiae debitis veritatis to",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 4,
-          UserId: 2,
-          TweetId: 2,
-          comment: "Nulla est veniam.\nEius nihil ex.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 274,
+                "UserId": 14,
+                "TweetId": 94,
+                "comment": "sit soluta veniam",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 284,
+                "UserId": 54,
+                "TweetId": 94,
+                "comment": "Dolorem dolorum quasi deleniti. Maxime ut est similique fuga aut.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 294,
+                "UserId": 14,
+                "TweetId": 94,
+                "comment": "A dolores et. Vitae sed itaque laborum labore ullam aliquam aut alias. Facilis amet vel autem molestias dolorum. Optio dolorem exercitatione",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [
+            {
+                "id": 64,
+                "UserId": 34,
+                "TweetId": 94,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        ],
+        "likedCount": 1,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 3,
-      UserId: 2,
-      description: "ut",
-      createdAt: "2022-02-23T20:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 9,
-          UserId: 4,
-          TweetId: 3,
-          comment: "Veniam libero non ducimus et.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 74,
+        "UserId": 14,
+        "description": "Nulla asperiores quibusdam iste quaerat explicabo id dignissimos nulla quo. Culpa aut ut aperiam in enim molestiae dolorem laborum. Quam ab soluta nostrum omnis qui ut consequatur.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 8,
-          UserId: 2,
-          TweetId: 3,
-          comment: "Ex vel iure eaque quae in non cum officiis.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 7,
-          UserId: 2,
-          TweetId: 3,
-          comment:
-            "Blanditiis ut consequatur et et cumque. Amet amet minus eum. Quas vel rerum. Quibusdam et consequatur.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 214,
+                "UserId": 14,
+                "TweetId": 74,
+                "comment": "Voluptatem sunt facilis voluptatem debitis omnis ea ut. Alias non dolores sit ut accusamus ad modi. Ad cumque at. Deleniti sint ut nostrum v",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 224,
+                "UserId": 34,
+                "TweetId": 74,
+                "comment": "Omnis sint illum dolor dicta saepe nobis.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 234,
+                "UserId": 54,
+                "TweetId": 74,
+                "comment": "Perspiciatis illo inventore non voluptatem dignissimos. Possimus voluptas non officia. Accusamus eaque amet repellendus est et et voluptatum",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [
+            {
+                "id": 84,
+                "UserId": 24,
+                "TweetId": 74,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        ],
+        "likedCount": 1,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 4,
-      UserId: 2,
-      description:
-        "Nobis debitis delectus dolore et. Aut reiciendis consequuntur ad cumque debitis ea velit voluptatem ipsam. Vel vel quisquam rerum consequatur sit.\n \rQuaerat voluptatum qui quas ut magni fugiat aut. Quis debitis ut non. Consequatur reprehenderit labore inventore molestias cumque qui. Et consequatur accusamus quo esse ut minima aliquid rem. Maiores et molestiae quidem aut magnam. Vero provident asperiores aut soluta vitae quis molestiae laboriosam fugiat.\n \rEaque atque aut. Debitis laboriosam aut accusamus molestias accusamus. Sequi ut laboriosam ipsam quibusdam tempore sit ut dolor ut.",
-      createdAt: "2022-02-24T11:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 12,
-          UserId: 5,
-          TweetId: 4,
-          comment:
-            "Molestiae et recusandae in facere eius. Maxime officiis commodi sed perferendis molestias. Vero veniam explicabo quod enim ut recusandae. Co",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 14,
+        "UserId": 14,
+        "description": "Ad et rerum quis ea ea veniam. Inventore repellat et. Esse amet alias. Ullam excepturi quo voluptatem animi molestiae iure et possimus ut. Vitae autem ipsum accusantium sint voluptatem sed.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 11,
-          UserId: 2,
-          TweetId: 4,
-          comment: "qui ullam itaque",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 10,
-          UserId: 2,
-          TweetId: 4,
-          comment: "optio",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 34,
+                "UserId": 14,
+                "TweetId": 14,
+                "comment": "Itaque soluta omnis sit. Impedit voluptatum ea vel autem est corrupti voluptatem mollitia dolor. Sit qui voluptatum. Et tenetur a qui est pe",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 44,
+                "UserId": 24,
+                "TweetId": 14,
+                "comment": "Maiores voluptas id.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 54,
+                "UserId": 44,
+                "TweetId": 14,
+                "comment": "Illum quia illo porro accusantium fuga dolore culpa voluptatum rerum. Ab facilis repudiandae vitae ut recusandae nobis ut similique qui. Sun",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 5,
-      UserId: 2,
-      description:
-        "Et ab quia id aliquid. Ut aut molestiae quidem quod ex quo facilis minima. Consequatur qui non et voluptatibus. Laudantium minima eveniet iusto illum fuga quod. Animi sed omnis aut eaque dolorem. Cum veniam repellendus eius necessitatibus blanditiis non reprehenderit quo.\n \rNulla officia sit quibusdam vitae iste libero. Voluptates est alias. Ut est nesciunt commodi. Mollitia sunt odit eius sit voluptatibus laudantium. Earum magni qui accusantium minus sit consequatur similique. Qui dolorem voluptatibus similique.\n \rVoluptatem quibusdam esse facere est est ipsum. Nesciunt quia et. Quis asperiores eos.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 15,
-          UserId: 2,
-          TweetId: 5,
-          comment: "Temporibus in assumenda amet.\nArchitecto velit enim.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 24,
+        "UserId": 14,
+        "description": "Ullam omnis occaecati repudiandae vero a.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 14,
-          UserId: 5,
-          TweetId: 5,
-          comment: "assumenda quisquam consequuntur",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 13,
-          UserId: 2,
-          TweetId: 5,
-          comment: "necessitatibus sit quod",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [
-        {
-          id: 3,
-          UserId: 4,
-          TweetId: 5,
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
+        "Replies": [
+            {
+                "id": 64,
+                "UserId": 14,
+                "TweetId": 24,
+                "comment": "Assumenda sed totam. Non non rerum voluptas cupiditate dolores. Iste quaerat itaque quo. Quod temporibus pariatur.\n \rVoluptatem est id in qu",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 74,
+                "UserId": 34,
+                "TweetId": 24,
+                "comment": "Enim ea provident repudiandae. Voluptas illo vitae architecto placeat consectetur voluptas quia in. Officiis consectetur cumque explicabo. M",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 84,
+                "UserId": 34,
+                "TweetId": 24,
+                "comment": "Voluptatem non repellat cupiditate explicabo rerum distinctio possimus quis.\nSed exercitationem alias aut sed minus earum id ut.\nLaboriosam ",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 6,
-      UserId: 2,
-      description:
-        "Et et dolor in sit qui pariatur aliquam.\nVeritatis in corrupti ipsa tempore cumque reiciendis est voluptatem dignissimos.\nConsequatur ea earum tempora.\nVeniam sit distinctio.",
-      createdAt: "2022-02-01T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 18,
-          UserId: 4,
-          TweetId: 6,
-          comment: "Est quia consequatur velit vitae.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 34,
+        "UserId": 14,
+        "description": "Nobis repellendus saepe nobis quibusdam quia ipsa nostrum provident.\nNihil eos error aliquam assumenda qui minima.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 17,
-          UserId: 3,
-          TweetId: 6,
-          comment: "ut debitis facere",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 16,
-          UserId: 2,
-          TweetId: 6,
-          comment:
-            "Qui voluptate dicta est harum ea minus numquam accusantium.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 94,
+                "UserId": 14,
+                "TweetId": 34,
+                "comment": "Et mollitia nobis error et dolorum qui et consequatur.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 104,
+                "UserId": 14,
+                "TweetId": 34,
+                "comment": "Necessitatibus doloremque voluptatem sequi. Odio aut rerum eos. Reiciendis ipsam ea voluptatibus porro provident deserunt maiores.\n \rIn nisi",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 114,
+                "UserId": 24,
+                "TweetId": 34,
+                "comment": "Aut enim quos dicta rerum laborum itaque odio qui ut. Sint velit quia excepturi ad dolor doloremque id odio. Exercitationem nam placeat inci",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 7,
-      UserId: 2,
-      description: "velit in perferendis",
-      createdAt: "2022-02-24T11:11:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 21,
-          UserId: 3,
-          TweetId: 7,
-          comment: "aut",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 44,
+        "UserId": 14,
+        "description": "Ducimus veritatis deleniti eligendi voluptatibus non labore.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 20,
-          UserId: 4,
-          TweetId: 7,
-          comment:
-            "Placeat accusantium veritatis qui. Ipsam consequatur illum ea iure accusamus. Sapiente fugit alias totam eum dolorem molestiae. Deserunt omn",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 19,
-          UserId: 2,
-          TweetId: 7,
-          comment: "quia",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 124,
+                "UserId": 14,
+                "TweetId": 44,
+                "comment": "Quisquam dignissimos qui.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 134,
+                "UserId": 34,
+                "TweetId": 44,
+                "comment": "Quod molestiae a. Quod rem ut recusandae aut qui et illo. Necessitatibus distinctio dolores eum dolores ratione. Alias nesciunt magni. Ut ne",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 144,
+                "UserId": 34,
+                "TweetId": 44,
+                "comment": "Ut distinctio quas vero molestiae voluptatem sed dolorem sequi.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 8,
-      UserId: 2,
-      description: "expedita sed quos",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 24,
-          UserId: 3,
-          TweetId: 8,
-          comment:
-            "Quia et modi nostrum velit quas. Id facere dolore eius est delectus nesciunt.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 54,
+        "UserId": 14,
+        "description": "Neque quam tempora ea minima nemo officiis dolor.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 23,
-          UserId: 6,
-          TweetId: 8,
-          comment:
-            "Explicabo quasi voluptatem aut a quaerat voluptatum mollitia qui optio.\nVoluptates mollitia maiores fugiat illum eligendi aut.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 22,
-          UserId: 2,
-          TweetId: 8,
-          comment: "dignissimos eum eius",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
+        "Replies": [
+            {
+                "id": 154,
+                "UserId": 14,
+                "TweetId": 54,
+                "comment": "unde tenetur doloremque",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 164,
+                "UserId": 44,
+                "TweetId": 54,
+                "comment": "Natus perspiciatis est.",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 174,
+                "UserId": 44,
+                "TweetId": 54,
+                "comment": "Excepturi labore delectus eos.\nMinus provident deleniti provident qui laudantium.\nEt ratione ducimus voluptate dignissimos id cupiditate et ",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
     },
     {
-      id: 9,
-      UserId: 2,
-      description:
-        "Nisi enim fuga maxime ratione commodi enim. In earum blanditiis quis facilis quasi quo sit vitae facilis. Rerum ipsa non praesentium corrupti error voluptatem et iure. Et consectetur nam cupiditate vel in perferendis aut dolorum sint. Perspiciatis voluptas iste. Quas perspiciatis sint.\n \rDolores vero omnis laboriosam aliquam quasi in dolor repellat. Distinctio facilis perferendis officia. Saepe architecto neque voluptatem sed. Pariatur facilis cupiditate et ratione quaerat quaerat officia culpa voluptas. Quis aut impedit in.\n \rSunt quasi dolores. Perspiciatis iure dolorem quaerat quia totam ut. Perferendis ut consequatur ab.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 27,
-          UserId: 2,
-          TweetId: 9,
-          comment:
-            "Sunt omnis illum autem eum excepturi. Explicabo unde nemo veritatis dolore voluptatem beatae. Quis assumenda labore eum vel cupiditate itaqu",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
+        "id": 84,
+        "UserId": 14,
+        "description": "Sit voluptas odio quia omnis sunt repudiandae ut aut soluta.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-        {
-          id: 26,
-          UserId: 3,
-          TweetId: 9,
-          comment: "Quis est ut vel et.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 25,
-          UserId: 2,
-          TweetId: 9,
-          comment:
-            "Sit aliquam sapiente asperiores dignissimos est sunt id esse. Nostrum fugit repellat consequuntur. Nihil sint qui ut animi sapiente et dicta",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
-    },
-    {
-      id: 10,
-      UserId: 2,
-      description: "Qui perspiciatis placeat.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      User: {
-        id: 2,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$Is0KM9XOstEfEjeTqskiBeCCz1UURsKxNrPCCMCMb9G8eCqIB1Seu",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-        introduction: "Culpa minus ea ullam.",
-        role: "user",
-        createdAt: "2022-02-24T08:19:30.000Z",
-        updatedAt: "2022-02-24T08:19:30.000Z",
-      },
-      Replies: [
-        {
-          id: 30,
-          UserId: 5,
-          TweetId: 10,
-          comment: "Aliquam sit nostrum eius labore officiis velit.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 29,
-          UserId: 5,
-          TweetId: 10,
-          comment: "sint in doloremque",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-        {
-          id: 28,
-          UserId: 2,
-          TweetId: 10,
-          comment: "Rerum tempora nobis id.",
-          createdAt: "2022-02-24T08:19:31.000Z",
-          updatedAt: "2022-02-24T08:19:31.000Z",
-        },
-      ],
-      Likes: [],
-    },
-  ],
+        "Replies": [
+            {
+                "id": 244,
+                "UserId": 14,
+                "TweetId": 84,
+                "comment": "doloremque",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 254,
+                "UserId": 14,
+                "TweetId": 84,
+                "comment": "aliquam ea veritatis",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            },
+            {
+                "id": 264,
+                "UserId": 24,
+                "TweetId": 84,
+                "comment": "Ex est nulla quo consequatur accusantium accusamus adipisci veritatis. Dignissimos ea aperiam eos assumenda vero omnis. Nihil autem qui libe",
+                "createdAt": "2022-02-26T13:31:32.000Z",
+                "updatedAt": "2022-02-26T13:31:32.000Z"
+            }
+        ],
+        "Likes": [],
+        "likedCount": 0,
+        "repliedCount": 3,
+        "isLiked": false
+    }
+]
 };
 const userDummyData = {
   userData: {
     user: {
-      id: 2,
-      account: "user1",
-      email: "user1@example.com",
-      password: "$2a$10$.dq2MpPwCRQ6z95RFQQr1.cPXfV1ToXJM79qiZdTPp4MK0EnzAV1W",
-      name: "user1",
-      avatar:
-        "https://loremflickr.com/g/320/240/people/?random=81.81418904058285",
-      cover: "https://loremflickr.com/g/600/240/shop/?random=60.682696641592",
-      introduction: "Voluptas veritatis ut optio quia sint qui aut totam.",
-      role: "user",
-      createdAt: "2022-02-24T03:59:42.000Z",
-      updatedAt: "2022-02-24T03:59:42.000Z",
-      Followings: {
-        id: null,
-        account: null,
-        email: null,
-        password: null,
-        name: null,
-        avatar: null,
-        cover: null,
-        introduction: null,
-        role: null,
-        createdAt: null,
-        updatedAt: null,
-        Followship: {
-          followerId: null,
-          followingId: null,
-          createdAt: null,
-          updatedAt: null,
+    "id": 14,
+    "account": "user1",
+    "email": "user1@example.com",
+    "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+    "name": "user1",
+    "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+    "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+    "introduction": "Nihil et error voluptatem incidunt.",
+    "role": "user",
+    "createdAt": "2022-02-26T13:31:32.000Z",
+    "updatedAt": "2022-02-26T13:31:32.000Z",
+    "Followings": [
+        {
+            "id": 24,
+            "account": "user2",
+            "email": "user2@example.com",
+            "password": "$2a$10$Il1etWmTyHTaQthyJ8CCaO0j7aUI1sUa2hF6l70AtY4r1ZULjjSt6",
+            "name": "user2",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=19.688300546759187",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=59.69861975665756",
+            "introduction": "Aliquam sit cupiditate recusandae error iusto.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 14,
+                "followingId": 24,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        }
+    ],
+    "Followers": [
+        {
+            "id": 54,
+            "account": "user5",
+            "email": "user5@example.com",
+            "password": "$2a$10$uXcfcRW9/jQrnsd5IN22reCMdvmRqNm97Q8e/D/osjFjK19q3cB/.",
+            "name": "user5",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=53.862516895651005",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=30.9884661571197",
+            "introduction": "Rerum quidem suscipit itaque harum dicta sapiente.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 54,
+                "followingId": 14,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
         },
-      },
-      Followers: {
-        id: null,
-        account: null,
-        email: null,
-        password: null,
-        name: null,
-        avatar: null,
-        cover: null,
-        introduction: null,
-        role: null,
-        createdAt: null,
-        updatedAt: null,
-        Followship: {
-          followerId: null,
-          followingId: null,
-          createdAt: null,
-          updatedAt: null,
-        },
-      },
-    },
-    followingCount: 20,
-    follwerCount: 10,
+        {
+            "id": 44,
+            "account": "user4",
+            "email": "user4@example.com",
+            "password": "$2a$10$pT/Fa9VgpEX5Pv8Zbflnn.Ky59RHIfyhdufbfb8bhLHgMnf5I8X7y",
+            "name": "user4",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=85.38506035885851",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=21.01274733805727",
+            "introduction": "Debitis veniam ad eos eum voluptas sit.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 44,
+                "followingId": 14,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        }
+    ],
+    "followingCount": 1,
+    "follwerCount": 2,
+    "isFollowed": false
+}
   },
 }; //api/user/id這包幾乎包刮全部會用到的資料好像可以用currentuser.id去取這包再帶資料
 const DummyData2 = {
   Replies: [
     {
-      id: 1,
-      UserId: 2,
-      TweetId: 1,
-      comment:
-        "Maiores totam nobis corrupti dolores qui et est consectetur hic. Necessitatibus rem quidem blanditiis iusto reiciendis ipsam id architecto. ",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 4,
+        "UserId": 14,
+        "TweetId": 4,
+        "comment": "Ut qui magnam quia quis reiciendis ipsum qui. Illo quis et error aut distinctio libero soluta ex ratione. Odit autem autem id ut omnis. Assu",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": null
     },
     {
-      id: 2,
-      UserId: 2,
-      TweetId: 1,
-      comment: "odit",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 14,
+        "UserId": 14,
+        "TweetId": 4,
+        "comment": "Sed impedit exercitationem modi.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": null
     },
     {
-      id: 3,
-      UserId: 4,
-      TweetId: 1,
-      comment:
-        "Quasi modi sint fuga recusandae. Et et ducimus consectetur soluta. Deleniti inventore error possimus nesciunt itaque ut sunt.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 34,
+        "UserId": 14,
+        "TweetId": 14,
+        "comment": "Itaque soluta omnis sit. Impedit voluptatum ea vel autem est corrupti voluptatem mollitia dolor. Sit qui voluptatum. Et tenetur a qui est pe",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 14,
+            "UserId": 14,
+            "description": "Ad et rerum quis ea ea veniam. Inventore repellat et. Esse amet alias. Ullam excepturi quo voluptatem animi molestiae iure et possimus ut. Vitae autem ipsum accusantium sint voluptatem sed.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
     {
-      id: 4,
-      UserId: 2,
-      TweetId: 2,
-      comment: "Nulla est veniam.\nEius nihil ex.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 2,
-        UserId: 2,
-        description:
-          "Ipsam expedita natus accusamus eos expedita doloribus qui veniam est. Mollitia est eos et ratione eaque distinctio. Eum magnam dolor. Odio nobis minus at cum illum et ex dignissimos.",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 64,
+        "UserId": 14,
+        "TweetId": 24,
+        "comment": "Assumenda sed totam. Non non rerum voluptas cupiditate dolores. Iste quaerat itaque quo. Quod temporibus pariatur.\n \rVoluptatem est id in qu",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 24,
+            "UserId": 14,
+            "description": "Ullam omnis occaecati repudiandae vero a.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
     {
-      id: 5,
-      UserId: 2,
-      TweetId: 1,
-      comment:
-        "Maiores totam nobis corrupti dolores qui et est consectetur hic. Necessitatibus rem quidem blanditiis iusto reiciendis ipsam id architecto. ",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 94,
+        "UserId": 14,
+        "TweetId": 34,
+        "comment": "Et mollitia nobis error et dolorum qui et consequatur.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 34,
+            "UserId": 14,
+            "description": "Nobis repellendus saepe nobis quibusdam quia ipsa nostrum provident.\nNihil eos error aliquam assumenda qui minima.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
     {
-      id: 6,
-      UserId: 2,
-      TweetId: 1,
-      comment: "odit",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 104,
+        "UserId": 14,
+        "TweetId": 34,
+        "comment": "Necessitatibus doloremque voluptatem sequi. Odio aut rerum eos. Reiciendis ipsam ea voluptatibus porro provident deserunt maiores.\n \rIn nisi",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 34,
+            "UserId": 14,
+            "description": "Nobis repellendus saepe nobis quibusdam quia ipsa nostrum provident.\nNihil eos error aliquam assumenda qui minima.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
     {
-      id: 7,
-      UserId: 4,
-      TweetId: 1,
-      comment:
-        "Quasi modi sint fuga recusandae. Et et ducimus consectetur soluta. Deleniti inventore error possimus nesciunt itaque ut sunt.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 1,
-        UserId: 2,
-        description: "a",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 124,
+        "UserId": 14,
+        "TweetId": 44,
+        "comment": "Quisquam dignissimos qui.",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 44,
+            "UserId": 14,
+            "description": "Ducimus veritatis deleniti eligendi voluptatibus non labore.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
     {
-      id: 8,
-      UserId: 2,
-      TweetId: 2,
-      comment: "Nulla est veniam.\nEius nihil ex.",
-      createdAt: "2022-02-24T08:19:31.000Z",
-      updatedAt: "2022-02-24T08:19:31.000Z",
-      Tweet: {
-        id: 2,
-        UserId: 2,
-        description:
-          "Ipsam expedita natus accusamus eos expedita doloribus qui veniam est. Mollitia est eos et ratione eaque distinctio. Eum magnam dolor. Odio nobis minus at cum illum et ex dignissimos.",
-        createdAt: "2022-02-24T08:19:31.000Z",
-        updatedAt: "2022-02-24T08:19:31.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          account: "user1",
+        "id": 154,
+        "UserId": 14,
+        "TweetId": 54,
+        "comment": "unde tenetur doloremque",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
         },
-      },
+        "Tweet": {
+            "id": 54,
+            "UserId": 14,
+            "description": "Neque quam tempora ea minima nemo officiis dolor.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
     },
-  ],
+    {
+        "id": 184,
+        "UserId": 14,
+        "TweetId": 64,
+        "comment": "facilis",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": null
+    },
+    {
+        "id": 204,
+        "UserId": 14,
+        "TweetId": 64,
+        "comment": "ab omnis consequatur",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": null
+    },
+    {
+        "id": 214,
+        "UserId": 14,
+        "TweetId": 74,
+        "comment": "Voluptatem sunt facilis voluptatem debitis omnis ea ut. Alias non dolores sit ut accusamus ad modi. Ad cumque at. Deleniti sint ut nostrum v",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 74,
+            "UserId": 14,
+            "description": "Nulla asperiores quibusdam iste quaerat explicabo id dignissimos nulla quo. Culpa aut ut aperiam in enim molestiae dolorem laborum. Quam ab soluta nostrum omnis qui ut consequatur.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
+    },
+    {
+        "id": 244,
+        "UserId": 14,
+        "TweetId": 84,
+        "comment": "doloremque",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 84,
+            "UserId": 14,
+            "description": "Sit voluptas odio quia omnis sunt repudiandae ut aut soluta.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
+    },
+    {
+        "id": 254,
+        "UserId": 14,
+        "TweetId": 84,
+        "comment": "aliquam ea veritatis",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 84,
+            "UserId": 14,
+            "description": "Sit voluptas odio quia omnis sunt repudiandae ut aut soluta.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
+    },
+    {
+        "id": 274,
+        "UserId": 14,
+        "TweetId": 94,
+        "comment": "sit soluta veniam",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 94,
+            "UserId": 14,
+            "description": "Dolor magnam sequi repudiandae.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
+    },
+    {
+        "id": 294,
+        "UserId": 14,
+        "TweetId": 94,
+        "comment": "A dolores et. Vitae sed itaque laborum labore ullam aliquam aut alias. Facilis amet vel autem molestias dolorum. Optio dolorem exercitatione",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 94,
+            "UserId": 14,
+            "description": "Dolor magnam sequi repudiandae.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user1",
+                "account": "user1"
+            }
+        }
+    },
+    {
+        "id": 464,
+        "UserId": 14,
+        "TweetId": 154,
+        "comment": "Ea soluta sint facilis repellat quisquam.\nEarum veritatis veniam architecto esse nobis voluptates quod et eos.\nOdio aut et eum accusantium n",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 154,
+            "UserId": 24,
+            "description": "Magnam quidem vel rerum quas ut ipsa sed. Officia minus laudantium. Ut temporibus delectus. Et est totam error sed veniam. Soluta blanditiis ipsa et sed ex numquam facilis reiciendis.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user2",
+                "account": "user2"
+            }
+        }
+    },
+    {
+        "id": 624,
+        "UserId": 14,
+        "TweetId": 204,
+        "comment": "suscipit deserunt aut",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 204,
+            "UserId": 34,
+            "description": "Corporis enim natus sapiente nostrum at vel tempora blanditiis cupiditate. Ut ut qui qui. Et velit veniam cupiditate.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user3",
+                "account": "user3"
+            }
+        }
+    },
+    {
+        "id": 794,
+        "UserId": 14,
+        "TweetId": 264,
+        "comment": "inventore quia in",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 264,
+            "UserId": 34,
+            "description": "Perspiciatis quas dolor magni qui velit eum.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user3",
+                "account": "user3"
+            }
+        }
+    },
+    {
+        "id": 824,
+        "UserId": 14,
+        "TweetId": 274,
+        "comment": "qui",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 274,
+            "UserId": 34,
+            "description": "Necessitatibus libero nam dolor voluptatem praesentium.\nDelectus voluptatem quaerat nam totam est ut expedita.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user3",
+                "account": "user3"
+            }
+        }
+    },
+    {
+        "id": 854,
+        "UserId": 14,
+        "TweetId": 284,
+        "comment": "Occaecati quia blanditiis unde iure et quaerat sunt. Sit veritatis et nisi sint. Deleniti sapiente et sed eos.",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 284,
+            "UserId": 34,
+            "description": "Odio at quod tempora itaque.",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user3",
+                "account": "user3"
+            }
+        }
+    },
+    {
+        "id": 894,
+        "UserId": 14,
+        "TweetId": 294,
+        "comment": "Vel voluptatibus voluptas quae.",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 294,
+            "UserId": 34,
+            "description": "et",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user3",
+                "account": "user3"
+            }
+        }
+    },
+    {
+        "id": 1194,
+        "UserId": 14,
+        "TweetId": 394,
+        "comment": "qui voluptatum est",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 394,
+            "UserId": 44,
+            "description": "quae",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user4",
+                "account": "user4"
+            }
+        }
+    },
+    {
+        "id": 1214,
+        "UserId": 14,
+        "TweetId": 404,
+        "comment": "Sit aperiam illo labore facere quia animi.",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 404,
+            "UserId": 54,
+            "description": "ut",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user5",
+                "account": "user5"
+            }
+        }
+    },
+    {
+        "id": 1274,
+        "UserId": 14,
+        "TweetId": 424,
+        "comment": "Exercitationem fugit sequi qui dolor officia mollitia.",
+        "createdAt": "2022-02-26T13:31:33.000Z",
+        "updatedAt": "2022-02-26T13:31:33.000Z",
+        "User": {
+            "id": 14,
+            "account": "user1",
+            "email": "user1@example.com",
+            "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+            "name": "user1",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+            "introduction": "Nihil et error voluptatem incidunt.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        "Tweet": {
+            "id": 424,
+            "UserId": 54,
+            "description": "dolor dolor doloremque",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "User": {
+                "name": "user5",
+                "account": "user5"
+            }
+        }
+    }
+]
 };
 export default {
   components: {
@@ -857,8 +1358,8 @@ export default {
         avatar: userDummyData.userData.user.avatar,
         cover: userDummyData.userData.user.cover,
         introduction: userDummyData.userData.user.introduction,
-        followingCount: userDummyData.userData.followingCount,
-        follwerCount: userDummyData.userData.follwerCount,
+        followingCount: userDummyData.userData.user.followingCount,
+        follwerCount: userDummyData.userData.user.follwerCount,
       };
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="signEditing-wrapper">
     <div class="form-wrapper">
-      <form id="signEditingForm" @submit.prevent.stop="handleFormSubmit">
+      <form id="signEditingForm">
         <!-- 輸入框 -->
         <label for="" :class="['label', { isInvalid: account.isInvalid }]">
           帳號
@@ -54,14 +54,32 @@
           <h5>{{ worLimitMessage(passwordCheck) }}</h5>
           <h5>{{ wordLimitCount(passwordCheck) }}</h5>
         </div>
-        <button type="submit" form="signEditingForm" v-if="pageNow" class="btn active">儲存</button>
-        <button type="submit" form="signEditingForm" v-else class="btn active">註冊</button>
+        <button
+          type="submit"
+          form="signEditingForm"
+          v-if="pageNow"
+          class="btn active"
+        >
+          儲存
+        </button>
+        <button
+          type="submit"
+          form="signEditingForm"
+          v-else
+          class="btn active"
+          @click.prevent.stop="handleSignUpSubmit"
+          :disabled="isProcessing"
+        >
+          註冊
+        </button>
       </form>
     </div>
   </div>
 </template>
+
 <script>
 import { Toast } from "../utils/helpers";
+import authorizationAPI from "../apis/authorization";
 export default {
   props: {
     currentUser: {
@@ -76,8 +94,8 @@ export default {
     },
     pageNow: {
       type: Boolean,
-      require:true,
-    }
+      require: true,
+    },
   },
   data() {
     return {
@@ -102,6 +120,7 @@ export default {
         text: "",
         isInvalid: false,
       },
+      isProcessing: false,
     };
   },
   computed: {
@@ -133,44 +152,53 @@ export default {
       this.name.text = this.currentUser.name;
       this.email.text = this.currentUser.email;
     },
-    handleFormSubmit(e) {
-      // todo: sweet alert 2
-      const account = this.account.text;
-      const name = this.name.text;
-      const email = this.email.text;
-      const password = this.password.text;
-      const passwordCheck = this.passwordCheck.text;
-      if (!account || !name || !email || !password || !passwordCheck)
-        return Toast.fire({
-          icon: "error",
-          title: "尚有未填寫欄位",
+    async handleSignUpSubmit() {
+      try {
+        const account = this.account.text;
+        const name = this.name.text;
+        const email = this.email.text;
+        const password = this.password.text;
+        const passwordCheck = this.passwordCheck.text;
+        if (!account || !name || !email || !password || !passwordCheck)
+          return Toast.fire({
+            icon: "error",
+            title: "尚有未填寫欄位",
+          });
+        else if (password !== passwordCheck)
+          return Toast.fire({
+            icon: "error",
+            title: "密碼確認與密碼不同",
+          });
+        else if (
+          account.length > 50 ||
+          name.length > 50 ||
+          email.length > 50 ||
+          password.length > 50 ||
+          passwordCheck.length > 50
+        )
+          return Toast.fire({
+            icon: "error",
+            title: "字數超過上限",
+          });
+        this.isProcessing = true;
+        const response = await authorizationAPI.signUp({
+          account,
+          name,
+          email,
+          password,
+          passwordCheck,
         });
-      else if (password !== passwordCheck)
-        return Toast.fire({
+        if (response.status === "error") throw new Error(response.message);
+        this.$router.push("/signin");
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
           icon: "error",
-          title: "密碼確認與密碼不同",
+          title: error,
         });
-      else if (
-        account.length > 50 ||
-        name.length > 50 ||
-        email.length > 50 ||
-        password.length > 50 ||
-        passwordCheck.length > 50
-      )
-        return Toast.fire({
-          icon: "error",
-          title: "字數超過上限",
-        });
+      }
+
       // todo: connect API - POST
-      const form = e.target;
-      const formData = new FormData(form);
-      // for check
-      console.log(formData);
-      console.log(formData.get("account"));
-      console.log(formData.get("name"));
-      console.log(formData.get("email"));
-      console.log(formData.get("password"));
-      console.log(formData.get("passwordCheck"));
     },
   },
 };

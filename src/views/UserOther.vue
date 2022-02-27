@@ -588,59 +588,82 @@ const dummyData = {
 const userDummyData = {
   userData: {
     user: {
-      id: 9,
-      account: "mjjane",
-      email: "Mary@example.com",
-      password: "$2a$10$.dq2MpPwCRQ6z95RFQQr1.cPXfV1ToXJM79qiZdTPp4MK0EnzAV1W",
-      name: "Mary Jane",
-      avatar:
-        "https://loremflickr.com/g/320/240/people/?random=81.81418904058285",
-      cover: "https://loremflickr.com/g/600/240/shop/?random=60.682696641592",
-      introduction: "Voluptas veritatis utqui aut totam.",
-      role: "user",
-      createdAt: "2022-02-24T03:59:42.000Z",
-      updatedAt: "2022-02-24T03:59:42.000Z",
-      Followings: {
-        id: null,
-        account: null,
-        email: null,
-        password: null,
-        name: null,
-        avatar: null,
-        cover: null,
-        introduction: null,
-        role: null,
-        createdAt: null,
-        updatedAt: null,
-        Followship: {
-          followerId: null,
-          followingId: null,
-          createdAt: null,
-          updatedAt: null,
+    "id": 14,
+    "account": "user1",
+    "email": "user1@example.com",
+    "password": "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
+    "name": "user1",
+    "avatar": "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
+    "cover": "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
+    "introduction": "Nihil et error voluptatem incidunt.",
+    "role": "user",
+    "createdAt": "2022-02-26T13:31:32.000Z",
+    "updatedAt": "2022-02-26T13:31:32.000Z",
+    "Followings": [
+        {
+            "id": 24,
+            "account": "user2",
+            "email": "user2@example.com",
+            "password": "$2a$10$Il1etWmTyHTaQthyJ8CCaO0j7aUI1sUa2hF6l70AtY4r1ZULjjSt6",
+            "name": "user2",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=19.688300546759187",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=59.69861975665756",
+            "introduction": "Aliquam sit cupiditate recusandae error iusto.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 14,
+                "followingId": 24,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        }
+    ],
+    "Followers": [
+        {
+            "id": 54,
+            "account": "user5",
+            "email": "user5@example.com",
+            "password": "$2a$10$uXcfcRW9/jQrnsd5IN22reCMdvmRqNm97Q8e/D/osjFjK19q3cB/.",
+            "name": "user5",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=53.862516895651005",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=30.9884661571197",
+            "introduction": "Rerum quidem suscipit itaque harum dicta sapiente.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 54,
+                "followingId": 14,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
         },
-      },
-      Followers: {
-        id: null,
-        account: null,
-        email: null,
-        password: null,
-        name: null,
-        avatar: null,
-        cover: null,
-        introduction: null,
-        role: null,
-        createdAt: null,
-        updatedAt: null,
-        Followship: {
-          followerId: null,
-          followingId: null,
-          createdAt: null,
-          updatedAt: null,
-        },
-      },
-    },
-    followingCount: 1174,
-    follwerCount: 63960,
+        {
+            "id": 44,
+            "account": "user4",
+            "email": "user4@example.com",
+            "password": "$2a$10$pT/Fa9VgpEX5Pv8Zbflnn.Ky59RHIfyhdufbfb8bhLHgMnf5I8X7y",
+            "name": "user4",
+            "avatar": "https://loremflickr.com/g/320/240/people/?random=85.38506035885851",
+            "cover": "https://loremflickr.com/g/600/240/shop/?random=21.01274733805727",
+            "introduction": "Debitis veniam ad eos eum voluptas sit.",
+            "role": "user",
+            "createdAt": "2022-02-26T13:31:32.000Z",
+            "updatedAt": "2022-02-26T13:31:32.000Z",
+            "Followship": {
+                "followerId": 44,
+                "followingId": 14,
+                "createdAt": "2022-02-26T13:31:33.000Z",
+                "updatedAt": "2022-02-26T13:31:33.000Z"
+            }
+        }
+    ],
+    "followingCount": 1,
+    "follwerCount": 2,
+    "isFollowed": false
+}
   },
 }; //api/user/id這包幾乎包刮全部會用到的資料好像可以用currentuser.id去取這包再帶資料
 const DummyData2 = {
@@ -835,6 +858,7 @@ export default {
         introduction: "",
         followingCount: -1,
         follwerCount: -1,
+        isFollowed: ""
       },
       whichPage: false, //true代表個人false代表他人
       tabNow: 1, //1推文 2回復 3喜歡
@@ -854,8 +878,9 @@ export default {
         avatar: userDummyData.userData.user.avatar,
         cover: userDummyData.userData.user.cover,
         introduction: userDummyData.userData.user.introduction,
-        followingCount: userDummyData.userData.followingCount,
-        follwerCount: userDummyData.userData.follwerCount,
+        followingCount: userDummyData.userData.user.followingCount,
+        follwerCount: userDummyData.userData.user.follwerCount,
+        isFollowed: userDummyData.userData.user.isFollowed,
       };
     },
   },

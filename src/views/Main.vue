@@ -58,8 +58,8 @@ export default {
     async fetchTweetCards() {
       try {
         const { data, statusText } = await tweetsAPI.getAllTweets()
-        console.log(statusText)
-        console.log(data)
+        // console.log(statusText)
+        // console.log(data)
         // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
         if (statusText !== "OK") throw new Error(statusText)
         this.tweetCards = [ ...data ]

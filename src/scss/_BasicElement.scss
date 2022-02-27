@@ -36,6 +36,15 @@ h6 {
 }
 
 // label default
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 50px inset;
+  -webkit-box-shadow: 0 0 0px 100px #{$label-background} inset;
+}
+
 .form-wrapper {
   width: 100%;
   // label
@@ -55,7 +64,8 @@ h6 {
     }
   }
   // input
-  input[type="text"] {
+  input[type="text"],
+  input[type="password"] {
     border: none;
     outline: none;
     appearance:none;

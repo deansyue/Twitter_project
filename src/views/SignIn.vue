@@ -21,7 +21,11 @@
             :class="['label', { isInvalid: password.isInvalid }]"
           >
             密碼
-            <input v-model.trim="password.text" name="password" type="text">
+            <input
+              v-model.trim="password.text"
+              name="password"
+              type="password" autocomplete="off"
+            />
           </label>
           <div class="wordLimit-wrapper">
             <h5>{{ worLimitMessage(password) }}</h5>
@@ -89,7 +93,6 @@ export default {
   methods: {
     async handleFormSubmit() {
       try{
-        // todo: 待測試 API 串接狀況
         const account = this.account.text
         const password = this.password.text
         if(!account || !password) return Toast.fire({
@@ -102,28 +105,30 @@ export default {
         })
         // 當前端檢查過關：
         this.isProcessing = true
-        const response = await authorizationAPI.SignIn({
+        const { data, statusText } = await authorizationAPI.SignIn({
           account,
           password
         })
-        if (response.status === "error") throw new Error(response.message)
+        // 當串接失敗
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(data.message)
+        }
         // 當串接成功：
         this.isProcessing = false
-        localStorage.setItem('token', response.data.token)
-        this.$store.commit('setCurrentUser', response.data.user)
+        // todo: 待確認 data 階層是否修改
+        localStorage.setItem('token', data.data.token)
+        this.$store.commit('setCurrentUser', data.data.user)
         this.$router.push('/main')
 
       } catch (error) {
         this.isProcessing = false
         this.password.text = ''
-        // todo: 確認訊息內容是否需調整
-        // "Error: Network Error" 或 "帳號與密碼不存在" ?
         Toast.fire({
           icon: 'error',
           title: error
         })
       }
     }
-  }
+  },
 }
 </script>

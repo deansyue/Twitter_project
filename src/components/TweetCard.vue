@@ -47,9 +47,9 @@ export default {
       tweetUser: {},
       description: '',
       createdAt: '',
-      replysCount: 0,
-      likesCount: 0,
-      isLiked: false
+      replysCount: 0, // 尚為預設值
+      likesCount: 0, // 尚為預設值
+      isLiked: false // 尚為預設值
     }
   },
   methods: {

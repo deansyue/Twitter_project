@@ -1,11 +1,12 @@
 .navBar-wrapper {
-  height: 100%;
-  width: 26%;
-  position: fixed;
+  height: 100vh;
+  position: sticky;
+  top: 0;
   .container {
     position: absolute;
     top: 14px;
-    left: 30%;
+    right: 55px;
+    width: 210px;
     background: #{$white};
   }
   .logo{  

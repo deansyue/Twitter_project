@@ -1,0 +1,58 @@
+.userCardEdit-modal {
+  top: 54px !important;
+  border-radius: 14px;
+  background-color: #{$white};
+  .userCardEdit-head {
+    display: grid;
+    height: 64px;
+    padding: 15px 15px 15px 19.5px;
+    grid-template-columns: 79px 1fr 81px;
+    align-items: center;
+    button.btn.active {
+      padding: 5px 15px;
+      font-size: 18px;
+    }
+  }
+  .userCardEdit-body {
+    .form-image-wrapper {
+      position: relative;
+      .form-image-cover {
+        width: 598px;
+        height: 200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        background-image: url("https://image-resizer.cwg.tw/resize/uri/https%3A%2F%2Fa.chdev.tw%2Fclub%2Farticle%2F202006%2Farticle-5eeb142614250.jpg/?w=561");
+        img {
+          margin: 19px;
+        }
+      }
+      .form-image-avatar {
+        position: absolute;
+        left: 15px;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+        border: 3px solid #{$white};
+        background-image: url("https://d25tv1xepz39hi.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg");
+      }
+    }
+    .form-input-wrapper {
+      padding: 80px 15px 0 15px;
+      .textarea {
+        height: 150px;
+        textarea {
+          width: 96%;
+          height: 120px;
+          font-size: 19px;
+          resize: none;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column">
+  <div class="app-tripple-column" v-if="!isLoading">
     <div class="left-container">
       <NavBar />
     </div>
@@ -41,6 +41,7 @@ export default {
       followerCards: [],
       isFollowerPage: true,
       paramsId: 0, // 從網址取得目標使用者的 id
+      isLoading: true,
     }
   },
   methods: {
@@ -55,6 +56,7 @@ export default {
             id: id
           }
         })
+        this.isLoading = false
       } catch (error) {
         Toast.fire({
           icon: 'error',

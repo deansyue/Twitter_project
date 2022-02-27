@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column">
+  <div class="app-tripple-column" v-if="!isLoading">
     <div class="left-container">
       <NavBar />
     </div>
@@ -40,6 +40,7 @@ export default {
       followingCards: [],
       isFollowerPage: false,
       paramsId: 0,
+      isLoading: true,
     }
   },
   methods: {
@@ -47,7 +48,6 @@ export default {
       try {
         const { data, statusText } = await usersAPI.getFollowings({ userId: paramsId })
         if (statusText !== "OK") throw new Error(statusText)
-        console.log(data)
         this.followingCards = data.map(card => {
           const id = card.followingId
           return {
@@ -55,10 +55,11 @@ export default {
             id: id
           }
         })
+        this.isLoading = false
       } catch (error) {
         Toast.fire({
           icon: 'error',
-          title: '無法取得追隨者資料，請稍後再試'
+          title: '無法取得正在跟隨資料，請稍後再試'
         })
       }
     }

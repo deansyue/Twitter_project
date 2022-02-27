@@ -3,7 +3,7 @@
     <div class="card-left avatar" @click="linkedUser(tweetUser.id)">
       <img class="avatar" :src="tweetUser.avatar">
     </div>
-    <div class="card-right">
+    <div class="card-right" @click="linkedReply($event, id)">
       <div class="card-head">
         <h5 class="card-name" @click="linkedUser(tweetUser.id)">
           {{ tweetUser.name }}
@@ -20,7 +20,7 @@
         {{ description }}
       <p>
       <div class="card-foot">
-        <img class="reply" @click="linkedReply(id)">
+        <img class="reply">
         <h6>{{ replysCount }}</h6>
         <img v-if="isLiked" @click="deleteLikes()" class="heart-active">
         <img v-else @click="addLikes()" class="heart">
@@ -77,7 +77,13 @@ export default {
     linkedUser(userId) {
       this.$router.push({ name: 'user', params: { id: userId }})
     },
-    linkedReply(tweetId) {
+    linkedReply($event, tweetId) {
+      // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面
+      if ($event.target.matches('.heart')
+        || $event.target.matches('.heart-active')
+        || $event.target.matches('.avatar')
+        || $event.target.matches('.card-name')) return
+        
       this.$router.push({ name: 'tweet', params: { id: tweetId }})
     }
   },

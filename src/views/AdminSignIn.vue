@@ -2,7 +2,7 @@
   <div class="signin-wrapper">
     <!-- todo: 從共用scss變數中引用icon -->
     <img class="logo-big" alt="">
-    <h2>登入 Alphaitter</h2>
+    <h2>後台登入</h2>
     <div class="form-wrapper">
       <form id="signInForm" @submit.prevent.stop="handleFormSubmit">
           <!-- 輸入框 -->
@@ -31,29 +31,24 @@
             <h5>{{ worLimitMessage(password) }}</h5>
             <h5>{{ wordLimitCount(password) }}</h5>
           </div>
-          <button 
-            form="signInForm"
-            type="submit"  class="btn active"
-            :disabled="isProcessing">
+          <button type="submit" form="signInForm" class="btn active">
             登入
           </button>
       </form>
     </div>
+
     <div class="link-wrapper">
-      <router-link to="/signup" class="link">
-        註冊Alphitter
-      </router-link>
-      <span>●</span>
-      <router-link to="/admin/signin" class="link">
-        後台登入
+      <router-link to="/signin" class="link">
+        前台登入
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import authorizationAPI from '../apis/authorization'
 import { Toast } from "../utils/helpers";
+// import adminAPI from "../api/admin";
+
 export default {
   data() {
     return {
@@ -66,7 +61,6 @@ export default {
         text: "",
         isInvalid: false,
       },
-      isProcessing: false
     }
   },
   computed: {
@@ -91,45 +85,25 @@ export default {
     },
   },
   methods: {
-    async handleFormSubmit() {
-      try{
-        const account = this.account.text
-        const password = this.password.text
-        if(!account || !password) return Toast.fire({
-          icon: 'error',
-          title: '帳號密碼不可空白'
-        })
-        else if (account.length > 50 || password.length > 50) return Toast.fire({
-          icon: 'error',
-          title: '字數超過上限'
-        })
-        // 當前端檢查過關：
-        this.isProcessing = true
-        const { data, statusText } = await authorizationAPI.SignIn({
-          account,
-          password
-        })
-        // 當串接失敗
-        console.log(data)
-        if (statusText !== "OK" || data.status !== "success") {
-          throw new Error(data.message)
-        }
-        // 當串接成功：
-        this.isProcessing = false
-        // todo: 待確認 data 階層是否修改
-        localStorage.setItem('token', data.token)
-        this.$store.commit('setCurrentUser', data.user)
-        this.$router.push('/main')
-
-      } catch (error) {
-        this.isProcessing = false
-        this.password.text = ''
-        Toast.fire({
-          icon: 'error',
-          title: error
-        })
-      }
+    handleFormSubmit(e) {
+      const account = this.account.text
+      const password = this.password.text
+      if(!account || !password) return Toast.fire({
+        icon: 'error',
+        title: '帳號密碼不可空白'
+      })
+      else if (account.length > 50 || password.length > 50) return Toast.fire({
+        icon: 'error',
+        title: '字數超過上限'
+      })
+      // todo: connect API - POST
+      const form = e.target
+      const formData = new FormData(form)
+      // for check
+      console.log(formData)      
+      console.log(formData.get('account'))
+      console.log(formData.get('password'))
     }
-  },
+  }
 }
 </script>

@@ -2,7 +2,49 @@
   <div class="app-tripple-column">
     <div class="left-container"><NavBar /></div>
     <div class="middle-container">
-      <UserCard :tweets="tweets" :currentUserData="currentUserData" :whichPage="whichPage"/>
+      <UserCard
+        :tweets="tweets"
+        :currentUserData="currentUserData"
+        :whichPage="whichPage"
+      />
+      <div class="switchTabs">
+        <div
+          class="tweetTab"
+          :class="[{ activeTabs: tabNow === 1 }]"
+          @click="tabNow = 1"
+        >
+          推文
+        </div>
+        <div
+          class="replyTab"
+          :class="[{ activeTabs: tabNow === 2 }]"
+          @click="tabNow = 2"
+        >
+          推文與回覆
+        </div>
+        <div
+          class="likeTab"
+          :class="[{ activeTabs: tabNow === 3 }]"
+          @click="tabNow = 3"
+        >
+          喜歡的內容
+        </div>
+      </div>
+      <div class="self-tweet-wrapper" v-if="tabNow === 1">
+        <div class="self-tweet" v-for="tweet in tweets" :key="tweet.id">
+          <TweetCard :tweet-card="tweet" />
+        </div>
+      </div>
+      <div class="self-reply-wrapper" v-else-if="tabNow === 2">
+        <div class="self-reply" v-for="reply in replys" :key="reply.id">
+          <ReplyCard :tweet-card="reply" />
+        </div>
+      </div>
+      <div class="self-like-wrapper" v-else>
+        <div class="self-like" v-for="tweet in tweets" :key="tweet.id">
+          <TweetCard :tweet-card="tweet" />
+        </div>
+      </div>
     </div>
     <div class="right-container"><Popular /></div>
   </div>
@@ -11,6 +53,9 @@
 import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
+import TweetCard from "../components/TweetCard.vue";
+import ReplyCard from "../components/ReplyCard.vue";
+
 import { mapState } from "vuex";
 const dummyData = {
   tweets: [
@@ -599,15 +644,188 @@ const userDummyData = {
     follwerCount: 10,
   },
 }; //api/user/id這包幾乎包刮全部會用到的資料好像可以用currentuser.id去取這包再帶資料
+const DummyData2 = {
+  Replies: [
+    {
+      id: 1,
+      UserId: 2,
+      TweetId: 1,
+      comment:
+        "Maiores totam nobis corrupti dolores qui et est consectetur hic. Necessitatibus rem quidem blanditiis iusto reiciendis ipsam id architecto. ",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 2,
+      UserId: 2,
+      TweetId: 1,
+      comment: "odit",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 3,
+      UserId: 4,
+      TweetId: 1,
+      comment:
+        "Quasi modi sint fuga recusandae. Et et ducimus consectetur soluta. Deleniti inventore error possimus nesciunt itaque ut sunt.",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 4,
+      UserId: 2,
+      TweetId: 2,
+      comment: "Nulla est veniam.\nEius nihil ex.",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 2,
+        UserId: 2,
+        description:
+          "Ipsam expedita natus accusamus eos expedita doloribus qui veniam est. Mollitia est eos et ratione eaque distinctio. Eum magnam dolor. Odio nobis minus at cum illum et ex dignissimos.",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 5,
+      UserId: 2,
+      TweetId: 1,
+      comment:
+        "Maiores totam nobis corrupti dolores qui et est consectetur hic. Necessitatibus rem quidem blanditiis iusto reiciendis ipsam id architecto. ",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 6,
+      UserId: 2,
+      TweetId: 1,
+      comment: "odit",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 7,
+      UserId: 4,
+      TweetId: 1,
+      comment:
+        "Quasi modi sint fuga recusandae. Et et ducimus consectetur soluta. Deleniti inventore error possimus nesciunt itaque ut sunt.",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 1,
+        UserId: 2,
+        description: "a",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+    {
+      id: 8,
+      UserId: 2,
+      TweetId: 2,
+      comment: "Nulla est veniam.\nEius nihil ex.",
+      createdAt: "2022-02-24T08:19:31.000Z",
+      updatedAt: "2022-02-24T08:19:31.000Z",
+      Tweet: {
+        id: 2,
+        UserId: 2,
+        description:
+          "Ipsam expedita natus accusamus eos expedita doloribus qui veniam est. Mollitia est eos et ratione eaque distinctio. Eum magnam dolor. Odio nobis minus at cum illum et ex dignissimos.",
+        createdAt: "2022-02-24T08:19:31.000Z",
+        updatedAt: "2022-02-24T08:19:31.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          account: "user1",
+        },
+      },
+    },
+  ],
+};
 export default {
   components: {
     NavBar,
     Popular,
     UserCard,
+    TweetCard,
+    ReplyCard,
   },
   data() {
     return {
       tweets: [],
+      replys: [],
       currentUserData: {
         id: -1,
         account: "",
@@ -619,7 +837,8 @@ export default {
         followingCount: -1,
         follwerCount: -1,
       },
-      whichPage: true //true代表個人false代表他人
+      whichPage: true, //true代表個人false代表他人
+      tabNow: 1, //1推文 2回復 3喜歡
     };
   },
   computed: {
@@ -629,6 +848,7 @@ export default {
     fetchTweets() {
       // todo: 串接 API 用currentuser.id取出currentuser詳細資料
       this.tweets = dummyData.tweets;
+      this.replys = DummyData2.Replies;
       this.currentUserData = {
         id: userDummyData.userData.user.id,
         account: userDummyData.userData.user.account,
@@ -639,7 +859,7 @@ export default {
         introduction: userDummyData.userData.user.introduction,
         followingCount: userDummyData.userData.followingCount,
         follwerCount: userDummyData.userData.follwerCount,
-      }
+      };
     },
   },
   created() {

@@ -2,13 +2,14 @@
   .main-title {
     margin: 15px 0 14px 15px;
   }
-  .main-body {
+  .main-create {
     position: relative;
     display: flex;
     border-top: 1px solid #{$frameColor};
     border-bottom: 10px solid #{$frameColor};
     padding: 10px 15px;
     height: 120px;
+    cursor: pointer;
     p {
       margin: 10px;
     }

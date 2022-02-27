@@ -17,21 +17,25 @@
             <h5>{{ wordLimitCount(account) }}</h5>
           </div>
           <!-- 輸入框 -->
-          <label for="" 
-            :class="['label', { isInvalid: password.isInvalid }]"
-          >
+          <label for="" :class="['label', { isInvalid: password.isInvalid }]">
             密碼
             <input
               v-model.trim="password.text"
               name="password"
-              type="password" autocomplete="off"
+              type="password"
+              autocomplete="off"
             />
           </label>
           <div class="wordLimit-wrapper">
             <h5>{{ worLimitMessage(password) }}</h5>
             <h5>{{ wordLimitCount(password) }}</h5>
           </div>
-          <button type="submit" form="signInForm" class="btn active">
+          <button
+           form="signInForm"
+           type="submit"
+           class="btn active"
+           :disabled="isProcessing"
+        >
             登入
           </button>
       </form>
@@ -46,11 +50,11 @@
 </template>
 
 <script>
+import adminAPI from "../apis/admin";
 import { Toast } from "../utils/helpers";
-// import adminAPI from "../api/admin";
 
 export default {
-  data() {
+   data() {
     return {
       // input 一個輸入框為一組
       account: {
@@ -61,49 +65,71 @@ export default {
         text: "",
         isInvalid: false,
       },
-    }
+      isProcessing: false,
+    };
   },
   computed: {
     worLimitMessage() {
       return (input) => {
         if (input.text.length > 50) {
-          input.isInvalid = true
-          return '字數超過上限！'
+          input.isInvalid = true;
+          return "字數超過上限！";
+        } else {
+          input.isInvalid = false;
+          return "";
         }
-        else {
-          input.isInvalid = false
-          return ""
-        }
-      }
+      };
     },
     wordLimitCount() {
       // 計算帶入input的字數
       return (input) => {
-        if (input.text.length < 1) return ""
-        else return input.text.length + "/50"
+        if (input.text.length < 1) return "";
+        else return input.text.length + "/50";
+      };
+    },
+  },
+ methods: {
+    async handleFormSubmit() {
+      try {
+        const account = this.account.text;
+        const password = this.password.text;
+        if (!account || !password)
+          return Toast.fire({
+            icon: "error",
+            title: "帳號密碼不可空白",
+          });
+        else if (account.length > 50 || password.length > 50)
+          return Toast.fire({
+            icon: "error",
+            title: "字數超過上限",
+          });
+        // 當前端檢查過關：
+        this.isProcessing = true;
+        const { data, statusText } = await adminAPI.adminSignIn({
+          account,
+          password
+        });
+        // 當串接失敗
+        console.log(data)
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(data.message);
+        }
+        // 當串接成功：
+        this.isProcessing = false;
+        // todo: 待確認 data 階層是否修改
+        localStorage.setItem('token', data.token)
+        this.$store.commit('setCurrentUser', data.user)
+        this.$router.push('/admin/tweets')
+
+      } catch (error) {
+        this.isProcessing = false;
+        this.password.text = "";
+        Toast.fire({
+          icon: "error",
+          title: error,
+        });
       }
     },
   },
-  methods: {
-    handleFormSubmit(e) {
-      const account = this.account.text
-      const password = this.password.text
-      if(!account || !password) return Toast.fire({
-        icon: 'error',
-        title: '帳號密碼不可空白'
-      })
-      else if (account.length > 50 || password.length > 50) return Toast.fire({
-        icon: 'error',
-        title: '字數超過上限'
-      })
-      // todo: connect API - POST
-      const form = e.target
-      const formData = new FormData(form)
-      // for check
-      console.log(formData)      
-      console.log(formData.get('account'))
-      console.log(formData.get('password'))
-    }
-  }
-}
+};
 </script>

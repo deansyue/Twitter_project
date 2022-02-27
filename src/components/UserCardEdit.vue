@@ -13,19 +13,21 @@
         <form action="" class="form-wrapper">
           <div class="form-image-wrapper">
             <div class="form-image-cover">
-              <img class="camera" alt="">
-              <img class="cross-white" alt="">
+              <img class="cover" :src="currentUser.cover">
+              <label for="cover" class="camera"></label>
+              <input type="file" id="cover" name="cover" accept="image/png">
+              <img class="cross-white cancel" />
             </div>
             <div class="form-image-avatar avatar">
-              <img class="camera" alt="">
+              <label for="avatar" class="camera"></label>
+              <input type="file" id="avatar">
             </div>
           </div>
           <div class="form-input-wrapper">
             <!-- 輸入框 -->
-            <label for=""
-              :class="['label', { isInvalid: name.isInvalid }]"
-            >名稱
-            <input v-model.trim="name.text" name="name" type="text">
+            <label for="name" :class="['label', { isInvalid: name.isInvalid }]">
+            名稱
+            <input v-model.trim="name.text" name="name" type="text" id="name">
             </label>
             <div class="wordLimit-wrapper">
               <h5>{{ worLimitMessage(name, 50) }}</h5>
@@ -50,12 +52,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       // input 一個輸入框為一組
       name: {
-        text: "",
+        text:  "哈哈",
         isInvalid: false,
       },
       introduction: {
@@ -66,6 +69,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(["currentUser"]),
     worLimitMessage() {
       return (input, number) => {
         if (input.text.length > number) {
@@ -85,5 +89,8 @@ export default {
       }
     },
   },
+  created() {
+    this.name.text = this.currentUser.name
+  }
 }
 </script>

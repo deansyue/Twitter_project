@@ -39,7 +39,7 @@
         推文
       </button>
       <div class="logoutTab">
-        <button class="logoutButton">
+        <button class="logoutButton" @click="logout()">
           <div class="icon">
             <img class="logout" alt="" />
           </div>
@@ -51,8 +51,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState(["isAuthenticated"]),
+  },
   methods: {
+    logout() {
+      this.$store.commit('revokeAuthentication')
+      this.$router.push('/signin')
+    },
     showModal() {
       // 打開 modal
       this.$modal.show("tweetCreate");

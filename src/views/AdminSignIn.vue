@@ -21,7 +21,11 @@
             :class="['label', { isInvalid: password.isInvalid }]"
           >
             密碼
-            <input v-model.trim="password.text" name="password" type="text">
+            <input
+              v-model.trim="password.text"
+              name="password"
+              type="password" autocomplete="off"
+            />
           </label>
           <div class="wordLimit-wrapper">
             <h5>{{ worLimitMessage(password) }}</h5>

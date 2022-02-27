@@ -1315,6 +1315,142 @@ const DummyData2 = {
     }
 ]
 };
+const dummyDataLike= {
+    likes :[
+  {
+    "id": 4,
+    "UserId": 14,
+    "TweetId": 444,
+    "createdAt": "2022-02-26T13:31:33.000Z",
+    "updatedAt": "2022-02-26T13:31:33.000Z",
+    "Tweet": {
+      "id": 444,
+      "UserId": 54,
+      "description": "Quo ratione sit distinctio sint. Culpa et nostrum autem consectetur perferendis. Assumenda magni quis velit dolores dolores optio et temporibus porro. Fugiat similique placeat id sapiente porro explicabo esse. Eius aut totam numquam quod doloremque debitis maiores quia. Aperiam quaerat sequi.\n \rAsperiores odit voluptatem et ut nam. Et eaque voluptatum. Non labore suscipit corrupti blanditiis eligendi ut. Quod asperiores iste perspiciatis. Enim pariatur et.\n \rVitae non nihil sit nulla non. Necessitatibus non quaerat nihil animi. Hic dolores sint ratione iusto omnis molestias magnam debitis molestiae. Quibusdam quae laborum id et odit eaque sit. Illum eos sapiente earum minus atque assumenda. Dolor laboriosam vero et illo molestias.",
+      "createdAt": "2022-02-26T13:31:32.000Z",
+      "updatedAt": "2022-02-26T13:31:32.000Z",
+      "User": {
+        "id": 54,
+        "account": "user5",
+        "email": "user5@example.com",
+        "password": "$2a$10$uXcfcRW9/jQrnsd5IN22reCMdvmRqNm97Q8e/D/osjFjK19q3cB/.",
+        "name": "user5",
+        "avatar": "https://loremflickr.com/g/320/240/people/?random=53.862516895651005",
+        "cover": "https://loremflickr.com/g/600/240/shop/?random=30.9884661571197",
+        "introduction": "Rerum quidem suscipit itaque harum dicta sapiente.",
+        "role": "user",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z"
+      },
+      "Replies": [
+        {
+          "id": 1324,
+          "UserId": 54,
+          "TweetId": 444,
+          "comment": "voluptatem animi reiciendis",
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        },
+        {
+          "id": 1334,
+          "UserId": 34,
+          "TweetId": 444,
+          "comment": "Excepturi porro voluptates unde nisi.",
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        },
+        {
+          "id": 1344,
+          "UserId": 24,
+          "TweetId": 444,
+          "comment": "Optio quas est doloremque dignissimos officia modi aut quasi. Ut aspernatur aliquid. Quia dicta ab dolorum reiciendis cum odio et nulla.\n \rF",
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        }
+      ],
+      "Likes": [
+        {
+          "id": 4,
+          "UserId": 14,
+          "TweetId": 444,
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        },
+        {
+          "id": 14,
+          "UserId": 24,
+          "TweetId": 444,
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "UserId": 14,
+    "TweetId": 154,
+    "createdAt": "2022-02-26T13:31:33.000Z",
+    "updatedAt": "2022-02-26T13:31:33.000Z",
+    "Tweet": {
+      "id": 154,
+      "UserId": 24,
+      "description": "Magnam quidem vel rerum quas ut ipsa sed. Officia minus laudantium. Ut temporibus delectus. Et est totam error sed veniam. Soluta blanditiis ipsa et sed ex numquam facilis reiciendis.",
+      "createdAt": "2022-02-26T13:31:32.000Z",
+      "updatedAt": "2022-02-26T13:31:32.000Z",
+      "User": {
+        "id": 24,
+        "account": "user2",
+        "email": "user2@example.com",
+        "password": "$2a$10$Il1etWmTyHTaQthyJ8CCaO0j7aUI1sUa2hF6l70AtY4r1ZULjjSt6",
+        "name": "user2",
+        "avatar": "https://loremflickr.com/g/320/240/people/?random=19.688300546759187",
+        "cover": "https://loremflickr.com/g/600/240/shop/?random=59.69861975665756",
+        "introduction": "Aliquam sit cupiditate recusandae error iusto.",
+        "role": "user",
+        "createdAt": "2022-02-26T13:31:32.000Z",
+        "updatedAt": "2022-02-26T13:31:32.000Z"
+      },
+      "Replies": [
+        {
+          "id": 454,
+          "UserId": 24,
+          "TweetId": 154,
+          "comment": "Nihil inventore voluptatem itaque laboriosam numquam dolores et ullam.\nOptio quidem quis doloribus est illo voluptatem reiciendis corrupti m",
+          "createdAt": "2022-02-26T13:31:32.000Z",
+          "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        {
+          "id": 464,
+          "UserId": 14,
+          "TweetId": 154,
+          "comment": "Ea soluta sint facilis repellat quisquam.\nEarum veritatis veniam architecto esse nobis voluptates quod et eos.\nOdio aut et eum accusantium n",
+          "createdAt": "2022-02-26T13:31:32.000Z",
+          "updatedAt": "2022-02-26T13:31:32.000Z"
+        },
+        {
+          "id": 474,
+          "UserId": 54,
+          "TweetId": 154,
+          "comment": "Deserunt vitae nulla. Unde eum qui nisi. Occaecati quia sed similique sequi enim repellendus repellendus. Atque eos blanditiis dolorem aliqu",
+          "createdAt": "2022-02-26T13:31:32.000Z",
+          "updatedAt": "2022-02-26T13:31:32.000Z"
+        }
+      ],
+      "Likes": [
+        {
+          "id": 24,
+          "UserId": 14,
+          "TweetId": 154,
+          "createdAt": "2022-02-26T13:31:33.000Z",
+          "updatedAt": "2022-02-26T13:31:33.000Z"
+        }
+      ]
+    }
+  }
+]
+}
+
 export default {
   components: {
     NavBar,
@@ -1326,6 +1462,7 @@ export default {
   data() {
     return {
       tweets: [],
+      likeTweets:[],
       replys: [],
       currentUserData: {
         id: -1,
@@ -1350,6 +1487,7 @@ export default {
       // todo: 串接 API 用currentuser.id取出currentuser詳細資料
       this.tweets = dummyData.tweets;
       this.replys = DummyData2.Replies;
+      this.likeTweets = dummyDataLike.likes.map(like=>like.Tweet)
       this.currentUserData = {
         id: userDummyData.userData.user.id,
         account: userDummyData.userData.user.account,

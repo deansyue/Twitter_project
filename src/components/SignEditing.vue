@@ -35,7 +35,8 @@
           <input
             v-model.trim="password.text"
             name="password"
-            type="password" autocomplete="off"
+            type="password"
+            autocomplete="off"
           />
         </label>
         <div class="wordLimit-wrapper">
@@ -51,7 +52,8 @@
           <input
             v-model.trim="passwordCheck.text"
             name="passwordCheck"
-            type="password" autocomplete="off"
+            type="password"
+            autocomplete="off"
           />
         </label>
         <div class="wordLimit-wrapper">
@@ -162,13 +164,13 @@ export default {
         const name = this.name.text;
         const email = this.email.text;
         const password = this.password.text;
-        const passwordCheck = this.passwordCheck.text;
-        if (!account || !name || !email || !password || !passwordCheck)
+        const checkPassword = this.passwordCheck.text;
+        if (!account || !name || !email || !password || !checkPassword)
           return Toast.fire({
             icon: "error",
             title: "尚有未填寫欄位",
           });
-        else if (password !== passwordCheck)
+        else if (password !== checkPassword)
           return Toast.fire({
             icon: "error",
             title: "密碼確認與密碼不同",
@@ -178,21 +180,27 @@ export default {
           name.length > 50 ||
           email.length > 50 ||
           password.length > 50 ||
-          passwordCheck.length > 50
+          checkPassword.length > 50
         )
           return Toast.fire({
             icon: "error",
             title: "字數超過上限",
           });
+
         this.isProcessing = true;
-        const response = await authorizationAPI.signUp({
+        const { data } = await authorizationAPI.SignUp({
           account,
           name,
           email,
           password,
-          passwordCheck,
+          checkPassword
         });
-        if (response.status === "error") throw new Error(response.message);
+        if (data.status !== "success") throw new Error(data.message);
+
+        Toast.fire({
+          icon: "success",
+          title: "註冊成功",
+        });
         this.$router.push("/signin");
       } catch (error) {
         this.isProcessing = false;

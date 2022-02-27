@@ -1,13 +1,13 @@
 import { apiHelper } from '../utils/helpers'
 
 export default {
-  SignIn ({account, password}) {
+  SignIn({ account, password }) {
     return apiHelper.post('api/users/signin', {
       account,
       password
     })
   },
-  signUp({account, name, email, password, passwordCheck }) {
-    return apiHelper.post('api/users', { account, name, email, password, passwordCheck },)
+  SignUp({ account, name, email, password, checkPassword }) {
+    return apiHelper.post('api/users', { account, name, email, password, checkPassword })
   },
 }

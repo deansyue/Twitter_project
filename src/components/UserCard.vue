@@ -108,6 +108,14 @@ export default {
       isNotice: true,
     };
   },
+  watch:{
+    currentUserData(newValue){
+      this.userData={
+        ...this.userData,
+        ...newValue
+      }
+    }
+  },
   created() {
     this.fetchUser();
   },

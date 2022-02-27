@@ -32,7 +32,12 @@
           </router-link>
         </div>
       </div>
-      <button class="btn">推文</button>
+      <button
+        class="btn"
+        @click.prevent.stop="showModal('tweetCreate')"
+      >
+        推文
+      </button>
       <div class="logoutTab">
         <button class="logoutButton">
           <div class="icon">
@@ -44,3 +49,14 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    showModal() {
+      // 打開 modal
+      this.$modal.show("tweetCreate");
+    },
+  }
+}
+</script>

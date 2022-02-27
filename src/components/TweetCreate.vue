@@ -1,7 +1,8 @@
 <template>
   <modal name="tweetCreate"       
     classes="tweetCreat-modal"
-    :width="600" :height="300">
+    :width="600" :height="300"
+  >
     <div class="tweetCreate-wrapper">
       <div class="tweetCreate-head">
         <img class="cross-orange" @click="closeModal">

@@ -6,23 +6,22 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentUser: {
-      id: 1,
-      account: "heyJohn",
-      name: "John Doe",
-      email: "John123@gmail.com",
-      avatar:
-        "https://loremflickr.com/g/320/240/people/?random=91.66143782652539",
-      cover: "https://loremflickr.com/g/600/240/shop/?random=30.68038263159545",
-      introduction: "Culpa minus ea ullam.",
+      id: 0,
+      account: "",
+      name: "",
+      email: "",
+      avatar: "",
+      cover: "",
+      introduction: "",
     },
     isAuthenticated: false,
     token: ''
   },
   mutations: {
-    setCurrentUser(state, currentUser) {
+    setCurrentUser(state, user) {
       state.currentUser = {
         ...state.currentUser,
-        ...currentUser
+        ...user
       }
       state.isAuthenticated = true
       state.token = localStorage.getItem('token')

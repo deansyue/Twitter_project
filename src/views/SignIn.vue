@@ -110,14 +110,15 @@ export default {
           password
         })
         // 當串接失敗
+        console.log(data)
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(data.message)
         }
         // 當串接成功：
         this.isProcessing = false
         // todo: 待確認 data 階層是否修改
-        localStorage.setItem('token', data.data.token)
-        this.$store.commit('setCurrentUser', data.data.user)
+        localStorage.setItem('token', data.token)
+        this.$store.commit('setCurrentUser', data.user)
         this.$router.push('/main')
 
       } catch (error) {

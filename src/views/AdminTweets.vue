@@ -29,7 +29,12 @@ import { Toast } from '../utils/helpers';
 export default {
   components: {
     AdminNavBar,
-    AdminFeedList
+    AdminFeedList,
+  },
+    data() {
+    return {
+      tweetCards: [],
+    };
   },
   computed: {
     ...mapState(["currentUser"]),

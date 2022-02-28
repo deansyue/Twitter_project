@@ -1,0 +1,71 @@
+.userCardEdit-modal {
+  top: 54px !important;
+  border-radius: 14px;
+  background-color: #{$white};
+  .userCardEdit-head {
+    display: grid;
+    height: 64px;
+    padding: 15px 15px 15px 19.5px;
+    grid-template-columns: 79px 1fr 81px;
+    align-items: center;
+    button.btn.active {
+      padding: 5px 15px;
+      font-size: 18px;
+    }
+  }
+  .userCardEdit-body {
+    .form-image-wrapper {
+      position: relative;
+      input[type="file"] {
+        display: none;
+      }
+      .form-image-cover {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 598px;
+        height: 200px;
+        margin: 0 auto;        
+        .cover {
+          width: 100%;
+          height: 100%;
+          background-color: #{$tweet-grey};
+          opacity: 0.7;
+        }
+        label {
+          position: absolute;
+          left: 264px;
+        }
+        .cancel {
+          position: absolute;
+          right: 264px;
+        }
+      }
+      .form-image-avatar {
+        position: absolute;
+        left: 15px;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+        border: 3px solid #{$white};
+        background-color: #{$tweet-grey};
+      }
+    }
+    .form-input-wrapper {
+      padding: 80px 15px 0 15px;
+      .textarea {
+        height: 150px;
+        textarea {
+          width: 96%;
+          height: 120px;
+          font-size: 19px;
+          resize: none;
+        }
+      }
+    }
+  }
+}

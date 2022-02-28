@@ -12,7 +12,7 @@
     <div class="user-wrapper">
       <img :src="userData.cover" alt="" class="cover" />
       <img :src="userData.avatar" alt="" class="avatar-big" />
-      <button class="btn btn-edit" v-if="whichPage">編輯個人資料</button>
+      <button class="btn btn-edit" v-if="whichPage" @click="showModal()">編輯個人資料</button>
       <div class="otherButton" v-else>
         <img src="" alt="" class="message" />
         <img
@@ -59,13 +59,20 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <UserCardEdit />
+    <!-- Modal -->
   </div>
 </template>
 <script>
+import UserCardEdit from "../components/UserCardEdit.vue"
 import { accountTagFilter } from "./../utils/mixins";
 import { numberFormatTCFilter } from "./../utils/mixins";
 export default {
   mixins: [accountTagFilter,numberFormatTCFilter],
+  components: {
+    UserCardEdit
+  },
   props: {
     currentUserData: {
       type: Object,
@@ -131,6 +138,14 @@ export default {
       this.userData.followingCount = this.currentUserData.followingCount;
       this.userData.follwerCount = this.currentUserData.follwerCount;
       this.userData.isFollowed = this.currentUserData.isFollowed;
+    },
+    showModal() {
+      // 打開 modal
+      this.$modal.show("userCardEdit");
+    },
+    hideModal() {
+      // (預設)關閉 modal
+      this.$modal.hide("userCardEdit");
     },
   },
 };

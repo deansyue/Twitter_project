@@ -32,14 +32,20 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 查看指定使用者的正在跟隨
+  getFollowings({ userId }) {
+    return apiHelper.get(`api/users/${userId}/followings`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 追隨 todo: 待確認送出的資料內容，formData
-  getFollowings( formData ) {
+  addFollow( formData ) {
     return apiHelper.post('/api/followships', formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 取消追隨 todo: 待確認送出的資料內容 followingId ??
-  addFollow() {
+  deleteFollow() {
     return apiHelper.delete(`api/followships/:followingId`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })

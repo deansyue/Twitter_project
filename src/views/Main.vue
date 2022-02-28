@@ -23,9 +23,6 @@
     <div class="right-container">
       <Popular />
     </div>
-    <!-- Modal -->
-    <TweetCreate />
-    <!-- Modal  -->
   </div>
 </template>
 
@@ -33,7 +30,6 @@
 import NavBar from "../components/NavBar.vue";
 import TweetCard from "../components/TweetCard.vue";
 import Popular from "../components/Popular.vue";
-import TweetCreate from "../components/TweetCreate.vue";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets"
 import { Toast } from '../utils/helpers';
@@ -44,7 +40,6 @@ export default {
     NavBar,
     TweetCard,
     Popular,
-    TweetCreate,
   },
   data() {
     return {
@@ -74,10 +69,6 @@ export default {
     showModal() {
       // 打開 modal
       this.$modal.show("tweetCreate");
-    },
-    hideModal() {
-      // (預設)關閉 modal
-      this.$modal.hide("tweetCreate");
     },
   },
   created() {

@@ -10,10 +10,10 @@
       <div
         class="main-tweets"
         v-for="tweetCard in tweetCards"
-        :key="tweetCard.id"
+      :key="tweetCard.id"
       >
-        <AdminFeedList :tweet-card="tweetCard" />
-      </div>
+      <AdminFeedList :tweet-card="tweetCard" />
+    </div>
     </div>
   </div>
 </template>

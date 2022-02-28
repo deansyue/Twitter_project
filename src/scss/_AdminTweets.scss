@@ -1,0 +1,45 @@
+// todo: 記得處理過長的單字
+.tweetCard-wrapper {
+    display: flex;
+    border-bottom: 1px solid #{$frameColor};
+    padding: 13px 15px;
+    color: #{$tweet-grey};
+    .card-left {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .card-right {
+      position: relative;
+      width: calc(100% - 60px);
+      .card-head {
+        display: flex;
+        align-items: center;
+        line-height: 22px;
+        .card-name {
+          margin-right: 5px;
+          font-weight: 700;
+          color: #{$black};
+          cursor: pointer;
+        }
+      }
+      p {
+        margin-bottom: 14px;
+        line-height: 22px;
+        color: #{$black};
+      }
+      .card-foot {
+        display: flex;
+        align-items: center;
+        h6 {
+          margin: 0 52px 0 12px;
+        }
+      }
+      .card-cancel {
+        position: absolute;
+        top:0;
+        right: 30px;
+      }
+    }
+  }
+  
+  

@@ -1,11 +1,11 @@
 <template>
   <div class="tweetCard-wrapper">
-    <div class="card-left avatar" @click="linkedUser(tweetUser.id)">
+    <div class="card-left avatar">
       <img class="avatar" :src="tweetUser.avatar">
     </div>
     <div class="card-right">
       <div class="card-head">
-        <h5 class="card-name" @click="linkedUser(tweetUser.id)">
+        <h5 class="card-name">
           {{ tweetUser.name }}
         </h5>
         <h5 class="card-account">

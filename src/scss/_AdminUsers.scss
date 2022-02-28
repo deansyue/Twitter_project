@@ -1,0 +1,66 @@
+.adminusers__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    border: 1px solid #{$frameColor};
+}
+.admintweetCard-wrapper {
+    display: inline-block;
+    border: 1px solid #{$frameColor};
+    background-color: #c4c4c4;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.adminuser{
+    &__tweets{
+    width: 100%;
+    max-width: 245px;
+    margin: 7.5px;
+    }
+    &__avatar{
+    display: flex;
+    justify-content: center;
+    transform: scale(2);
+    margin-top: 68px;
+    }
+    &__avatar img{
+       border: 2px solid white;
+    }
+    &__info {
+    width: 100%;
+    background-color: #f6f7f8;
+    max-width: 245px;
+    height: 174px;
+    display: flex;
+    flex-direction: column;
+    }
+    &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 33px;
+    }
+    &__subtitle {
+    color: #{$tweet-grey};
+    }
+    &__heart {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+    }
+    &__heart01 , &__heart02{
+    display: flex;
+    padding: 0px 20px;
+    }
+    &__followinfo {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    }
+    &__followinfo01 , &__followinfo02{
+    display: flex;
+    padding: 0px 5px;
+    }
+}

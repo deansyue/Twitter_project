@@ -82,16 +82,16 @@ export default {
     currentUserData: {
       type: Object,
       default: () => ({
-        id: -1,
+        id: 0,
         account: "",
         name: "",
         email: "",
         avatar: "",
         cover: "",
         introduction: "",
-        followingCount: -1,
-        follwerCount: -1,
-        isFollowed: "",
+        followingCount: 0,
+        follwerCount: 0,
+        isFollowed: ""
       }),
     },
     tweets: {
@@ -106,16 +106,16 @@ export default {
   data() {
     return {
       userData: {
-        id: -1,
+        id: 0,
         account: "",
         name: "",
         email: "",
         avatar: "",
         cover: "",
         introduction: "",
-        followingCount: -1,
-        follwerCount: -1,
-        isFollowed: "",
+        followingCount: 0,
+        follwerCount: 0,
+        isFollowed:""
       },
       isNotice: true,
     };

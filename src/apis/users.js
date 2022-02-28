@@ -38,6 +38,16 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 修改個人基本資料
+  editInformation({ id, avatar, cover, name, introduction }) {
+    return apiHelper.put(`api/users/${id}`, {
+      avatar, cover, name, introduction
+    }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  // 修改個人帳號密碼
+
   // 追隨 todo: 待確認送出的資料內容，formData
   addFollow( {id} ) {
     return apiHelper.post('/api/followships', {id}, {

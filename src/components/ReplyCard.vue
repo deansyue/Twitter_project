@@ -1,7 +1,7 @@
 <template>
   <div class="replyCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(userId)">
-      <img class="avatar" :src="avatar">
+      <img class="avatar" :src="avatar" />
     </div>
     <div class="card-right">
       <div class="card-head">
@@ -17,11 +17,10 @@
         </h5>
       </div>
       <h5>
-        <span>回覆</span> 
+        <span>回覆</span>
         <span class="card-replyer" @click="linkedUser(targetUserId)">
           {{ targetAccount | accountTag }}
         </span>
-          
       </h5>
       <p>{{ comment }}</p>
     </div>
@@ -29,7 +28,8 @@
 </template>
 
 <script>
-import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import { fromNowFilter, accountTagFilter } from "../utils/mixins";
+import { mapState } from "vuex";
 
 // 假設：被回覆對象之資料
 const dummyUser = {
@@ -49,28 +49,31 @@ export default {
     replyCard: {
       type: Object,
       required: true,
-    }
+    },
   },
   data() {
     return {
       // 被回覆的對象
-      targetAccount: '',
+      targetAccount: "",
       targetUserId: 0,
       // 此卡片的其他資料
       tweetId: 0,
       userId: 0,
-      comment: '',
-      createdAt: '',
-      userName: '',
-      userAccount: '',
-      avatar: ''
-    }
+      comment: "",
+      createdAt: "",
+      userName: "",
+      userAccount: "",
+      avatar: "",
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   methods: {
     fetchReplyCard() {
       // 被回覆的對象 // todo: 待 API 加入此值
-      this.targetAccount = dummyUser.account 
-      this.targetUserId = dummyUser.id 
+      this.targetAccount = dummyUser.account;
+      this.targetUserId = dummyUser.id;
       // 此卡片的其他資料
       const { id, comment, createdAt, UserId, User } = this.replyCard
       this.tweetId = id
@@ -82,16 +85,20 @@ export default {
       this.avatar = User.avatar
     },
     linkedUser(userId) {
-      this.$router.push({ name: 'user', params: { id: userId }})
+      if (userId === this.currentUser.id) {
+        this.$router.push({ name: "userSelf" });
+      } else {
+        this.$router.push({ name: "user", params: { id: userId } });
+      }
     },
   },
   created() {
-    this.fetchReplyCard()
+    this.fetchReplyCard();
   },
   watch: {
-    replyCard (newValue) {
-      this.replyCard = newValue
-    }
-  }
-}
+    replyCard(newValue) {
+      this.replyCard = newValue;
+    },
+  },
+};
 </script>

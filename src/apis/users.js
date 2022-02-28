@@ -49,14 +49,20 @@ export default {
   // 修改個人帳號密碼
 
   // 追隨 todo: 待確認送出的資料內容，formData
-  addFollow( formData ) {
-    return apiHelper.post('/api/followships', formData, {
+  addFollow( {id} ) {
+    return apiHelper.post('/api/followships', {id}, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 取消追隨 todo: 待確認送出的資料內容 followingId ??
-  deleteFollow() {
-    return apiHelper.delete(`api/followships/:followingId`, {
+  deleteFollow({followingId}) {
+    return apiHelper.delete(`api/followships/${followingId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  //取得熱門使用者
+  getTopUser() {
+    return apiHelper.get("api/users/top", {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },

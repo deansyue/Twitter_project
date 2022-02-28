@@ -78,15 +78,15 @@ export default {
       likeTweets: [],
       replys: [],
       currentUserData: {
-        id: -1,
+        id: 0,
         account: "",
         name: "",
         email: "",
         avatar: "",
         cover: "",
         introduction: "",
-        followingCount: -1,
-        follwerCount: -1,
+        followingCount: 0,
+        follwerCount: 0,
       },
       whichPage: true, //true代表個人false代表他人
       tabNow: 1, //1推文 2回復 3喜歡
@@ -167,5 +167,15 @@ export default {
     this.fetchUserTweets()
     this.fetchUserReplies()
   },
+  watch: {
+    currentUser(newValue) {
+      // 監控 UserCardEdit 是否修改 vuex 資料
+      // 將新資料覆蓋進 data 中渲染畫面
+      this.currentUserData = {
+        ...this.currentUserData,
+        ...newValue
+      }
+    }
+  }
 };
 </script>

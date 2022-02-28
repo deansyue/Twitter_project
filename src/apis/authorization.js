@@ -1,5 +1,5 @@
 import { apiHelper } from '../utils/helpers'
-
+const getToken = () => localStorage.getItem('token')
 export default {
   // 登入
   SignIn({ account, password }) {
@@ -14,7 +14,12 @@ export default {
 
   },
   // 帳號資料更改
+  SignEdit({ userId, account, name, email, password, checkPassword }) {
+    return apiHelper.put(`api/users/${userId}/edit`, { account, name, email, password, checkPassword }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
 
+  },
   // 管理者登入
   AdminSignIn({ account, password }) {
     return apiHelper.post('api/admin/signin', {

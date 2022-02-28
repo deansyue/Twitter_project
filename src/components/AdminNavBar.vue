@@ -3,7 +3,7 @@
     <div class="container">
       <div class="logoContainer">
         <router-link to="/main">
-          <img class="logo" alt="" />
+          <img class="logo" alt="admin/tweets" />
         </router-link>
       </div>
       <div class="content">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="logoutTab">
-        <button class="logoutButton">
+        <button class="logoutButton" @click="logout()">
           <div class="icon">
             <img class="logout" alt="" />
           </div>
@@ -35,3 +35,23 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState(["isAuthenticated"]),
+  },
+  methods: {
+    logout() {
+      this.$store.commit('revokeAuthentication')
+      this.$router.push('/admin/signin')
+    },
+    showModal() {
+      // 打開 modal
+      this.$modal.show("tweetCreate");
+    },
+  }
+}
+</script>

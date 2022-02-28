@@ -198,7 +198,7 @@ export default {
           checkPassword,
         });
         if (data.status !== "success") throw new Error(data.message);
-
+        this.isProcessing = false;
         Toast.fire({
           icon: "success",
           title: "註冊成功",
@@ -252,6 +252,7 @@ export default {
         });
         if (data.status !== "success") throw new Error(data.message);
         this.$store.commit("setCurrentUser", data.user);
+        this.isProcessing = false;
         Toast.fire({
           icon: "success",
           title: "修改成功",

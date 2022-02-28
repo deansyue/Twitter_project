@@ -63,8 +63,7 @@ import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";
 
 import { mapState } from "vuex";
-//因為4道api能取得資料的目前都只有id=14也就是user1這個帳號的id所以他人頁面帶入動態id的地方先暫時用currentuser.id頂著等有多一點id可以取得資料再修改測試
-//todo:修改動態id參數
+
 export default {
   components: {
     NavBar,
@@ -98,10 +97,10 @@ export default {
     ...mapState(["currentUser"]),
   },
   methods: {
-    async fetchUser() {
+    async fetchUser(userId) {
       try {
         const response = await usersAPI.getUser({
-          userId: this.currentUser.id,
+          userId: userId,
         });
 
         this.currentUserData = {
@@ -123,10 +122,10 @@ export default {
         });
       }
     },
-    async fetchLikeTweets() {
+    async fetchLikeTweets(userId) {
       try {
         const response = await usersAPI.getUserLikes({
-          userId: this.currentUser.id,
+          userId: userId,
         });
         this.likeTweets = response.data.map((like) => like.Tweet);
       } catch (error) {
@@ -136,10 +135,10 @@ export default {
         });
       }
     },
-    async fetchUserTweets() {
+    async fetchUserTweets(userId) {
       try {
         const response = await usersAPI.getUserTweets({
-          userId: this.currentUser.id,
+          userId: userId,
         });
         this.tweets = response.data;
       } catch (error) {
@@ -149,10 +148,10 @@ export default {
         });
       }
     },
-    async fetchUserReplies() {
+    async fetchUserReplies(userId) {
       try {
         const response = await usersAPI.getUserReplies({
-          userId: this.currentUser.id,
+          userId: userId,
         });
         this.replys = response.data;
       } catch (error) {
@@ -164,10 +163,17 @@ export default {
     },
   },
   created() {
-    this.fetchUser();
-    this.fetchLikeTweets();
-    this.fetchUserTweets();
-    this.fetchUserReplies();
+    this.fetchUser(this.$route.params.id);
+    this.fetchLikeTweets(this.$route.params.id);
+    this.fetchUserTweets(this.$route.params.id);
+    this.fetchUserReplies(this.$route.params.id);
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.fetchUser(to.params.id);
+    this.fetchLikeTweets(to.params.id);
+    this.fetchUserTweets(to.params.id);
+    this.fetchUserReplies(to.params.id);
+    next()
   },
 };
 </script>

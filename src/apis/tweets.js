@@ -21,9 +21,17 @@ export default {
     })
   },
   // 新增推文卡片
-  
+  addNewTweet({ comment }) {
+    return apiHelper.post('api/tweets', { comment }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 新增回覆卡片
-
+  addNewReply({ tweetId, comment }) {
+    return apiHelper.post(`api/tweets/${tweetId}/replies`, { comment }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 卡片狀態：喜歡
   addLike({ tweetId }) {
     return apiHelper.post(`api/tweets/${tweetId}/like`, {

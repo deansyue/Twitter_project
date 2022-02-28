@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column">
+  <div class="app-tripple-column" v-if="!isLoading">
     <div class="left-container">
       <NavBar />
     </div>
@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       tweetCards: [],
+      isLoading: false
     };
   },
   computed: {
@@ -52,14 +53,14 @@ export default {
   methods: {
     async fetchTweetCards() {
       try {
+        this.isLoading = true
         const { data, statusText } = await tweetsAPI.getAllTweets()
-        // console.log(statusText)
-        // console.log(data)
-        // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
         if (statusText !== "OK") throw new Error(statusText)
+        this.isLoading = false
         this.tweetCards = [ ...data ]
 
       } catch (error) {
+        this.isLoading = false
         Toast.fire({
           icon: 'error',
           title: '無法取得主頁資料，請稍後再試'

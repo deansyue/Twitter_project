@@ -50,9 +50,9 @@ export default {
       tweetUser: {},
       description: "",
       createdAt: "",
-      replysCount: 0, // 尚為預設值
-      likesCount: 0, // 尚為預設值
-      isLiked: false, // 尚為預設值
+      replysCount: 0,
+      likeCount: 0,
+      isLiked: false
     };
   },
   computed: {
@@ -60,15 +60,14 @@ export default {
   },
   methods: {
     fetchTweetCard() {
-      // 待加回 replysCount、likesCount相關屬性
-      const { User, description, id, createdAt } = this.tweetCard;
+      const { User, description, id, createdAt, replyCount, likeCount, isLiked } = this.tweetCard
       this.id = id;
       this.tweetUser = User;
       this.description = description;
       this.createdAt = createdAt;
-      // 待 API 加入此值
-      // this.replysCount = Replies.length
-      // this.likesCount = Likes.length
+      this.replysCount = replyCount;
+      this.likeCount = likeCount;
+      this.isLiked = isLiked;
     },
     addLikes() {
       // todo: connect API

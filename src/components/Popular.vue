@@ -3,7 +3,7 @@
     <div class="title">Popular</div>
     <div class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
-        <img :src="user.avatar" alt="" @click="linkedUser(user.id)"/>
+        <img :src="user.avatar" alt="" @click="linkedUser(user.id)" />
       </div>
       <div class="name-wrapper" @click="linkedUser(user.id)">
         {{ user.name }}
@@ -28,6 +28,7 @@
 </template>
 <script>
 import { accountTagFilter } from "./../utils/mixins";
+import { mapState } from "vuex";
 const dummyData = {
   popularUser: [
     {
@@ -201,12 +202,19 @@ export default {
   created() {
     this.fetchPopular();
   },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   methods: {
     fetchPopular() {
       this.popularUser = dummyData.popularUser;
     },
     linkedUser(userId) {
-      this.$router.push({ name: 'user', params: { id: userId }})
+      if (userId === this.currentUser.id) {
+        this.$router.push({ name: "userSelf" });
+      } else {
+        this.$router.push({ name: "user", params: { id: userId } });
+      }
     },
     addFollow(userId) {
       this.popularUser = this.popularUser.map((user) => {

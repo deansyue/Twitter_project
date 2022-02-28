@@ -65,6 +65,8 @@
           form="signEditingForm"
           v-if="pageNow"
           class="btn active"
+          @click.prevent.stop="handleEditSubmit(currentUser.id)"
+          :disabled="isProcessing"
         >
           儲存
         </button>
@@ -193,7 +195,7 @@ export default {
           name,
           email,
           password,
-          checkPassword
+          checkPassword,
         });
         if (data.status !== "success") throw new Error(data.message);
 
@@ -209,8 +211,58 @@ export default {
           title: error,
         });
       }
+    },
+    async handleEditSubmit(userId) {
+      try {
+        const account = this.account.text;
+        const name = this.name.text;
+        const email = this.email.text;
+        const password = this.password.text;
+        const checkPassword = this.passwordCheck.text;
+        if (!account || !name || !email || !password || !checkPassword)
+          return Toast.fire({
+            icon: "error",
+            title: "尚有未填寫欄位",
+          });
+        else if (password !== checkPassword)
+          return Toast.fire({
+            icon: "error",
+            title: "密碼確認與密碼不同",
+          });
+        else if (
+          account.length > 50 ||
+          name.length > 50 ||
+          email.length > 50 ||
+          password.length > 50 ||
+          checkPassword.length > 50
+        )
+          return Toast.fire({
+            icon: "error",
+            title: "字數超過上限",
+          });
 
-      // todo: connect API - POST
+        this.isProcessing = true;
+        const { data } = await authorizationAPI.SignEdit({
+          userId,
+          account,
+          name,
+          email,
+          password,
+          checkPassword,
+        });
+        if (data.status !== "success") throw new Error(data.message);
+        this.$store.commit("setCurrentUser", data.user);
+        Toast.fire({
+          icon: "success",
+          title: "修改成功",
+        });
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: error,
+        });
+      }
     },
   },
 };

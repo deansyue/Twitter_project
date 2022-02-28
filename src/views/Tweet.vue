@@ -131,7 +131,7 @@ export default {
           name: this.currentUser.name
         },
         comment,
-        id: 0,
+        id: 0, // TODO:可以後端回傳嗎？
         createdAt: new Date().toISOString()
       })
     },

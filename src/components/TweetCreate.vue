@@ -17,7 +17,11 @@
             placeholder="有什麼新鮮事？"
             focus
           ></textarea>
-          <button class="btn active" @click="submitTweet()">
+          <button 
+            class="btn active"
+            @click="submitTweet()"
+            :disabled="isProcessing"
+          >
             推文
           </button>
         </div>
@@ -25,7 +29,6 @@
     </div>
   </modal> 
 </template>
-
 
 <script>
 import tweetsAPI from "../apis/tweets"
@@ -36,7 +39,8 @@ export default {
   name: 'tweetCreate',
   data() {
     return {
-      comment: ''
+      comment: '',
+      isProcessing: false
     }
   },
   methods: {
@@ -47,12 +51,17 @@ export default {
     },
     async submitTweet() {
       try {
+        // TODO: 確認 API 問題
+        this.isProcessing = true
         console.log(this.comment)
         const response = await tweetsAPI.addNewTweet({ comment: this.comment })
         console.log(response)
-        // 更新主畫面: 應該要顯示在第一個...
-        // this.closeModal()
+        this.isProcessing = false
+        this.closeModal()
+        this.$emit('after-tweet-create', this.comment)
+        if (this.$route.name !== "main") this.$router.push("/main")
       } catch (error) {
+        this.isProcessing = false
         Toast.fire({
           icon: "error",
           title: "無法新增推文，請稍後再試"

@@ -23,6 +23,9 @@
     <div class="right-container">
       <Popular />
     </div>
+    <!-- Modal -->
+    <TweetCreate @after-tweet-create="afterTweetCreate"/>
+    <!-- Modal -->
   </div>
 </template>
 
@@ -30,6 +33,7 @@
 import NavBar from "../components/NavBar.vue";
 import TweetCard from "../components/TweetCard.vue";
 import Popular from "../components/Popular.vue";
+import TweetCreate from "../components/TweetCreate.vue"
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets"
 import { Toast } from '../utils/helpers';
@@ -40,6 +44,7 @@ export default {
     NavBar,
     TweetCard,
     Popular,
+    TweetCreate
   },
   data() {
     return {
@@ -66,6 +71,22 @@ export default {
           title: '無法取得主頁資料，請稍後再試'
         })
       }
+    },
+    afterTweetCreate(comment) {
+      this.tweetCards.unshift({
+        createdAt: new Date().toISOString(),
+        id: 0, // TODO:可以後端回傳嗎？
+        isLiked: false,
+        likeCount: 0,
+        replyCount: 0,
+        User: {
+          account: this.currentUser.account,
+          avatar:this.currentUser.avatar,
+          id: this.currentUser.id,
+          name: this.currentUser.name,
+        },
+        description: comment,
+      })
     },
     showModal() {
       // 打開 modal

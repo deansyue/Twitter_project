@@ -26,8 +26,7 @@
         <h6>{{ replysCount }}</h6>
         <img v-if="isLiked" @click="deleteLikes()" class="heart-active" />
         <img v-else @click="addLikes()" class="heart" />
-
-        <h6>{{ likesCount }}</h6>
+        <h6>{{ likeCount }}</h6>
       </div>
     </div>
   </div>
@@ -72,12 +71,12 @@ export default {
     addLikes() {
       // todo: connect API
       this.isLiked = true;
-      this.likesCount++;
+      this.likeCount++;
     },
     deleteLikes() {
       // todo: connect API
       this.isLiked = false;
-      this.likesCount--;
+      this.likeCount--;
     },
     linkedUser(userId) {
       if (userId === this.currentUser.id) {

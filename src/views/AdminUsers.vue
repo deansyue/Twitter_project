@@ -56,10 +56,6 @@ export default {
         })
       }
     },
-    showModal() {
-      // 打開 modal
-      this.$modal.show("tweetCreate");
-    },
   },
   created() {
     this.fetchTweetCards();

@@ -48,10 +48,6 @@ export default {
       this.$store.commit('revokeAuthentication')
       this.$router.push('/admin/signin')
     },
-    showModal() {
-      // 打開 modal
-      this.$modal.show("tweetCreate");
-    },
   }
 }
 </script>

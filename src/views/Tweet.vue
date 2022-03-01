@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column" v-if="!isLoading">
+  <div class="app-tripple-column">
     <div class="left-container">
       <NavBar />
     </div>
@@ -83,7 +83,8 @@ export default {
       user: {},
       repliedTweet: {},
       replyCards: [],
-      isLoading: false
+      isLoading: false,
+      isProcessing: false,
     };
   },
   methods: {
@@ -133,18 +134,43 @@ export default {
         }
       })
     },
-    addLike() {
-      // to: connect API
-      this.repliedTweet.isLiked = true;
-      this.repliedTweet.likeCount ++
+    async addLike() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.addLike({
+          tweetId: this.paramsId
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.repliedTweet.isLiked = true;
+        this.repliedTweet.likeCount ++
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法加入最愛，請稍後再試"
+        })
+      }
     },
-    deleteLike() {
-      // to: connect API
-      this.repliedTweet.isLiked = false;
-      this.repliedTweet.likeCount --
+    async deleteLike() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.deleteLike({ 
+          tweetId: this.paramsId
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.repliedTweet.isLiked = false;
+        this.repliedTweet.likeCount --
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取消最愛，請稍後再試"
+        })
+      }
     },
     linkedUser(userId) {
-      // todo: check id after connect API
       this.$router.push({ name: "user", params: { id: userId } });
     },
     showReplyModal() {

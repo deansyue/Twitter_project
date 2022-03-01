@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column" v-if="!isLoading">
+  <div class="app-tripple-column">
     <div class="left-container">
       <NavBar />
     </div>

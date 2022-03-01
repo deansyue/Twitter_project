@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import authorizationAPI from '../apis/authorization'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
       avatar: "",
       cover: "",
       introduction: "",
+      role: ""
     },
     isAuthenticated: false,
     token: '',
@@ -75,7 +77,19 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    // todo: 每次網址更新時，搭配 router / index.js 核對使用者資料
+    async fetchCurrentUser({ state, commit }) {
+      try {
+        const response = state.currentUser.role === "user" ?
+          await authorizationAPI.getCurrentUser() :
+          await authorizationAPI.getCurrentAdminUser()
+
+        console.log(response)
+        commit("setCurrentUser", response)
+        
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
   },
   modules: {
   }

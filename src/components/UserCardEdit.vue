@@ -6,7 +6,7 @@
     :clickToClose="false">
     <div class="userCardEdit-wrapper">
       <div class="userCardEdit-head">
-        <img class="cross-orange" alt="" @click="hideModal()">
+        <img class="cross-orange" alt="" @click="hideEditModal()">
         <h3>編輯個人資料</h3>
         <button
           class="btn active"
@@ -85,7 +85,7 @@ export default {
     return {
       // input 一個輸入框為一組
       name: {
-        text:  "",
+        text: "",
         isInvalid: false,
       },
       introduction: {
@@ -171,7 +171,7 @@ export default {
         })
       }
     },
-    hideModal() {
+    hideEditModal() {
       // 關閉 modal
       this.$modal.hide("userCardEdit");
       this.name.text = this.currentUser.name

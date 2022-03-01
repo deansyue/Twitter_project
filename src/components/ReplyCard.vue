@@ -1,7 +1,7 @@
 <template>
   <div class="replyCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(userId)">
-      <img class="avatar" :src="avatar" />
+      <img class="avatar" :src="avatar | emptyImage" />
     </div>
     <div class="card-right">
       <div class="card-head">
@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import { fromNowFilter, accountTagFilter } from "../utils/mixins";
+import { fromNowFilter, accountTagFilter, emptyImageFilter } from "../utils/mixins";
 import { mapState } from "vuex";
 
 export default {
-  mixins: [fromNowFilter, accountTagFilter],
+  mixins: [fromNowFilter, accountTagFilter, emptyImageFilter],
   props: {
     // 被回覆者的資料
     replyTarget: {

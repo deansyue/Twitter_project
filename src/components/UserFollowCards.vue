@@ -1,7 +1,7 @@
 <template>
   <div class="userFollowCards">
     <div class="userFollowCards-left avatar">
-      <img class="avatar" :src="followCard.avatar">
+      <img class="avatar" :src="followCard.avatar | emptyImage">
     </div>
     <div class="userFollowCards-right">
       <button
@@ -24,10 +24,10 @@
 <script>
 import usersAPI from "../apis/users";
 import { Toast } from "../utils/helpers";
-import { accountTagFilter } from "../utils/mixins";
+import { accountTagFilter, emptyImageFilter } from "../utils/mixins";
 
 export default {
-  mixins: [accountTagFilter],
+  mixins: [accountTagFilter, emptyImageFilter],
   props: {
     initialFollowCard: {
       type: Object,

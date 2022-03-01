@@ -11,7 +11,7 @@
       <div class="replyCreate-body">
         <div class="target-image">
           <img class="avatar"
-            :src="tweetReplyTarget.avatar">
+            :src="tweetReplyTarget.avatar | emptyImage">
           <span></span>
         </div>
         <div class="target-tweet">
@@ -25,7 +25,7 @@
           <h5>回覆給 <strong>{{ tweetReplyTarget.account | accountTag }}</strong></h5>
         </div>
         <div class="replyer-image">
-          <img class="avatar" :src="currentUser.avatar">
+          <img class="avatar" :src="currentUser.avatar | emptyImage">
         </div>
         <div class="replyer-tweet">
           <textarea 
@@ -47,11 +47,11 @@
 <script>
 import tweetsAPI from "../apis/tweets"
 import { mapState } from "vuex";
-import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import { fromNowFilter, accountTagFilter, emptyImageFilter } from '../utils/mixins'
 import { Toast } from "../utils/helpers"
 
 export default {
-  mixins: [fromNowFilter, accountTagFilter],
+  mixins: [fromNowFilter, accountTagFilter, emptyImageFilter],
   computed: {
     ...mapState(["currentUser", "tweetReplyTarget"]),
   },

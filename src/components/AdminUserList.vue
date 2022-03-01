@@ -2,7 +2,7 @@
   <div class="admintweetCard-wrapper">
     <!--UserAvatar-->
     <div class="adminuser__avatar">
-      <img class="avatar" :src="tweetUser.avatar">
+      <img class="avatar" :src="tweetUser.avatar | emptyImage">
     </div>
 
     <!--UserInfo-->
@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import { fromNowFilter, accountTagFilter, emptyImageFilter } from '../utils/mixins'
 export default {
-  mixins: [fromNowFilter, accountTagFilter],
+  mixins: [fromNowFilter, accountTagFilter, emptyImageFilter],
   props: {
     tweetCard: {
       type: Object,

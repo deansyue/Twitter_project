@@ -9,7 +9,7 @@
       </div>
       <div class="tweetCreate-body">
         <div class="tweetCreate-left">
-          <img class="avatar" :src="currentUser.avatar">
+          <img class="avatar" :src="currentUser.avatar | emptyImage">
         </div>
         <div class="tweetCreate-right">
           <textarea 
@@ -35,9 +35,11 @@
 import tweetsAPI from "../apis/tweets"
 import { mapState } from "vuex"
 import { Toast } from "../utils/helpers"
+import { emptyImageFilter } from "../utils/mixins";
 
 export default {
   name: 'tweetCreate',
+  mixins: [emptyImageFilter],
   data() {
     return {
       description: "",

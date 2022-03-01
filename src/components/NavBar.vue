@@ -34,7 +34,7 @@
       </div>
       <button
         class="btn"
-        @click.prevent.stop="showModal('tweetCreate')"
+        @click.prevent.stop="showNewCreateModal()"
       >
         推文
       </button>
@@ -62,7 +62,7 @@ export default {
       this.$store.commit('revokeAuthentication')
       this.$router.push('/signin')
     },
-    showModal() {
+    showNewCreateModal() {
       // 打開 modal
       this.$modal.show("tweetCreate");
     },

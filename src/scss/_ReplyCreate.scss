@@ -69,6 +69,12 @@
         }
       }
     }
+    > p {
+      position: absolute;
+      right: 100px;
+      bottom: 28px;
+      color: #{$red};
+    }
     button {
       position: absolute;
       right: 15px;

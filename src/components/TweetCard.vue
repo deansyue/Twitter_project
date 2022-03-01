@@ -22,7 +22,7 @@
 
       <p></p>
       <div class="card-foot">
-        <img class="reply" />
+        <img class="reply" @click="showReplyModal()" />
         <h6>{{ replysCount }}</h6>
         <img v-if="isLiked" @click="deleteLikes()" class="heart-active" />
         <img v-else @click="addLikes()" class="heart" />
@@ -88,6 +88,7 @@ export default {
     linkedReply($event, tweetId) {
       // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面
       if (
+        $event.target.matches(".reply") ||
         $event.target.matches(".heart") ||
         $event.target.matches(".heart-active") ||
         $event.target.matches(".avatar") ||
@@ -97,6 +98,19 @@ export default {
 
       this.$router.push({ name: "tweet", params: { id: tweetId } });
     },
+    showReplyModal() {
+      this.$modal.show("replyCreate");
+      const replyTargetData = {
+        id: this.id,
+        name: this.tweetUser.name,
+        userId: this.tweetUser.id,
+        account: this.tweetUser.account,
+        avatar: this.tweetUser.avatar,
+        description: this.description,
+        createdAt: this.createdAt,
+      }
+      this.$store.commit("setTweetReplyTarget", replyTargetData)
+    }
   },
   created() {
     this.fetchTweetCard();

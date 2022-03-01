@@ -5,7 +5,7 @@
     :clickToClose="false">
     <div class="tweetCreate-wrapper">
       <div class="tweetCreate-head">
-        <img class="cross-orange" @click="closeModal">
+        <img class="cross-orange" @click="hideNewCreateModal()">
       </div>
       <div class="tweetCreate-body">
         <div class="tweetCreate-left">
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    closeModal() {
+    hideNewCreateModal() {
       // 關閉 modal、清空輸入框
       this.$modal.hide('tweetCreate')
       this.description = ""
@@ -66,7 +66,7 @@ export default {
         })
         if (response.statusText !== "OK") throw new Error()
         this.isProcessing = false
-        this.closeModal()
+        this.hideNewCreateModal()
         this.$store.commit("passTweetCreate", response.data)
         if (this.$route.name !== "main") this.$router.push("/main")
       } catch (error) {

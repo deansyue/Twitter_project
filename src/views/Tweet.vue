@@ -32,7 +32,7 @@
               <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
             </div>
             <div class="tweet-footer-buttons">
-              <img class="reply-big" @click="showModal()" />
+              <img class="reply-big" @click="showReplyModal()" />
               <img
                 v-if="repliedTweet.isLiked"
                 @click="deleteLike()"
@@ -54,10 +54,6 @@
     <div class="right-container">
       <Popular />
     </div>
-    <!-- Modal -->
-    <ReplyCreate
-      :reply-target-info="repliedTweet" @reply-comment="afterSubmit"/>
-    <!-- Modal -->
   </div>
 </template>
 
@@ -65,7 +61,6 @@
 import NavBar from "../components/NavBar.vue";
 import ReplyCard from "../components/ReplyCard.vue";
 import Popular from "../components/Popular.vue";
-import ReplyCreate from "../components/ReplyCreate.vue";
 import tweetsAPI from "../apis/tweets"
 import { mapState } from "vuex"
 import { accountTagFilter, timeFormatFilter } from "../utils/mixins";
@@ -77,9 +72,11 @@ export default {
     NavBar,
     ReplyCard,
     Popular,
-    ReplyCreate,
   },
   mixins: [accountTagFilter, timeFormatFilter],
+  computed: {
+    ...mapState(["currentUser", "replyCreate"]),
+  },
   data() {
     return {
       paramsId: 0,
@@ -123,16 +120,17 @@ export default {
         })
       }
     },
-    afterSubmit(comment) {
+    afterSubmitReplyCreate(data) {
+      // TODO: 檢查 !
       this.replyCards.unshift({
+        comment: data.comment,
+        id: data.id, 
+        createdAt: data.createdAt,
         User: {
           avatar: this.currentUser.avatar,
           account: this.currentUser.account,
           name: this.currentUser.name
-        },
-        comment,
-        id: 0, // TODO:可以後端回傳嗎？
-        createdAt: new Date().toISOString()
+        }
       })
     },
     addLike() {
@@ -149,17 +147,20 @@ export default {
       // todo: check id after connect API
       this.$router.push({ name: "user", params: { id: userId } });
     },
-    showModal() {
-      // 打開 modal
+    showReplyModal() {
       this.$modal.show("replyCreate");
+      const { id, User, description, createdAt } = this.repliedTweet
+      const replyTargetData = {
+        id,
+        name: User.name,
+        userId: User.id,
+        account: User.account,
+        avatar: User.avatar,
+        description,
+        createdAt,
+      }
+      this.$store.commit("setTweetReplyTarget", replyTargetData)
     },
-    hideModal() {
-      // (預設)關閉 modal
-      this.$modal.hide("replyCreate");
-    },
-  },
-  computed: {
-    ...mapState(["currentUser"]),
   },
   created() {
     const { id } = this.$route.params
@@ -174,6 +175,10 @@ export default {
     this.fetchTweetReplyCards(this.paramsId)
     next()
   },
-
+  watch: {
+    replyCreate (newValue) {
+      this.afterSubmitReplyCreate(newValue)
+    }
+  }
 };
 </script>

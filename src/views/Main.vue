@@ -6,7 +6,7 @@
     <div class="middle-container">
       <div class="main-wrapper">
         <h3 class="main-title">首頁</h3>
-        <div class="main-create" @click.prevent.stop="showModal('tweetCreate')">
+        <div class="main-create" @click="showNewCreateModal()">
           <img class="avatar" :src="currentUser.avatar" />
           <p>有什麼新鮮事？</p>
           <button class="btn active">推文</button>
@@ -84,8 +84,7 @@ export default {
         description: data.description,
       })
     },
-    showModal() {
-      // 打開 modal
+    showNewCreateModal() {
       this.$modal.show("tweetCreate");
     },
   },

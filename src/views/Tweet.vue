@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column">
+  <div class="app-tripple-column" v-if="!isLoading">
     <div class="left-container">
       <NavBar />
     </div>
@@ -14,12 +14,12 @@
             <div class="card-head-left avatar" @click="linkedUser(userId)">
               <img
                 class="avatar"
-                src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539"
+                :src="user.avatar"
               />
             </div>
             <div class="card-head-right">
-              <h5 @click="linkedUser(userId)">{{ "名稱" }}</h5>
-              <h5>{{ "帳號" | accountTag }}</h5>
+              <h5 @click="linkedUser(userId)">{{ user.name }}</h5>
+              <h5>{{ user.account | accountTag }}</h5>
             </div>
           </div>
           <div class="tweet-body">
@@ -29,7 +29,7 @@
           <div class="tweet-footer">
             <div class="tweet-footer-info">
               <h4><strong>{{ replyCards.length }}</strong> 回覆</h4>
-              <h4><strong>{{ "808" }}</strong> 喜歡次數</h4>
+              <h4><strong>{{ likeCount }}</strong> 喜歡次數</h4>
             </div>
             <div class="tweet-footer-buttons">
               <img class="reply-big" @click="showModal()" />
@@ -65,95 +65,12 @@ import NavBar from "../components/NavBar.vue";
 import ReplyCard from "../components/ReplyCard.vue";
 import Popular from "../components/Popular.vue";
 import ReplyCreate from "../components/ReplyCreate.vue";
+import tweetsAPI from "../apis/tweets"
 import { accountTagFilter, timeFormatFilter } from "../utils/mixins";
-
-// GET api/tweets/14 一筆推文及回覆：
-const dummyData = {
-  id: 14,
-  UserId: 14,
-  description:
-    "Ad et rerum quis ea ea veniam. Inventore repellat et. Esse amet alias. Ullam excepturi quo voluptatem animi molestiae iure et possimus ut. Vitae autem ipsum accusantium sint voluptatem sed.",
-  createdAt: "2022-02-26T13:31:32.000Z",
-  updatedAt: "2022-02-26T13:31:32.000Z",
-  Replies: [
-    {
-      id: 34,
-      UserId: 14,
-      TweetId: 14,
-      comment:
-        "Itaque soluta omnis sit. Impedit voluptatum ea vel autem est corrupti voluptatem mollitia dolor. Sit qui voluptatum. Et tenetur a qui est pe",
-      createdAt: "2022-02-26T13:31:32.000Z",
-      updatedAt: "2022-02-26T13:31:32.000Z",
-      User: {
-        id: 14,
-        account: "user1",
-        email: "user1@example.com",
-        password:
-          "$2a$10$b6erG8lmSU4h3.ZYJHuJrOqFg/YogeCVtr9/TAwUuPl9p60ycGCeG",
-        name: "user1",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=95.02090559814266",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=60.90347403010878",
-        introduction: "Nihil et error voluptatem incidunt.",
-        role: "user",
-        createdAt: "2022-02-26T13:31:32.000Z",
-        updatedAt: "2022-02-26T13:31:32.000Z",
-      },
-    },
-    {
-      id: 44,
-      UserId: 24,
-      TweetId: 14,
-      comment: "Maiores voluptas id.",
-      createdAt: "2022-02-26T13:31:32.000Z",
-      updatedAt: "2022-02-26T13:31:32.000Z",
-      User: {
-        id: 24,
-        account: "user2",
-        email: "user2@example.com",
-        password:
-          "$2a$10$Il1etWmTyHTaQthyJ8CCaO0j7aUI1sUa2hF6l70AtY4r1ZULjjSt6",
-        name: "user2",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=19.688300546759187",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=59.69861975665756",
-        introduction: "Aliquam sit cupiditate recusandae error iusto.",
-        role: "user",
-        createdAt: "2022-02-26T13:31:32.000Z",
-        updatedAt: "2022-02-26T13:31:32.000Z",
-      },
-    },
-    {
-      id: 54,
-      UserId: 44,
-      TweetId: 14,
-      comment:
-        "Illum quia illo porro accusantium fuga dolore culpa voluptatum rerum. Ab facilis repudiandae vitae ut recusandae nobis ut similique qui. Sun",
-      createdAt: "2022-02-26T13:31:32.000Z",
-      updatedAt: "2022-02-26T13:31:32.000Z",
-      User: {
-        id: 44,
-        account: "user4",
-        email: "user4@example.com",
-        password:
-          "$2a$10$pT/Fa9VgpEX5Pv8Zbflnn.Ky59RHIfyhdufbfb8bhLHgMnf5I8X7y",
-        name: "user4",
-        avatar:
-          "https://loremflickr.com/g/320/240/people/?random=85.38506035885851",
-        cover:
-          "https://loremflickr.com/g/600/240/shop/?random=21.01274733805727",
-        introduction: "Debitis veniam ad eos eum voluptas sit.",
-        role: "user",
-        createdAt: "2022-02-26T13:31:32.000Z",
-        updatedAt: "2022-02-26T13:31:32.000Z",
-      },
-    },
-  ],
-};
+import { Toast } from "../utils/helpers"
 
 export default {
+  name: "Tweet",
   components: {
     NavBar,
     ReplyCard,
@@ -163,33 +80,66 @@ export default {
   mixins: [accountTagFilter, timeFormatFilter],
   data() {
     return {
+      paramsId: 0,
       tweetId: 0,
-      userId: 0,
-      user: {}, // todo: API 待補
+      user: {},
       description: '',
       createdAt: '',
+      isLiked: false,
+      likeCount: 0,
       replyCards: [],
-      isLiked: false, // todo: API 待補 ... ?
+      isLoading: false
     };
   },
   methods: {
-    // 個人主頁：
-    fetchTweetReplyCards() {
-      // todo: 串接 API
-      const { id, UserId, description, createdAt, Replies } = dummyData
-      this.tweetId = id
-      this.userId = UserId,
-      this.description = description,
-      this.createdAt = createdAt,
-      this.replyCards = Replies
+    async fetchRepliedTweet(paramsId) {
+      // 主貼文資料：
+      try {
+        this.isLoading = true
+        const { data, statusText } = await tweetsAPI.getRepliedTweet({ tweetId: paramsId })
+        if (statusText !== "OK") throw new Error(statusText)
+        this.isLoading = false
+        const { id, User, description, createdAt, isLiked, likeCount } = data
+        console.log(data)
+        this.tweetId = id
+        this.user = User
+        this.description = description
+        this.createdAt = createdAt
+        this.isLiked = isLiked
+        this.likeCount = likeCount
+      } catch (error) {
+        this.isLoading = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取得推文內容，請稍後再試"
+        })
+      }
+    },
+    async fetchTweetReplyCards(paramsId) {
+      // 所有回覆卡片的陣列
+      try {
+        this.isLoading = true
+        const { data, statusText } = await tweetsAPI.getAllReplies({ tweetId: paramsId })
+        if (statusText !== "OK") throw new Error(statusText)
+        this.isLoading = false
+        this.replyCards = [ ...data ]
+      } catch (error) {
+        this.isLoading = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取得回覆推文，請稍後再試"
+        })
+      }
     },
     addLike() {
       // to: connect API
       this.isLiked = true;
+      this.likeCount ++
     },
     deleteLike() {
       // to: connect API
       this.isLiked = false;
+      this.likeCount --
     },
     linkedUser(userId) {
       // todo: check id after connect API
@@ -205,7 +155,17 @@ export default {
     },
   },
   created() {
-    this.fetchTweetReplyCards();
+    const { id } = this.$route.params
+    this.paramsId = Number(id)
+    this.fetchRepliedTweet(this.paramsId)
+    this.fetchTweetReplyCards(this.paramsId);
   },
+  beforeRouteUpdate (to, from, next) {
+    const { id } = to.params
+    this.paramsId = Number(id)
+    this.fetchRepliedTweet(this.paramsId)
+    this.fetchTweetReplyCards(this.paramsId)
+    next()
+  }
 };
 </script>

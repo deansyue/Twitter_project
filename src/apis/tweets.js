@@ -9,14 +9,14 @@ export default {
     })
   },
   // 取得回覆頁面：主貼文（指定卡片自己的資料 object）
-  getTweet({ tweetId }) {
+  getRepliedTweet({ tweetId }) {
     return apiHelper.get(`api/tweets/${tweetId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 取得回覆頁面：所有回覆卡片（指定卡片的所有回覆 array）
   getAllReplies({ tweetId }) {
-    return apiHelper.get(`api/tweets/${tweetId}`, {
+    return apiHelper.get(`api/tweets/${tweetId}/replies` , {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },

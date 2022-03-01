@@ -71,7 +71,15 @@ export default {
   },
   methods: {
     fetchTweetCard() {
-      const { User, description, id, createdAt, replyCount, likeCount, isLiked } = this.tweetCard
+      const {
+        User,
+        description,
+        id,
+        createdAt,
+        replyCount,
+        likeCount,
+        isLiked,
+      } = this.tweetCard;
       this.id = id;
       this.tweetUser = User;
       this.description = description;
@@ -152,6 +160,12 @@ export default {
   },
   created() {
     this.fetchTweetCard();
+  },
+  watch: {
+    tweetCard(newValue) {
+      this.tweetCard = newValue;
+      this.fetchTweetCard();
+    },
   },
 };
 </script>

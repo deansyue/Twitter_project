@@ -39,10 +39,8 @@ export default {
     })
   },
   // 修改個人基本資料
-  editInformation({ id, avatar, cover, name, introduction }) {
-    return apiHelper.put(`api/users/${id}`, {
-      avatar, cover, name, introduction
-    }, {
+  editInformation({ id, formData }) {
+    return apiHelper.put(`api/users/${id}`, formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },

@@ -17,18 +17,27 @@
       <div class="userCardEdit-body">
         <form action="" class="form-wrapper"
           id="userCardForm" 
-          @submit.prevent.stop="handleSubmit()">
+          @submit.prevent.stop="handleSubmit($event)">
           <div class="form-image-wrapper">
             <div class="form-image-cover">
               <img class="cover" :src="cover" v-show="cover">
               <label for="cover" class="camera"></label>
-              <input type="file" id="cover" name="cover" accept="image/png" @change="handleFileChange($event, 'cover')">
+              <input 
+                type="file"
+                id="cover"
+                name="cover"
+                accept="image/png"
+                @change="handleFileChange($event, 'cover')">
               <img class="cross-white cancel" @click="clearCover()"/>
             </div>
             <div class="form-image-avatar">
               <img class="avatar" :src="avatar" v-show="avatar">
               <label for="avatar" class="camera"></label>
-              <input type="file" id="avatar" name="avatar" @change="handleFileChange($event, 'avatar')">
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                @change="handleFileChange($event, 'avatar')">
             </div>
           </div>
           <div class="form-input-wrapper">
@@ -125,28 +134,29 @@ export default {
     clearCover() {
       this.cover = ""
     },
-    async handleSubmit() {
+    async handleSubmit($event) {
       try {
         const id = this.currentUser.id
-        const avatar = this.avatar
-        const cover = this.cover
-        const name = this.name.text
-        const introduction = this.introduction.text
-        if (this.name.isInvalid || this.introduction.isInvalid) return
-        if (this.name.text.length < 1) {
+        if (this.name.isInvalid || this.introduction.isInvalid) {
           return Toast.fire({
-            icon: 'warning',
-            title: '請輸入使用名稱'
+            icon: "warning",
+            title: "字數超出上限！"
           })
         }
+        if (this.name.text.length < 1) {
+          return Toast.fire({
+            icon: "warning",
+            title: "請輸入使用名稱"
+          })
+        }
+        const form = $event.target
+        const formData = new FormData(form)
+
         this.isProcessing = true
         // TODO: 處理圖片上傳資料
         const { statusText , data } = await usersAPI.editInformation({
           id,
-          avatar: [avatar],
-          cover: [cover],
-          name,
-          introduction,
+          formData,
         })
         if(statusText !== "OK" || data.status !== "success") throw new Error()
         this.isProcessing = false

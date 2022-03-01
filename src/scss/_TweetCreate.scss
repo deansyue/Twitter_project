@@ -31,6 +31,13 @@
           outline: none;
         }
       }
+      p {
+        position: absolute;
+        right: 90px;
+        bottom: 14px;
+        font-size: 15px;
+        color: #{$red};
+      }
       button {
         position: absolute;
         right: 0;

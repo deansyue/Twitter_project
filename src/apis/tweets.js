@@ -21,18 +21,28 @@ export default {
     })
   },
   // 新增推文卡片
-  
+  addNewTweet({ description }) {
+    return apiHelper.post('api/tweets', { description }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 新增回覆卡片
-
+  addNewReply({ tweetId, comment }) {
+    return apiHelper.post(`api/tweets/${tweetId}/replies`, { comment }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 卡片狀態：喜歡
   addLike({ tweetId }) {
-    return apiHelper.post(`api/tweets/${tweetId}/like`, {
+    return apiHelper.post(`api/tweets/${tweetId}/like`, 
+      { tweetId }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 卡片狀態：取消喜歡
   deleteLike({ tweetId }) {
-    return apiHelper.post(`api/tweets/${tweetId}/unlike`, {
+    return apiHelper.post(`api/tweets/${tweetId}/unlike`,
+      { tweetId }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   }

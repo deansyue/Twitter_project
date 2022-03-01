@@ -3,16 +3,19 @@
     <router-view />
     <!-- Modal -->
     <TweetCreate />
+    <ReplyCreate />
     <!-- Modal -->
   </div>
 </template>
 
 <script>
 import TweetCreate from "../src/components/TweetCreate.vue";
+import ReplyCreate from "../src/components/ReplyCreate.vue";
 
 export default {
   components: {
     TweetCreate,
+    ReplyCreate
   },
   mounted() {
     window.addEventListener("unload", this.saveState);
@@ -21,13 +24,19 @@ export default {
     this.getState();
   },
   methods: {
-    showModal() {
-      // 打開 modal
+    // 新增推文 modal
+    showNewCreateModal() {
       this.$modal.show("tweetCreate");
     },
-    hideModal() {
-      // 關閉 modal
+    hideNewCreateModal() {
       this.$modal.hide("tweetCreate");
+    },
+    // 新增回覆 modal
+    showReplyModal() {
+      this.$modal.show("replyCreate");
+    },
+    hideReplyModal() {
+      this.$modal.hide("replyCreate");
     },
     saveState() {
       sessionStorage.setItem("state", JSON.stringify(this.$store.state));

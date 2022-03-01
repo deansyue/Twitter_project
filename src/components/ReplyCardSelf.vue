@@ -34,11 +34,6 @@ import { mapState } from "vuex";
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {
-    // 被回覆者的資料
-    replyTarget: {
-      type: Object,
-      required: true,
-    },
     // 每筆回覆貼文的資料
     replyCard: {
       type: Object,
@@ -66,8 +61,8 @@ export default {
   methods: {
     fetchReplyCard() {
       // 被回覆的對象 // TODO: 個人頁面待 API 加入此值
-      this.targetAccount = this.replyTarget.account;
-      this.targetUserId = this.replyTarget.id;
+      this.targetAccount = this.replyCard.Tweet.User.account;
+      this.targetUserId = this.replyCard.Tweet.id;
       // 此卡片的其他資料
       const { id, comment, createdAt, UserId, User } = this.replyCard
       this.tweetId = id
@@ -94,10 +89,6 @@ export default {
       this.replyCard = newValue;
       this.fetchReplyCard();
     },
-    replyTarget (newValue) {
-      this.replyTarget = newValue;
-      this.fetchReplyCard();
-    }
   }
 }
 </script>

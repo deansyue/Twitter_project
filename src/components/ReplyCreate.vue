@@ -1,55 +1,106 @@
 <template>
   <modal name="replyCreate"
     classes="replyCreate-model"
-    :width="600" :height="450">
+    :width="600" :height="450"
+    :clickToClose="false">
     <div class="replyCreate-wrapper">
       <div class="replyCreate-head">
-        <img class="cross-orange" @click="closeModal()">
+        <img class="cross-orange" @click="hideReplyModal()">
       </div>
       <div class="replyCreate-body">
         <div class="target-image">
-          <img class="avatar" src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
+          <img class="avatar"
+            :src="tweetReplyTarget.avatar">
           <span></span>
         </div>
         <div class="target-tweet">
           <div class="target-tweet-head">
-            <h5 class="target-tweet-head-name">回覆對象name</h5>
-            <h5>回覆對象account</h5>
+            <h5 class="target-tweet-head-name">{{ tweetReplyTarget.name }}</h5>
+            <h5>{{ tweetReplyTarget.account | accountTag }}</h5>
             <span>．</span>
-            <h5>3小時</h5>
+            <h5>{{ tweetReplyTarget.createdAt | fromNow }}</h5>
           </div>
-          <p>回覆對象：內容</p>
-          <h5>回覆給 <strong>@回覆對象account</strong></h5>
+          <p>{{ tweetReplyTarget.description }}</p>
+          <h5>回覆給 <strong>{{ tweetReplyTarget.account | accountTag }}</strong></h5>
         </div>
         <div class="replyer-image">
-          <img class="avatar" src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
+          <img class="avatar" :src="currentUser.avatar">
         </div>
         <div class="replyer-tweet">
           <textarea 
-            v-model="message"
+            v-model="comment"
             placeholder="有什麼新鮮事？"
             focus
           ></textarea>
         </div>
       </div>
-      <button class="btn active">回覆</button>
+      <p>{{ wordLimit }}</p>
+      <button
+        class="btn active"
+        @click="submitReply()"
+        :disabled="isProcessing">回覆</button>
     </div>
   </modal>
 </template>
 
 <script>
+import tweetsAPI from "../apis/tweets"
+import { mapState } from "vuex";
+import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import { Toast } from "../utils/helpers"
+
 export default {
+  mixins: [fromNowFilter, accountTagFilter],
+  computed: {
+    ...mapState(["currentUser", "tweetReplyTarget"]),
+  },
   data () {
     return {
-      message: ''
+      replyTarget: {},
+      paramsId: 0,
+      comment: "",
+      wordLimit: "",
+      isProcessing: false
     }
   },
   methods: {
-    closeModal() {
-      // 關閉 modal、清空輸入框
-      this.$modal.hide('tweetCreate')
-      this.message = ''
+    async submitReply() {
+      try {
+        if (this.comment.length < 1) {
+          return this.wordLimit = "內容不可空白"
+        } else if (this.comment.length > 140) {
+          return this.wordLimit = "字數不可超過140字"
+        }
+        this.wordLimit = ""
+        this.isProcessing = true
+        const response = await tweetsAPI.addNewReply({
+          tweetId: this.paramsId,
+          comment: 
+          this.comment
+        })
+        if (response.status !== "success") throw new Error()
+        console.log(response) // TODO: 確認 data 內容
+        this.isProcessing = false
+        this.$store.commit("passReplyCreate", response.reply)
+        this.closeModal()
+        // if (this.$route.name !== "main") this.$router.push("/main")
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法新增回覆，請稍後再試"
+        })
+      }
     },
-  }
+    hideReplyModal() {
+      this.$modal.hide("replyCreate");
+      this.comment = ""
+      this.wordLimit = ""
+    },
+  },
+  created() {
+    const { id } = this.$route.params
+    this.paramsId = Number(id)
+  },
 }
 </script>

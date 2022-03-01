@@ -62,9 +62,6 @@ export default {
       this.id = id
       this.tweetUser = User
     },
-    linkedUser(userId) {
-      this.$router.push({ name: 'user', params: { id: userId }})
-    }
   },
   created() {
     this.fetchTweetCard()

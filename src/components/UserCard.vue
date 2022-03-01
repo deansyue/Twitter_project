@@ -12,7 +12,9 @@
     <div class="user-wrapper">
       <img :src="userData.cover" alt="" class="cover" />
       <img :src="userData.avatar" alt="" class="avatar-big" />
-      <button class="btn btn-edit" v-if="whichPage" @click="showModal()">編輯個人資料</button>
+      <button class="btn btn-edit" v-if="whichPage" @click="showEditModal()">
+        編輯個人資料
+      </button>
       <div class="otherButton" v-else>
         <img src="" alt="" class="message" />
         <img
@@ -32,11 +34,17 @@
         <button
           class="btn btnDeleteFollow"
           v-if="userData.isFollowed"
-          @click="userData.isFollowed = false"
+          @click="deleteFollow(userData.id)"
+          :disabled="isProcessing"
         >
           正在追隨
         </button>
-        <button class="btn btnAddFollow" v-else @click="userData.isFollowed = true">
+        <button
+          class="btn btnAddFollow"
+          v-else
+          @click="addFollow(userData.id)"
+          :disabled="isProcessing"
+        >
           追隨
         </button>
       </div>
@@ -49,12 +57,12 @@
             :to="{ name: 'users-followings', params: { id: userData.id } }"
             class="strong"
           >
-            {{ userData.followingCount | numberFormatTC}}個
+            {{ userData.followingCount | numberFormatTC }}個
           </router-link>
           追隨中<router-link
             :to="{ name: 'users-followers', params: { id: userData.id } }"
             class="strong2"
-            >{{ userData.follwerCount | numberFormatTC}}位</router-link
+            >{{ userData.follwerCount | numberFormatTC }}位</router-link
           >追隨者
         </div>
       </div>
@@ -65,13 +73,16 @@
   </div>
 </template>
 <script>
-import UserCardEdit from "../components/UserCardEdit.vue"
+import UserCardEdit from "../components/UserCardEdit.vue";
 import { accountTagFilter } from "./../utils/mixins";
 import { numberFormatTCFilter } from "./../utils/mixins";
+import usersAPI from "./../apis/users";
+import { Toast } from "../utils/helpers";
+
 export default {
-  mixins: [accountTagFilter,numberFormatTCFilter],
+  mixins: [accountTagFilter, numberFormatTCFilter],
   components: {
-    UserCardEdit
+    UserCardEdit,
   },
   props: {
     currentUserData: {
@@ -86,7 +97,7 @@ export default {
         introduction: "",
         followingCount: 0,
         follwerCount: 0,
-        isFollowed: ""
+        isFollowed: "",
       }),
     },
     tweets: {
@@ -110,18 +121,19 @@ export default {
         introduction: "",
         followingCount: 0,
         follwerCount: 0,
-        isFollowed:""
+        isFollowed: "",
       },
       isNotice: true,
+      isProcessing: false,
     };
   },
-  watch:{
-    currentUserData(newValue){
-      this.userData={
+  watch: {
+    currentUserData(newValue) {
+      this.userData = {
         ...this.userData,
-        ...newValue
-      }
-    }
+        ...newValue,
+      };
+    },
   },
   created() {
     this.fetchUser();
@@ -139,13 +151,55 @@ export default {
       this.userData.follwerCount = this.currentUserData.follwerCount;
       this.userData.isFollowed = this.currentUserData.isFollowed;
     },
-    showModal() {
+    showEditModal() {
       // 打開 modal
       this.$modal.show("userCardEdit");
     },
-    hideModal() {
+    hideEditModal() {
       // (預設)關閉 modal
       this.$modal.hide("userCardEdit");
+    },
+    async addFollow(userId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await usersAPI.addFollow({ id: userId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.isProcessing = false;
+        this.userData = {
+          ...this.userData,
+          isFollowed: true,
+        };
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: "無法追隨使用者，請稍後再試",
+        });
+        console.log("error", error);
+      }
+    },
+    async deleteFollow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await usersAPI.deleteFollow({ followingId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.isProcessing = false;
+        this.userData = {
+          ...this.userData,
+          isFollowed: false,
+        };
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: "無法取消追隨使用者，請稍後再試",
+        });
+        console.log("error", error);
+      }
     },
   },
 };

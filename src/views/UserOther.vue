@@ -37,7 +37,7 @@
       </div>
       <div class="self-reply-wrapper" v-else-if="tabNow === 2">
         <div class="self-reply" v-for="reply in replys" :key="reply.id">
-          <ReplyCard :replyCard="reply" />
+          <ReplyCardSelf :replyCard="reply" />
         </div>
       </div>
       <div class="self-like-wrapper" v-else>
@@ -58,20 +58,19 @@ import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
 import TweetCard from "../components/TweetCard.vue";
-import ReplyCard from "../components/ReplyCard.vue";
+import ReplyCardSelf from "../components/ReplyCardSelf.vue";
 import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";
 
 import { mapState } from "vuex";
-//因為4道api能取得資料的目前都只有id=14也就是user1這個帳號的id所以他人頁面帶入動態id的地方先暫時用currentuser.id頂著等有多一點id可以取得資料再修改測試
-//todo:修改動態id參數
+
 export default {
   components: {
     NavBar,
     Popular,
     UserCard,
     TweetCard,
-    ReplyCard,
+    ReplyCardSelf,
   },
   data() {
     return {
@@ -98,10 +97,10 @@ export default {
     ...mapState(["currentUser"]),
   },
   methods: {
-    async fetchUser() {
+    async fetchUser(userId) {
       try {
         const response = await usersAPI.getUser({
-          userId: this.currentUser.id,
+          userId: userId,
         });
 
         this.currentUserData = {
@@ -123,12 +122,18 @@ export default {
         });
       }
     },
-    async fetchLikeTweets() {
+    async fetchLikeTweets(userId) {
       try {
         const response = await usersAPI.getUserLikes({
-          userId: this.currentUser.id,
+          userId: userId,
         });
-        this.likeTweets = response.data.map((like) => like.Tweet);
+        const tweets = response.data.map((like) => like.Tweet);
+        for (let i = 0; i < tweets.length; i++) {
+          tweets[i].likeCount = tweets[i].Likes.length;
+          tweets[i].replyCount = tweets[i].Replies.length;
+          tweets[i].isLiked = true;
+        }
+        this.likeTweets = tweets;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -136,10 +141,10 @@ export default {
         });
       }
     },
-    async fetchUserTweets() {
+    async fetchUserTweets(userId) {
       try {
         const response = await usersAPI.getUserTweets({
-          userId: this.currentUser.id,
+          userId: userId,
         });
         this.tweets = response.data;
       } catch (error) {
@@ -149,10 +154,10 @@ export default {
         });
       }
     },
-    async fetchUserReplies() {
+    async fetchUserReplies(userId) {
       try {
         const response = await usersAPI.getUserReplies({
-          userId: this.currentUser.id,
+          userId: userId,
         });
         this.replys = response.data;
       } catch (error) {
@@ -164,10 +169,17 @@ export default {
     },
   },
   created() {
-    this.fetchUser();
-    this.fetchLikeTweets();
-    this.fetchUserTweets();
-    this.fetchUserReplies();
+    this.fetchUser(this.$route.params.id);
+    this.fetchLikeTweets(this.$route.params.id);
+    this.fetchUserTweets(this.$route.params.id);
+    this.fetchUserReplies(this.$route.params.id);
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchUser(to.params.id);
+    this.fetchLikeTweets(to.params.id);
+    this.fetchUserTweets(to.params.id);
+    this.fetchUserReplies(to.params.id);
+    next();
   },
 };
 </script>

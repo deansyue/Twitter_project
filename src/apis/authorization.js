@@ -26,6 +26,17 @@ export default {
       account,
       password
     })
+  },
+  // 取得目前使用者資訊
+  getCurrentUser() {
+    return apiHelper.get('api/users/currentUser', {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  // 取得目前管理者資訊
+  getCurrentAdminUser() {
+    return apiHelper.get('api/admin/currentUser', {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
   }
-
 }

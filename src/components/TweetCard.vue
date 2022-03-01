@@ -1,7 +1,7 @@
 <template>
   <div class="tweetCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(tweetUser.id)">
-      <img class="avatar" :src="tweetUser.avatar">
+      <img class="avatar" :src="tweetUser.avatar" />
     </div>
     <div class="card-right" @click="linkedReply($event, id)">
       <div class="card-head">
@@ -18,77 +18,154 @@
       </div>
       <p>
         {{ description }}
-      <p>
+      </p>
+
+      <p></p>
       <div class="card-foot">
-        <img class="reply">
+        <img class="reply" @click="showReplyModal()" />
         <h6>{{ replysCount }}</h6>
-        <img v-if="isLiked" @click="deleteLikes()" class="heart-active">
-        <img v-else @click="addLikes()" class="heart">
-        
-        <h6>{{ likesCount }}</h6>
+        <img
+          v-if="isLiked"
+          @click="deleteLikes()"
+          class="heart-active"
+        />
+        <img
+          v-else
+          @click="addLikes()"
+          class="heart"
+        />
+        <h6>{{ likeCount }}</h6>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "../utils/helpers"
+import { fromNowFilter, accountTagFilter } from "../utils/mixins";
+import { mapState } from "vuex";
+
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {
     tweetCard: {
       type: Object,
       required: true,
-    }
+    },
   },
   data() {
     return {
       id: 0,
       tweetUser: {},
-      description: '',
-      createdAt: '',
-      replysCount: 0, // 尚為預設值
-      likesCount: 0, // 尚為預設值
-      isLiked: false // 尚為預設值
-    }
+      description: "",
+      createdAt: "",
+      replysCount: 0,
+      likeCount: 0,
+      isLiked: false,
+      isProcessing: false
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   methods: {
     fetchTweetCard() {
-      // 待加回 replysCount、likesCount相關屬性
-      const { User, description, id, createdAt } = this.tweetCard
-      this.id = id
-      this.tweetUser = User
-      this.description = description
-      this.createdAt = createdAt
-      // 待 API 加入此值
-      // this.replysCount = Replies.length
-      // this.likesCount = Likes.length
+      const {
+        User,
+        description,
+        id,
+        createdAt,
+        replyCount,
+        likeCount,
+        isLiked,
+      } = this.tweetCard;
+      this.id = id;
+      this.tweetUser = User;
+      this.description = description;
+      this.createdAt = createdAt;
+      this.replysCount = replyCount;
+      this.likeCount = likeCount;
+      this.isLiked = isLiked;
     },
-    addLikes() {
-      // todo: connect API
-      this.isLiked = true
-      this.likesCount++
+    async addLikes() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.addLike({
+          tweetId: this.id
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.isLiked = true;
+        this.likeCount++;
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法加入最愛，請稍後再試"
+        })
+      }
     },
-    deleteLikes() {
-      // todo: connect API
-      this.isLiked = false
-      this.likesCount--
+    async deleteLikes() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.deleteLike({ 
+          tweetId: this.id
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.isLiked = false;
+        this.likeCount--;
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取消最愛，請稍後再試"
+        })
+      }
     },
     linkedUser(userId) {
-      this.$router.push({ name: 'user', params: { id: userId }})
+      if (userId === this.currentUser.id) {
+        this.$router.push({ name: "userSelf" });
+      } else {
+        this.$router.push({ name: "user", params: { id: userId } });
+      }
     },
     linkedReply($event, tweetId) {
       // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面
-      if ($event.target.matches('.heart')
-        || $event.target.matches('.heart-active')
-        || $event.target.matches('.avatar')
-        || $event.target.matches('.card-name')) return
-        
-      this.$router.push({ name: 'tweet', params: { id: tweetId }})
+      if (
+        $event.target.matches(".reply") ||
+        $event.target.matches(".heart") ||
+        $event.target.matches(".heart-active") ||
+        $event.target.matches(".avatar") ||
+        $event.target.matches(".card-name")
+      )
+        return;
+
+      this.$router.push({ name: "tweet", params: { id: tweetId } });
+    },
+    showReplyModal() {
+      this.$modal.show("replyCreate");
+      const replyTargetData = {
+        id: this.id,
+        name: this.tweetUser.name,
+        userId: this.tweetUser.id,
+        account: this.tweetUser.account,
+        avatar: this.tweetUser.avatar,
+        description: this.description,
+        createdAt: this.createdAt,
+      }
+      this.$store.commit("setTweetReplyTarget", replyTargetData)
     }
   },
   created() {
-    this.fetchTweetCard()
-  }
-}
+    this.fetchTweetCard();
+  },
+  watch: {
+    tweetCard(newValue) {
+      this.tweetCard = newValue;
+      this.fetchTweetCard();
+    },
+  },
+};
 </script>

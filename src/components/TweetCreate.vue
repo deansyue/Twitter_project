@@ -2,22 +2,27 @@
   <modal name="tweetCreate"       
     classes="tweetCreat-modal"
     :width="600" :height="300"
-  >
+    :clickToClose="false">
     <div class="tweetCreate-wrapper">
       <div class="tweetCreate-head">
-        <img class="cross-orange" @click="closeModal">
+        <img class="cross-orange" @click="hideNewCreateModal()">
       </div>
       <div class="tweetCreate-body">
         <div class="tweetCreate-left">
-          <img class="avatar" src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
+          <img class="avatar" :src="currentUser.avatar">
         </div>
         <div class="tweetCreate-right">
           <textarea 
-            v-model="message"
+            v-model="description"
             placeholder="有什麼新鮮事？"
             focus
           ></textarea>
-          <button class="btn active" @click="submitTweet">
+          <p>{{ wordLimit }}</p>
+          <button 
+            class="btn active"
+            @click="submitTweet()"
+            :disabled="isProcessing"
+          >
             推文
           </button>
         </div>
@@ -26,30 +31,55 @@
   </modal> 
 </template>
 
-
 <script>
-// todo: 接收大頭照資料(顯示畫面)、使用者 id 等資料(API新增貼文時要用到的...)
+import tweetsAPI from "../apis/tweets"
+import { mapState } from "vuex"
+import { Toast } from "../utils/helpers"
 
 export default {
   name: 'tweetCreate',
   data() {
     return {
-      message: ''
+      description: "",
+      wordLimit: "",
+      isProcessing: false
     }
   },
   methods: {
-    closeModal() {
+    hideNewCreateModal() {
       // 關閉 modal、清空輸入框
       this.$modal.hide('tweetCreate')
-      this.message = ''
+      this.description = ""
+      this.wordLimit = ""
     },
-    submitTweet() {
-      // for check
-      console.log({ formData: this.message })
-      // todo: 串接 API
-      // 更新主畫面: 應該要顯示在第一個...
-      // this.closeModal()
+    async submitTweet() {
+      try {
+        if (this.description.length < 1) {
+          return this.wordLimit = "內容不可空白"
+        } else if (this.description.length > 140) {
+          return this.wordLimit = "字數不可超過140字"
+        }
+        this.wordLimit = ""
+        this.isProcessing = true
+        const response = await tweetsAPI.addNewTweet({
+          description: this.description
+        })
+        if (response.statusText !== "OK") throw new Error()
+        this.isProcessing = false
+        this.hideNewCreateModal()
+        this.$store.commit("passTweetCreate", response.data)
+        if (this.$route.name !== "main") this.$router.push("/main")
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法新增推文，請稍後再試"
+        })
+      }
     }
-  }
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
 }
 </script>

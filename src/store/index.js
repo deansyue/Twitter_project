@@ -15,7 +15,12 @@ export default new Vuex.Store({
       introduction: "",
     },
     isAuthenticated: false,
-    token: ''
+    token: '',
+    tweetCreate: {
+      id: "",
+      createdAt: "",
+      description: "",
+    }
   },
   mutations: {
     setCurrentUser(state, user) {
@@ -33,7 +38,13 @@ export default new Vuex.Store({
       state.isAuthenticated = false
       state.token = ''
       localStorage.removeItem('token')
-    }
+    },
+    passTweetCreate(state, data) {
+      state.tweetCreate = {
+        ...state.tweetCreate,
+        ...data
+      }
+    },
   },
   actions: {
     // todo: 每次網址更新時，搭配 router / index.js 核對使用者資料

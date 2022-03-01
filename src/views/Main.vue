@@ -23,9 +23,6 @@
     <div class="right-container">
       <Popular />
     </div>
-    <!-- Modal -->
-    <TweetCreate @after-tweet-create="afterTweetCreate"/>
-    <!-- Modal -->
   </div>
 </template>
 
@@ -33,7 +30,6 @@
 import NavBar from "../components/NavBar.vue";
 import TweetCard from "../components/TweetCard.vue";
 import Popular from "../components/Popular.vue";
-import TweetCreate from "../components/TweetCreate.vue"
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets"
 import { Toast } from '../utils/helpers';
@@ -44,7 +40,6 @@ export default {
     NavBar,
     TweetCard,
     Popular,
-    TweetCreate
   },
   data() {
     return {
@@ -53,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(["currentUser", "tweetCreate"]),
   },
   methods: {
     async fetchTweetCards() {
@@ -72,10 +67,11 @@ export default {
         })
       }
     },
-    afterTweetCreate(comment) {
+    afterSubmitTweetCreate(data) {
+      // 從 vuex 中取出 tweetCreate 資料並塞入 tweetCards
       this.tweetCards.unshift({
-        createdAt: new Date().toISOString(),
-        id: 0, // TODO:可以後端回傳嗎？
+        createdAt: data.createdAt,
+        id: data.id,
         isLiked: false,
         likeCount: 0,
         replyCount: 0,
@@ -85,7 +81,7 @@ export default {
           id: this.currentUser.id,
           name: this.currentUser.name,
         },
-        description: comment,
+        description: data.description,
       })
     },
     showModal() {
@@ -96,5 +92,10 @@ export default {
   created() {
     this.fetchTweetCards();
   },
+  watch: {
+    tweetCreate (newValue) {
+      this.afterSubmitTweetCreate(newValue)
+    }
+  }
 };
 </script>

@@ -21,8 +21,8 @@ export default {
     })
   },
   // 新增推文卡片
-  addNewTweet({ comment }) {
-    return apiHelper.post('api/tweets', { comment }, {
+  addNewTweet({ description }) {
+    return apiHelper.post('api/tweets', { description }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },

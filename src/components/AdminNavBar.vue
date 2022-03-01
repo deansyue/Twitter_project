@@ -2,7 +2,7 @@
   <div class="navBar-wrapper">
     <div class="container">
       <div class="logoContainer">
-        <router-link to="/main">
+        <router-link to="/admin/tweets">
           <img class="logo" alt="admin/tweets" />
         </router-link>
       </div>

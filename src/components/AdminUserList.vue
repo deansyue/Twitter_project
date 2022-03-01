@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { fromNowFilter, accountTagFilter } from '../utils/mixins'
+import { fromNowFilter, accountTagFilter } from '../utils/mixins';
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {

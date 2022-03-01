@@ -37,7 +37,7 @@
       </div>
       <div class="self-reply-wrapper" v-else-if="tabNow === 2">
         <div class="self-reply" v-for="reply in replys" :key="reply.id">
-          <ReplyCard :replyCard="reply" />
+          <ReplyCardSelf :replyCard="reply" />
         </div>
       </div>
       <div class="self-like-wrapper" v-else>
@@ -58,7 +58,7 @@ import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
 import TweetCard from "../components/TweetCard.vue";
-import ReplyCard from "../components/ReplyCard.vue";
+import ReplyCardSelf from "../components/ReplyCardSelf.vue";
 import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";
 
@@ -70,7 +70,7 @@ export default {
     Popular,
     UserCard,
     TweetCard,
-    ReplyCard,
+    ReplyCardSelf,
   },
   data() {
     return {

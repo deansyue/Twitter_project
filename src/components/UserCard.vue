@@ -35,10 +35,16 @@
           class="btn btnDeleteFollow"
           v-if="userData.isFollowed"
           @click="deleteFollow(userData.id)"
+          :disabled="isProcessing"
         >
           正在追隨
         </button>
-        <button class="btn btnAddFollow" v-else @click="addFollow(userData.id)">
+        <button
+          class="btn btnAddFollow"
+          v-else
+          @click="addFollow(userData.id)"
+          :disabled="isProcessing"
+        >
           追隨
         </button>
       </div>
@@ -91,7 +97,7 @@ export default {
         introduction: "",
         followingCount: 0,
         follwerCount: 0,
-        isFollowed: ""
+        isFollowed: "",
       }),
     },
     tweets: {
@@ -115,9 +121,10 @@ export default {
         introduction: "",
         followingCount: 0,
         follwerCount: 0,
-        isFollowed:""
+        isFollowed: "",
       },
       isNotice: true,
+      isProcessing: false,
     };
   },
   watch: {
@@ -154,15 +161,18 @@ export default {
     },
     async addFollow(userId) {
       try {
+        this.isProcessing = true;
         const { data } = await usersAPI.addFollow({ id: userId });
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+        this.isProcessing = false;
         this.userData = {
           ...this.userData,
           isFollowed: true,
         };
       } catch (error) {
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: "無法追隨使用者，請稍後再試",
@@ -172,15 +182,18 @@ export default {
     },
     async deleteFollow(followingId) {
       try {
+        this.isProcessing = true;
         const { data } = await usersAPI.deleteFollow({ followingId });
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+        this.isProcessing = false;
         this.userData = {
           ...this.userData,
           isFollowed: false,
         };
       } catch (error) {
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: "無法取消追隨使用者，請稍後再試",

@@ -37,7 +37,7 @@
       </div>
       <div class="self-reply-wrapper" v-else-if="tabNow === 2">
         <div class="self-reply" v-for="reply in replys" :key="reply.id">
-          <ReplyCard :replyCard="reply" />
+          <ReplyCardSelf :replyCard="reply" />
         </div>
       </div>
       <div class="self-like-wrapper" v-else>
@@ -58,7 +58,7 @@ import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
 import TweetCard from "../components/TweetCard.vue";
-import ReplyCard from "../components/ReplyCard.vue";
+import ReplyCardSelf from "../components/ReplyCardSelf.vue";
 import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";
 
@@ -70,7 +70,7 @@ export default {
     Popular,
     UserCard,
     TweetCard,
-    ReplyCard,
+    ReplyCardSelf,
   },
   data() {
     return {
@@ -127,7 +127,13 @@ export default {
         const response = await usersAPI.getUserLikes({
           userId: userId,
         });
-        this.likeTweets = response.data.map((like) => like.Tweet);
+        const tweets = response.data.map((like) => like.Tweet);
+        for (let i = 0; i < tweets.length; i++) {
+          tweets[i].likeCount = tweets[i].Likes.length;
+          tweets[i].replyCount = tweets[i].Replies.length;
+          tweets[i].isLiked = true;
+        }
+        this.likeTweets = tweets;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -168,12 +174,12 @@ export default {
     this.fetchUserTweets(this.$route.params.id);
     this.fetchUserReplies(this.$route.params.id);
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     this.fetchUser(to.params.id);
     this.fetchLikeTweets(to.params.id);
     this.fetchUserTweets(to.params.id);
     this.fetchUserReplies(to.params.id);
-    next()
+    next();
   },
 };
 </script>

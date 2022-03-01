@@ -62,16 +62,16 @@ export default {
     fetchReplyCard() {
       // 被回覆的對象 // TODO: 個人頁面待 API 加入此值
       this.targetAccount = this.replyCard.Tweet.User.account;
-      this.targetUserId = this.replyCard.Tweet.id;
+      this.targetUserId = this.replyCard.Tweet.UserId;
       // 此卡片的其他資料
-      const { id, comment, createdAt, UserId, User } = this.replyCard
-      this.tweetId = id
-      this.userId = UserId
-      this.comment = comment
-      this.createdAt = createdAt
-      this.userName = User.name
-      this.userAccount = User.account
-      this.avatar = User.avatar
+      const { id, comment, createdAt, UserId, User } = this.replyCard;
+      this.tweetId = id;
+      this.userId = UserId;
+      this.comment = comment;
+      this.createdAt = createdAt;
+      this.userName = User.name;
+      this.userAccount = User.account;
+      this.avatar = User.avatar;
     },
     linkedUser(userId) {
       if (userId === this.currentUser.id) {
@@ -85,10 +85,10 @@ export default {
     this.fetchReplyCard();
   },
   watch: {
-    replyCard (newValue) {
+    replyCard(newValue) {
       this.replyCard = newValue;
       this.fetchReplyCard();
     },
-  }
-}
+  },
+};
 </script>

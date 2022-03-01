@@ -1,7 +1,8 @@
 <template>
   <modal name="replyCreate"
     classes="replyCreate-model"
-    :width="600" :height="450"
+    :adaptive="true"
+    :width="600" :minHeight="450"
     :clickToClose="false">
     <div class="replyCreate-wrapper">
       <div class="replyCreate-head">
@@ -73,22 +74,20 @@ export default {
         }
         this.wordLimit = ""
         this.isProcessing = true
-        const response = await tweetsAPI.addNewReply({
-          tweetId: this.paramsId,
-          comment: 
-          this.comment
+        const { statusText, data } = await tweetsAPI.addNewReply({
+          tweetId: this.tweetReplyTarget.id,
+          comment: this.comment
         })
-        if (response.status !== "success") throw new Error()
-        console.log(response) // TODO: 確認 data 內容
+        if (statusText !== "OK" || data.status !== "success") throw new Error()
         this.isProcessing = false
-        this.$store.commit("passReplyCreate", response.reply)
-        this.closeModal()
-        // if (this.$route.name !== "main") this.$router.push("/main")
+        this.$store.commit("passReplyCreate", data.reply)
+        this.hideReplyModal()
+        if (this.$route.name === "main") this.$router.push(`/tweets/${data.reply.TweetId}`)
       } catch (error) {
         this.isProcessing = false
         Toast.fire({
           icon: "error",
-          title: "無法新增回覆，請稍後再試"
+          title: error.message
         })
       }
     },

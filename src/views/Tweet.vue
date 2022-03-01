@@ -11,30 +11,30 @@
         </div>
         <div class="tweet-main">
           <div class="card-head">
-            <div class="card-head-left avatar" @click="linkedUser(userId)">
+            <div class="card-head-left avatar" @click="linkedUser(user.id)">
               <img
                 class="avatar"
                 :src="user.avatar"
               />
             </div>
             <div class="card-head-right">
-              <h5 @click="linkedUser(userId)">{{ user.name }}</h5>
+              <h5 @click="linkedUser(user.id)">{{ user.name }}</h5>
               <h5>{{ user.account | accountTag }}</h5>
             </div>
           </div>
           <div class="tweet-body">
-            <p>{{ description }}</p>
-            <h5>{{ createdAt | timeFormat }}</h5>
+            <p>{{ repliedTweet.description }}</p>
+            <h5>{{ repliedTweet.createdAt | timeFormat }}</h5>
           </div>
           <div class="tweet-footer">
             <div class="tweet-footer-info">
               <h4><strong>{{ replyCards.length }}</strong> 回覆</h4>
-              <h4><strong>{{ likeCount }}</strong> 喜歡次數</h4>
+              <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
             </div>
             <div class="tweet-footer-buttons">
               <img class="reply-big" @click="showModal()" />
               <img
-                v-if="isLiked"
+                v-if="repliedTweet.isLiked"
                 @click="deleteLike()"
                 class="heart-big-active"
               />
@@ -55,7 +55,8 @@
       <Popular />
     </div>
     <!-- Modal -->
-    <ReplyCreate />
+    <ReplyCreate
+      :reply-target-info="repliedTweet" @reply-comment="afterSubmit"/>
     <!-- Modal -->
   </div>
 </template>
@@ -66,6 +67,7 @@ import ReplyCard from "../components/ReplyCard.vue";
 import Popular from "../components/Popular.vue";
 import ReplyCreate from "../components/ReplyCreate.vue";
 import tweetsAPI from "../apis/tweets"
+import { mapState } from "vuex"
 import { accountTagFilter, timeFormatFilter } from "../utils/mixins";
 import { Toast } from "../utils/helpers"
 
@@ -81,12 +83,8 @@ export default {
   data() {
     return {
       paramsId: 0,
-      tweetId: 0,
       user: {},
-      description: '',
-      createdAt: '',
-      isLiked: false,
-      likeCount: 0,
+      repliedTweet: {},
       replyCards: [],
       isLoading: false
     };
@@ -99,14 +97,8 @@ export default {
         const { data, statusText } = await tweetsAPI.getRepliedTweet({ tweetId: paramsId })
         if (statusText !== "OK") throw new Error(statusText)
         this.isLoading = false
-        const { id, User, description, createdAt, isLiked, likeCount } = data
-        console.log(data)
-        this.tweetId = id
-        this.user = User
-        this.description = description
-        this.createdAt = createdAt
-        this.isLiked = isLiked
-        this.likeCount = likeCount
+        this.user = data.User
+        this.repliedTweet = { ...data }
       } catch (error) {
         this.isLoading = false
         Toast.fire({
@@ -131,15 +123,27 @@ export default {
         })
       }
     },
+    afterSubmit(comment) {
+      this.replyCards.unshift({
+        User: {
+          avatar: this.currentUser.avatar,
+          account: this.currentUser.account,
+          name: this.currentUser.name
+        },
+        comment,
+        id: 0, // TODO:可以後端回傳嗎？
+        createdAt: new Date().toISOString()
+      })
+    },
     addLike() {
       // to: connect API
-      this.isLiked = true;
-      this.likeCount ++
+      this.repliedTweet.isLiked = true;
+      this.repliedTweet.likeCount ++
     },
     deleteLike() {
       // to: connect API
-      this.isLiked = false;
-      this.likeCount --
+      this.repliedTweet.isLiked = false;
+      this.repliedTweet.likeCount --
     },
     linkedUser(userId) {
       // todo: check id after connect API
@@ -154,6 +158,9 @@ export default {
       this.$modal.hide("replyCreate");
     },
   },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   created() {
     const { id } = this.$route.params
     this.paramsId = Number(id)
@@ -166,6 +173,7 @@ export default {
     this.fetchRepliedTweet(this.paramsId)
     this.fetchTweetReplyCards(this.paramsId)
     next()
-  }
+  },
+
 };
 </script>

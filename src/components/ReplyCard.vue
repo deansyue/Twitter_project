@@ -31,12 +31,6 @@
 import { fromNowFilter, accountTagFilter } from "../utils/mixins";
 import { mapState } from "vuex";
 
-// 假設：被回覆對象之資料
-const dummyUser = {
-  id: 25,
-  account: "被回覆的對象",
-}
-
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {
@@ -71,9 +65,9 @@ export default {
   },
   methods: {
     fetchReplyCard() {
-      // 被回覆的對象 // todo: 待 API 加入此值
-      this.targetAccount = dummyUser.account;
-      this.targetUserId = dummyUser.id;
+      // 被回覆的對象 // TODO: 個人頁面待 API 加入此值
+      this.targetAccount = this.replyTarget.account;
+      this.targetUserId = this.replyTarget.id;
       // 此卡片的其他資料
       const { id, comment, createdAt, UserId, User } = this.replyCard
       this.tweetId = id
@@ -96,9 +90,14 @@ export default {
     this.fetchReplyCard();
   },
   watch: {
-    replyCard(newValue) {
+    replyCard (newValue) {
       this.replyCard = newValue;
+      this.fetchReplyCard();
     },
-  },
-};
+    replyTarget (newValue) {
+      this.replyTarget = newValue;
+      this.fetchReplyCard();
+    }
+  }
+}
 </script>

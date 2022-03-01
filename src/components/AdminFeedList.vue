@@ -54,9 +54,6 @@ export default {
       this.description = description
       this.createdAt = createdAt
     },
-    linkedUser(userId) {
-      this.$router.push({ name: 'user', params: { id: userId }})
-    }
   },
   created() {
     this.fetchTweetCard()

@@ -127,6 +127,11 @@ export default {
     },
     async handleSubmit() {
       try {
+        const id = this.currentUser.id
+        const avatar = this.avatar
+        const cover = this.cover
+        const name = this.name.text
+        const introduction = this.introduction.text
         if (this.name.isInvalid || this.introduction.isInvalid) return
         if (this.name.text.length < 1) {
           return Toast.fire({
@@ -135,17 +140,18 @@ export default {
           })
         }
         this.isProcessing = true
+        // TODO: 處理圖片上傳資料
         const { statusText , data } = await usersAPI.editInformation({
-          id: this.currentUser.id,
-          avatar: this.avatar,
-          cover: this.cover,
-          name: this.name.text,
-          introduction: this.introduction.text
+          id,
+          avatar: [avatar],
+          cover: [cover],
+          name,
+          introduction,
         })
-        if(statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        if(statusText !== "OK" || data.status !== "success") throw new Error()
         this.isProcessing = false
         this.$store.commit('setCurrentUser', data.user)
-        this.hideModal()
+        this.$modal.hide("userCardEdit");
 
       } catch (error) {
         this.isProcessing = false

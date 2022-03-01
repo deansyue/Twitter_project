@@ -9,15 +9,19 @@
       </div>
       <div class="tweetCreate-body">
         <div class="tweetCreate-left">
-          <img class="avatar" src="https://loremflickr.com/g/320/240/people/?random=91.66143782652539">
+          <img class="avatar" :src="currentUser.avatar">
         </div>
         <div class="tweetCreate-right">
           <textarea 
-            v-model="message"
+            v-model="comment"
             placeholder="有什麼新鮮事？"
             focus
           ></textarea>
-          <button class="btn active" @click="submitTweet">
+          <button 
+            class="btn active"
+            @click="submitTweet()"
+            :disabled="isProcessing"
+          >
             推文
           </button>
         </div>
@@ -26,30 +30,47 @@
   </modal> 
 </template>
 
-
 <script>
-// todo: 接收大頭照資料(顯示畫面)、使用者 id 等資料(API新增貼文時要用到的...)
+import tweetsAPI from "../apis/tweets"
+import { mapState } from "vuex"
+import { Toast } from "../utils/helpers"
 
 export default {
   name: 'tweetCreate',
   data() {
     return {
-      message: ''
+      comment: '',
+      isProcessing: false
     }
   },
   methods: {
     closeModal() {
       // 關閉 modal、清空輸入框
       this.$modal.hide('tweetCreate')
-      this.message = ''
+      this.comment = ''
     },
-    submitTweet() {
-      // for check
-      console.log({ formData: this.message })
-      // todo: 串接 API
-      // 更新主畫面: 應該要顯示在第一個...
-      // this.closeModal()
+    async submitTweet() {
+      try {
+        // TODO: 確認 API 問題
+        this.isProcessing = true
+        console.log(this.comment)
+        const response = await tweetsAPI.addNewTweet({ comment: this.comment })
+        console.log(response)
+        this.isProcessing = false
+        this.closeModal()
+        this.$emit('after-tweet-create', this.comment)
+        if (this.$route.name !== "main") this.$router.push("/main")
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法新增推文，請稍後再試"
+        })
+      }
     }
-  }
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
 }
 </script>

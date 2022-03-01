@@ -22,7 +22,9 @@
 </template>
 
 <script>
-import { accountTagFilter } from "../utils/mixins"
+import usersAPI from "../apis/users";
+import { Toast } from "../utils/helpers";
+import { accountTagFilter } from "../utils/mixins";
 
 export default {
   mixins: [accountTagFilter],
@@ -41,20 +43,44 @@ export default {
     fetchFollowCard() {
       this.followCard = { ...this.initialFollowCard }
     },
-    addFollow(id) {
-      // todo: 串接 API
-      console.log(id)
-      this.followCard = {
-        ...this.followCard,
-        isFollowed: true
+    async addFollow(id) {
+      try {
+        const { statusText, data } = await usersAPI.addFollow({ id })
+        if (statusText !== "OK" || data.status !== "success") throw new Error()
+        Toast.fire({
+          icon: "success",
+          title: data.message
+        })
+        this.followCard = {
+          ...this.followCard,
+          isFollowed: true
+        }
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法進行追蹤，請稍後再試"
+        })
       }
     },
-    deleteFollow(id) {
-      // todo: 串接 API
-      console.log(id)
-      this.followCard = {
-        ...this.followCard,
-        isFollowed: false
+    async deleteFollow(id) {
+      try {
+        const { statusText, data } = await usersAPI.deleteFollow({
+          followingId: id
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error()
+        Toast.fire({
+          icon: "success",
+          title: data.message
+        })
+        this.followCard = {
+          ...this.followCard,
+          isFollowed: false
+        }
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法進行追蹤，請稍後再試"
+        })
       }
     }
   },

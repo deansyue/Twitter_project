@@ -21,8 +21,8 @@ export default {
     })
   },
   // 新增推文卡片
-  addNewTweet({ comment }) {
-    return apiHelper.post('api/tweets', { comment }, {
+  addNewTweet({ description }) {
+    return apiHelper.post('api/tweets', { description }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
@@ -34,13 +34,15 @@ export default {
   },
   // 卡片狀態：喜歡
   addLike({ tweetId }) {
-    return apiHelper.post(`api/tweets/${tweetId}/like`, {
+    return apiHelper.post(`api/tweets/${tweetId}/like`, 
+      { tweetId }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 卡片狀態：取消喜歡
   deleteLike({ tweetId }) {
-    return apiHelper.post(`api/tweets/${tweetId}/unlike`, {
+    return apiHelper.post(`api/tweets/${tweetId}/unlike`,
+      { tweetId }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   }

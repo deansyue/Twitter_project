@@ -12,7 +12,7 @@
     <div class="user-wrapper">
       <img :src="userData.cover" alt="" class="cover" />
       <img :src="userData.avatar" alt="" class="avatar-big" />
-      <button class="btn btn-edit" v-if="whichPage" @click="showModal()">
+      <button class="btn btn-edit" v-if="whichPage" @click="showEditModal()">
         編輯個人資料
       </button>
       <div class="otherButton" v-else>
@@ -151,11 +151,11 @@ export default {
       this.userData.follwerCount = this.currentUserData.follwerCount;
       this.userData.isFollowed = this.currentUserData.isFollowed;
     },
-    showModal() {
+    showEditModal() {
       // 打開 modal
       this.$modal.show("userCardEdit");
     },
-    hideModal() {
+    hideEditModal() {
       // (預設)關閉 modal
       this.$modal.hide("userCardEdit");
     },

@@ -2,10 +2,10 @@
   <modal name="tweetCreate"       
     classes="tweetCreat-modal"
     :width="600" :height="300"
-  >
+    :clickToClose="false">
     <div class="tweetCreate-wrapper">
       <div class="tweetCreate-head">
-        <img class="cross-orange" @click="closeModal">
+        <img class="cross-orange" @click="hideNewCreateModal()">
       </div>
       <div class="tweetCreate-body">
         <div class="tweetCreate-left">
@@ -13,10 +13,11 @@
         </div>
         <div class="tweetCreate-right">
           <textarea 
-            v-model="comment"
+            v-model="description"
             placeholder="有什麼新鮮事？"
             focus
           ></textarea>
+          <p>{{ wordLimit }}</p>
           <button 
             class="btn active"
             @click="submitTweet()"
@@ -39,26 +40,34 @@ export default {
   name: 'tweetCreate',
   data() {
     return {
-      comment: '',
+      description: "",
+      wordLimit: "",
       isProcessing: false
     }
   },
   methods: {
-    closeModal() {
+    hideNewCreateModal() {
       // 關閉 modal、清空輸入框
       this.$modal.hide('tweetCreate')
-      this.comment = ''
+      this.description = ""
+      this.wordLimit = ""
     },
     async submitTweet() {
       try {
-        // TODO: 確認 API 問題
+        if (this.description.length < 1) {
+          return this.wordLimit = "內容不可空白"
+        } else if (this.description.length > 140) {
+          return this.wordLimit = "字數不可超過140字"
+        }
+        this.wordLimit = ""
         this.isProcessing = true
-        console.log(this.comment)
-        const response = await tweetsAPI.addNewTweet({ comment: this.comment })
-        console.log(response)
+        const response = await tweetsAPI.addNewTweet({
+          description: this.description
+        })
+        if (response.statusText !== "OK") throw new Error()
         this.isProcessing = false
-        this.closeModal()
-        this.$emit('after-tweet-create', this.comment)
+        this.hideNewCreateModal()
+        this.$store.commit("passTweetCreate", response.data)
         if (this.$route.name !== "main") this.$router.push("/main")
       } catch (error) {
         this.isProcessing = false

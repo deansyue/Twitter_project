@@ -39,23 +39,21 @@ export default {
     })
   },
   // 修改個人基本資料
-  editInformation({ id, avatar, cover, name, introduction }) {
-    return apiHelper.put(`api/users/${id}`, {
-      avatar, cover, name, introduction
-    }, {
+  editInformation({ id, formData }) {
+    return apiHelper.put(`api/users/${id}`, formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 修改個人帳號密碼
 
   // 追隨 todo: 待確認送出的資料內容，formData
-  addFollow( {id} ) {
-    return apiHelper.post('/api/followships', {id}, {
+  addFollow({ id }) {
+    return apiHelper.post('/api/followships', { id }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
   // 取消追隨 todo: 待確認送出的資料內容 followingId ??
-  deleteFollow({followingId}) {
+  deleteFollow({ followingId }) {
     return apiHelper.delete(`api/followships/${followingId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })

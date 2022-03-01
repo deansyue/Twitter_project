@@ -22,10 +22,18 @@
 
       <p></p>
       <div class="card-foot">
-        <img class="reply" />
+        <img class="reply" @click="showReplyModal()" />
         <h6>{{ replysCount }}</h6>
-        <img v-if="isLiked" @click="deleteLikes()" class="heart-active" />
-        <img v-else @click="addLikes()" class="heart" />
+        <img
+          v-if="isLiked"
+          @click="deleteLikes()"
+          class="heart-active"
+        />
+        <img
+          v-else
+          @click="addLikes()"
+          class="heart"
+        />
         <h6>{{ likeCount }}</h6>
       </div>
     </div>
@@ -33,8 +41,11 @@
 </template>
 
 <script>
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "../utils/helpers"
 import { fromNowFilter, accountTagFilter } from "../utils/mixins";
 import { mapState } from "vuex";
+
 export default {
   mixins: [fromNowFilter, accountTagFilter],
   props: {
@@ -52,6 +63,7 @@ export default {
       replysCount: 0,
       likeCount: 0,
       isLiked: false,
+      isProcessing: false
     };
   },
   computed: {
@@ -76,15 +88,41 @@ export default {
       this.likeCount = likeCount;
       this.isLiked = isLiked;
     },
-    addLikes() {
-      // todo: connect API
-      this.isLiked = true;
-      this.likeCount++;
+    async addLikes() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.addLike({
+          tweetId: this.id
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.isLiked = true;
+        this.likeCount++;
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法加入最愛，請稍後再試"
+        })
+      }
     },
-    deleteLikes() {
-      // todo: connect API
-      this.isLiked = false;
-      this.likeCount--;
+    async deleteLikes() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.deleteLike({ 
+          tweetId: this.id
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.isLiked = false;
+        this.likeCount--;
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取消最愛，請稍後再試"
+        })
+      }
     },
     linkedUser(userId) {
       if (userId === this.currentUser.id) {
@@ -96,6 +134,7 @@ export default {
     linkedReply($event, tweetId) {
       // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面
       if (
+        $event.target.matches(".reply") ||
         $event.target.matches(".heart") ||
         $event.target.matches(".heart-active") ||
         $event.target.matches(".avatar") ||
@@ -105,6 +144,19 @@ export default {
 
       this.$router.push({ name: "tweet", params: { id: tweetId } });
     },
+    showReplyModal() {
+      this.$modal.show("replyCreate");
+      const replyTargetData = {
+        id: this.id,
+        name: this.tweetUser.name,
+        userId: this.tweetUser.id,
+        account: this.tweetUser.account,
+        avatar: this.tweetUser.avatar,
+        description: this.description,
+        createdAt: this.createdAt,
+      }
+      this.$store.commit("setTweetReplyTarget", replyTargetData)
+    }
   },
   created() {
     this.fetchTweetCard();

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tripple-column" v-if="!isLoading">
+  <div class="app-tripple-column">
     <div class="left-container">
       <NavBar />
     </div>
@@ -32,7 +32,7 @@
               <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
             </div>
             <div class="tweet-footer-buttons">
-              <img class="reply-big" @click="showModal()" />
+              <img class="reply-big" @click="showReplyModal()" />
               <img
                 v-if="repliedTweet.isLiked"
                 @click="deleteLike()"
@@ -54,10 +54,6 @@
     <div class="right-container">
       <Popular />
     </div>
-    <!-- Modal -->
-    <ReplyCreate
-      :reply-target-info="repliedTweet" @reply-comment="afterSubmit"/>
-    <!-- Modal -->
   </div>
 </template>
 
@@ -65,7 +61,6 @@
 import NavBar from "../components/NavBar.vue";
 import ReplyCard from "../components/ReplyCard.vue";
 import Popular from "../components/Popular.vue";
-import ReplyCreate from "../components/ReplyCreate.vue";
 import tweetsAPI from "../apis/tweets"
 import { mapState } from "vuex"
 import { accountTagFilter, timeFormatFilter } from "../utils/mixins";
@@ -77,16 +72,19 @@ export default {
     NavBar,
     ReplyCard,
     Popular,
-    ReplyCreate,
   },
   mixins: [accountTagFilter, timeFormatFilter],
+  computed: {
+    ...mapState(["currentUser", "replyCreate"]),
+  },
   data() {
     return {
       paramsId: 0,
       user: {},
       repliedTweet: {},
       replyCards: [],
-      isLoading: false
+      isLoading: false,
+      isProcessing: false,
     };
   },
   methods: {
@@ -123,43 +121,72 @@ export default {
         })
       }
     },
-    afterSubmit(comment) {
+    afterSubmitReplyCreate(data) {
+      // TODO: 檢查 !
       this.replyCards.unshift({
+        comment: data.comment,
+        id: data.id, 
+        createdAt: data.createdAt,
         User: {
           avatar: this.currentUser.avatar,
           account: this.currentUser.account,
           name: this.currentUser.name
-        },
-        comment,
-        id: 0, // TODO:可以後端回傳嗎？
-        createdAt: new Date().toISOString()
+        }
       })
     },
-    addLike() {
-      // to: connect API
-      this.repliedTweet.isLiked = true;
-      this.repliedTweet.likeCount ++
+    async addLike() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.addLike({
+          tweetId: this.paramsId
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.repliedTweet.isLiked = true;
+        this.repliedTweet.likeCount ++
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法加入最愛，請稍後再試"
+        })
+      }
     },
-    deleteLike() {
-      // to: connect API
-      this.repliedTweet.isLiked = false;
-      this.repliedTweet.likeCount --
+    async deleteLike() {
+      try {
+        this.isProcessing = true
+        const { statusText, data } = await tweetsAPI.deleteLike({ 
+          tweetId: this.paramsId
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
+        this.isProcessing = false
+        this.repliedTweet.isLiked = false;
+        this.repliedTweet.likeCount --
+      } catch (error) {
+        this.isProcessing = false
+        Toast.fire({
+          icon: "error",
+          title: "無法取消最愛，請稍後再試"
+        })
+      }
     },
     linkedUser(userId) {
-      // todo: check id after connect API
       this.$router.push({ name: "user", params: { id: userId } });
     },
-    showModal() {
-      // 打開 modal
+    showReplyModal() {
       this.$modal.show("replyCreate");
+      const { id, User, description, createdAt } = this.repliedTweet
+      const replyTargetData = {
+        id,
+        name: User.name,
+        userId: User.id,
+        account: User.account,
+        avatar: User.avatar,
+        description,
+        createdAt,
+      }
+      this.$store.commit("setTweetReplyTarget", replyTargetData)
     },
-    hideModal() {
-      // (預設)關閉 modal
-      this.$modal.hide("replyCreate");
-    },
-  },
-  computed: {
-    ...mapState(["currentUser"]),
   },
   created() {
     const { id } = this.$route.params
@@ -174,6 +201,10 @@ export default {
     this.fetchTweetReplyCards(this.paramsId)
     next()
   },
-
+  watch: {
+    replyCreate (newValue) {
+      this.afterSubmitReplyCreate(newValue)
+    }
+  }
 };
 </script>

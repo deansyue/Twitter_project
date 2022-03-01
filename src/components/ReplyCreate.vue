@@ -5,23 +5,23 @@
     :clickToClose="false">
     <div class="replyCreate-wrapper">
       <div class="replyCreate-head">
-        <img class="cross-orange" @click="closeModal()">
+        <img class="cross-orange" @click="hideReplyModal()">
       </div>
       <div class="replyCreate-body">
         <div class="target-image">
           <img class="avatar"
-            :src="replyTargetInfo.User.avatar">
+            :src="tweetReplyTarget.avatar">
           <span></span>
         </div>
         <div class="target-tweet">
           <div class="target-tweet-head">
-            <h5 class="target-tweet-head-name">{{ replyTargetInfo.User.name }}</h5>
-            <h5>{{ replyTargetInfo.User.account | accountTag }}</h5>
+            <h5 class="target-tweet-head-name">{{ tweetReplyTarget.name }}</h5>
+            <h5>{{ tweetReplyTarget.account | accountTag }}</h5>
             <span>．</span>
-            <h5>{{ replyTargetInfo.createdAt | fromNow }}</h5>
+            <h5>{{ tweetReplyTarget.createdAt | fromNow }}</h5>
           </div>
-          <p>{{ replyTargetInfo.description }}</p>
-          <h5>回覆給 <strong>{{ replyTargetInfo.User.account | accountTag }}</strong></h5>
+          <p>{{ tweetReplyTarget.description }}</p>
+          <h5>回覆給 <strong>{{ tweetReplyTarget.account | accountTag }}</strong></h5>
         </div>
         <div class="replyer-image">
           <img class="avatar" :src="currentUser.avatar">
@@ -34,6 +34,7 @@
           ></textarea>
         </div>
       </div>
+      <p>{{ wordLimit }}</p>
       <button
         class="btn active"
         @click="submitReply()"
@@ -50,28 +51,15 @@ import { Toast } from "../utils/helpers"
 
 export default {
   mixins: [fromNowFilter, accountTagFilter],
-  props: {
-    replyTargetInfo: {
-      type: Object,
-      default: () => ({
-        User: {
-          account: "",
-          name: "",
-          avatar: ""
-        },
-        createdAt: "",
-        description: "",
-        id: 0,
-        isLiked: false,
-        likeCount: 0
-      })
-    }
+  computed: {
+    ...mapState(["currentUser", "tweetReplyTarget"]),
   },
   data () {
     return {
       replyTarget: {},
       paramsId: 0,
-      comment: '',
+      comment: "",
+      wordLimit: "",
       isProcessing: false
     }
   },
@@ -79,27 +67,23 @@ export default {
     async submitReply() {
       try {
         if (this.comment.length < 1) {
-          return Toast.fire({
-            icon: 'warning',
-            title: '請輸入訊息'
-          })
+          return this.wordLimit = "內容不可空白"
+        } else if (this.comment.length > 140) {
+          return this.wordLimit = "字數不可超過140字"
         }
+        this.wordLimit = ""
         this.isProcessing = true
-        const { statusText, data } = await tweetsAPI.addNewReply({
+        const response = await tweetsAPI.addNewReply({
           tweetId: this.paramsId,
           comment: 
           this.comment
         })
-        if (statusText !== "OK" || data.status !== "success") {
-          throw new Error(statusText)
-        }
+        if (response.status !== "success") throw new Error()
+        console.log(response) // TODO: 確認 data 內容
         this.isProcessing = false
-        this.$emit('reply-comment', this.comment)
+        this.$store.commit("passReplyCreate", response.reply)
         this.closeModal()
-        Toast.fire({
-          icon: "success",
-          title: data.message
-        })
+        // if (this.$route.name !== "main") this.$router.push("/main")
       } catch (error) {
         this.isProcessing = false
         Toast.fire({
@@ -108,23 +92,15 @@ export default {
         })
       }
     },
-    closeModal() {
-      // 關閉 modal、清空輸入框
-      this.$modal.hide('replyCreate')
-      this.comment = ''
+    hideReplyModal() {
+      this.$modal.hide("replyCreate");
+      this.comment = ""
+      this.wordLimit = ""
     },
   },
   created() {
     const { id } = this.$route.params
     this.paramsId = Number(id)
   },
-  computed: {
-    ...mapState(["currentUser"]),
-  },
-  watch: {
-    replyTargetInfo(newValue) {
-      this.replyTargetInfo = newValue
-    }
-  }
 }
 </script>

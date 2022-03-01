@@ -98,35 +98,40 @@ export default {
   methods: {
     async fetchUser() {
       try {
-          const response = await usersAPI.getUser({
+        const response = await usersAPI.getUser({
           userId: this.currentUser.id,
         });
 
         this.currentUserData = {
-        id: response.data.id,
-        account: response.data.account,
-        name: response.data.name,
-        email: response.data.email,
-        avatar: response.data.avatar,
-        cover: response.data.cover,
-        introduction: response.data.introduction,
-        followingCount: response.data.followingCount,
-        follwerCount: response.data.follwerCount,
-      };   
+          id: response.data.id,
+          account: response.data.account,
+          name: response.data.name,
+          email: response.data.email,
+          avatar: response.data.avatar,
+          cover: response.data.cover,
+          introduction: response.data.introduction,
+          followingCount: response.data.followingCount,
+          follwerCount: response.data.follwerCount,
+        };
       } catch (error) {
-          Toast.fire({
+        Toast.fire({
           icon: "error",
           title: "無法取得使用者資料，請稍後再試",
         });
-      }    
-     
+      }
     },
     async fetchLikeTweets() {
       try {
         const response = await usersAPI.getUserLikes({
           userId: this.currentUser.id,
         });
-        this.likeTweets = response.data.map((like) => like.Tweet);
+        const tweets = response.data.map((like) => like.Tweet);
+        for (let i = 0; i < tweets.length; i++) {
+          tweets[i].likeCount = tweets[i].Likes.length;
+          tweets[i].replyCount = tweets[i].Replies.length;
+          tweets[i].isLiked = true;
+        }
+        this.likeTweets = tweets;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -164,8 +169,8 @@ export default {
   created() {
     this.fetchUser();
     this.fetchLikeTweets();
-    this.fetchUserTweets()
-    this.fetchUserReplies()
+    this.fetchUserTweets();
+    this.fetchUserReplies();
   },
   watch: {
     currentUser(newValue) {
@@ -173,9 +178,9 @@ export default {
       // 將新資料覆蓋進 data 中渲染畫面
       this.currentUserData = {
         ...this.currentUserData,
-        ...newValue
-      }
-    }
-  }
+        ...newValue,
+      };
+    },
+  },
 };
 </script>

@@ -127,7 +127,13 @@ export default {
         const response = await usersAPI.getUserLikes({
           userId: userId,
         });
-        this.likeTweets = response.data.map((like) => like.Tweet);
+        const tweets = response.data.map((like) => like.Tweet);
+        for (let i = 0; i < tweets.length; i++) {
+          tweets[i].likeCount = tweets[i].Likes.length;
+          tweets[i].replyCount = tweets[i].Replies.length;
+          tweets[i].isLiked = true;
+        }
+        this.likeTweets = tweets;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -168,12 +174,12 @@ export default {
     this.fetchUserTweets(this.$route.params.id);
     this.fetchUserReplies(this.$route.params.id);
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     this.fetchUser(to.params.id);
     this.fetchLikeTweets(to.params.id);
     this.fetchUserTweets(to.params.id);
     this.fetchUserReplies(to.params.id);
-    next()
+    next();
   },
 };
 </script>

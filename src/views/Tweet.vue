@@ -14,7 +14,7 @@
             <div class="card-head-left avatar" @click="linkedUser(user.id)">
               <img
                 class="avatar"
-                :src="user.avatar"
+                :src="user.avatar | emptyImage"
               />
             </div>
             <div class="card-head-right">
@@ -63,7 +63,7 @@ import ReplyCard from "../components/ReplyCard.vue";
 import Popular from "../components/Popular.vue";
 import tweetsAPI from "../apis/tweets"
 import { mapState } from "vuex"
-import { accountTagFilter, timeFormatFilter } from "../utils/mixins";
+import { accountTagFilter, timeFormatFilter, emptyImageFilter } from "../utils/mixins";
 import { Toast } from "../utils/helpers"
 
 export default {
@@ -73,7 +73,7 @@ export default {
     ReplyCard,
     Popular,
   },
-  mixins: [accountTagFilter, timeFormatFilter],
+  mixins: [accountTagFilter, timeFormatFilter, emptyImageFilter],
   computed: {
     ...mapState(["currentUser", "replyCreate"]),
   },

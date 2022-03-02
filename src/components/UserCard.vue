@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="user-wrapper">
-      <img :src="userData.cover" alt="" class="cover" />
-      <img :src="userData.avatar" alt="" class="avatar-big" />
+      <img :src="userData.cover | emptyImage" alt="" class="cover" />
+      <img :src="userData.avatar | emptyImage" alt="" class="avatar-big" />
       <button class="btn btn-edit" v-if="whichPage" @click="showEditModal()">
         編輯個人資料
       </button>
@@ -76,11 +76,12 @@
 import UserCardEdit from "../components/UserCardEdit.vue";
 import { accountTagFilter } from "./../utils/mixins";
 import { numberFormatTCFilter } from "./../utils/mixins";
+import { emptyImageFilter } from "../utils/mixins";
 import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";
 
 export default {
-  mixins: [accountTagFilter, numberFormatTCFilter],
+  mixins: [accountTagFilter, numberFormatTCFilter, emptyImageFilter],
   components: {
     UserCardEdit,
   },

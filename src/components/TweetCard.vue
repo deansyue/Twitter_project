@@ -1,7 +1,7 @@
 <template>
   <div class="tweetCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(tweetUser.id)">
-      <img class="avatar" :src="tweetUser.avatar" />
+      <img class="avatar" :src="tweetUser.avatar | emptyImage" />
     </div>
     <div class="card-right" @click="linkedReply($event, id)">
       <div class="card-head">
@@ -43,11 +43,11 @@
 <script>
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "../utils/helpers"
-import { fromNowFilter, accountTagFilter } from "../utils/mixins";
+import { fromNowFilter, accountTagFilter, emptyImageFilter } from "../utils/mixins";
 import { mapState } from "vuex";
 
 export default {
-  mixins: [fromNowFilter, accountTagFilter],
+  mixins: [fromNowFilter, accountTagFilter, emptyImageFilter],
   props: {
     tweetCard: {
       type: Object,

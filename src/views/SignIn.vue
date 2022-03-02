@@ -107,7 +107,7 @@ export default {
         });
         // 當串接失敗
         if (statusText !== "OK" || data.status !== "success") {
-          throw new Error(data.message);
+          throw new Error();
         }
         // 當串接成功：
         this.isProcessing = false;
@@ -120,7 +120,7 @@ export default {
         this.password.text = "";
         Toast.fire({
           icon: "error",
-          title: error,
+          title: error.message,
         });
       }
     },

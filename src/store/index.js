@@ -82,8 +82,6 @@ export default new Vuex.Store({
         const response = state.currentUser.role === "user" ?
           await authorizationAPI.getCurrentUser() :
           await authorizationAPI.getCurrentAdminUser()
-        // TODO: check response
-        console.log(response)
         commit("setCurrentUser", response)
         return true
       } catch (error) {

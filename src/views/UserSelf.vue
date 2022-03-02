@@ -57,7 +57,7 @@
 import NavBar from "./../components/NavBar";
 import Popular from "./../components/Popular";
 import UserCard from "./../components/UserCard";
-import TweetCard from "../components/TweetCard.vue";
+import TweetCard from "../components/MainTweetCard.vue";
 import ReplyCardSelf from "../components/ReplyCardSelf.vue";
 import usersAPI from "./../apis/users";
 import { Toast } from "../utils/helpers";

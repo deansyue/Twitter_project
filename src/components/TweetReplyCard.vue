@@ -1,5 +1,5 @@
 <template>
-  <div class="replyCard-wrapper">
+  <div class="tweetReplyCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(userId)">
       <img class="avatar" :src="avatar | emptyImage" />
     </div>

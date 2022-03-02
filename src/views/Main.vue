@@ -7,13 +7,13 @@
         <p>有什麼新鮮事？</p>
         <button class="btn active">推文</button>
       </div>
-      <TweetCard/>
+      <MainTweetCard/>
     </div>
   </div>
 </template>
 
 <script>
-import TweetCard from "../components/TweetCard.vue";
+import MainTweetCard from "../components/MainTweetCard.vue";
 import { mapState } from "vuex";
 import { emptyImageFilter } from "../utils/mixins";
 
@@ -21,7 +21,7 @@ export default {
   name: "Main",
   mixins: [emptyImageFilter],
   components: {
-    TweetCard,
+    MainTweetCard,
   },
   data() {
     return {

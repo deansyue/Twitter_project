@@ -82,7 +82,7 @@ export default {
         this.isProcessing = false
         this.$store.commit("passReplyCreate", data.reply)
         this.hideReplyModal()
-        if (this.$route.name === "main") this.$router.push(`/tweets/${data.reply.TweetId}`)
+        if (this.$route.name === "main") this.$router.push(`/users/tweet/${data.reply.TweetId}`)
       } catch (error) {
         this.isProcessing = false
         Toast.fire({

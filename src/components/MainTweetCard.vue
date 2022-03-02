@@ -1,7 +1,7 @@
 <template>
   <div  class="main-wrapper">
     <div
-      class="tweetCard-wrapper"
+      class="mainTweetCard-wrapper"
       v-for="tweetCard in tweetCards"
       :key="tweetCard.id">
         <div class="card-left avatar" @click="linkedUser(tweetCard.User.id)">
@@ -65,7 +65,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(["currentUser", "tweetCreate"]),
   },
   methods: {
     async fetchTweetCards() {
@@ -177,5 +177,10 @@ export default {
   created() {
     this.fetchTweetCards();
   },
+  watch: {
+    tweetCreate (newValue) {
+      this.afterSubmitTweetCreate(newValue)
+    }
+  }
 };
 </script>

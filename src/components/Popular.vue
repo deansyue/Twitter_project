@@ -3,7 +3,7 @@
     <div class="title">Popular</div>
     <div class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
-        <img :src="user.avatar" alt="" @click="linkedUser(user.id)" />
+        <img :src="user.avatar | emptyImage" alt="" @click="linkedUser(user.id)" />
       </div>
       <div class="name-wrapper" @click="linkedUser(user.id)">
         {{ user.name }}
@@ -29,12 +29,13 @@
   </div>
 </template>
 <script>
-import { accountTagFilter } from "./../utils/mixins";
-import { mapState } from "vuex";
 import usersAPI from "./../apis/users";
+import { mapState } from "vuex";
 import { Toast } from "../utils/helpers";
+import { accountTagFilter, emptyImageFilter } from "./../utils/mixins";
+
 export default {
-  mixins: [accountTagFilter],
+  mixins: [accountTagFilter, emptyImageFilter],
   data() {
     return {
       popularUser: [],

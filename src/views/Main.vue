@@ -7,7 +7,7 @@
       <div class="main-wrapper">
         <h3 class="main-title">首頁</h3>
         <div class="main-create" @click="showNewCreateModal()">
-          <img class="avatar" :src="currentUser.avatar" />
+          <img class="avatar" :src="currentUser.avatar | emptyImage" />
           <p>有什麼新鮮事？</p>
           <button class="btn active">推文</button>
         </div>
@@ -33,9 +33,11 @@ import Popular from "../components/Popular.vue";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets"
 import { Toast } from '../utils/helpers';
+import { emptyImageFilter } from "../utils/mixins";
 
 export default {
   name: "Main",
+  mixins: [emptyImageFilter],
   components: {
     NavBar,
     TweetCard,

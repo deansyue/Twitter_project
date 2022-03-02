@@ -1,5 +1,6 @@
 .replyCreate-model {
   top: 54px !important;
+  height: auto !important;
   border-radius: 14px;
   background-color: #{$white};
   .replyCreate-wrapper {
@@ -15,7 +16,7 @@
       height: calc(100% - 54px - 70px); // 預留下方按鈕空間
       display: grid;
       grid-template-columns: 60px 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: auto 200px;
       .target-image {
         position: relative;
         cursor: pointer;
@@ -48,8 +49,7 @@
           line-height: 22px;
         }
         > h5 {
-          position: absolute;
-          bottom: 24px;
+          margin: 24px 0;
           strong {
             color: #{$orange};
             cursor: pointer;
@@ -61,7 +61,7 @@
         resize : none;
         overflow-y : hidden;
         width: 100%;
-        height: 100%;
+        height: calc(100% - 70px);
         font-size: 18px;
         line-height: 26px;
         &:focus {

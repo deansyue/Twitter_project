@@ -113,7 +113,7 @@ export default {
         this.isProcessing = false;
         localStorage.setItem('token', data.token)
         this.$store.commit('setCurrentUser', data.user)
-        this.$router.push('/main')
+        this.$router.push('/users/main')
 
       } catch (error) {
         this.isProcessing = false;

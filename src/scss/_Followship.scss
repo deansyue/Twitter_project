@@ -1,0 +1,63 @@
+.followship-wrapper {
+  position: relative;
+  border-bottom: 1px solid #{$frameColor};
+  .arrow {
+    position: absolute;
+    left: 19px;
+    top: 8px;
+  }
+  h3 {
+    margin: 7px 0 0 79px;
+    font-weight: 900;
+  }
+  h6 {
+    margin-left: 79px;
+    line-height: 18px;
+  }
+  .followTabs {
+    color: #{$tweet-grey};
+    .followTab {
+      display:inline-block;
+      padding: 16px 43px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .followTab.router-link-active,
+    .followTab.router-link-exact-active {
+      padding-bottom: 16px;
+      border-bottom: 2px solid #{$orange};
+      color: #{$orange};
+    }
+  }
+  .userFollowCards {
+    display: flex;
+    border-bottom: 1px solid #{$frameColor};
+    padding: 15px 15px 10px 15px;
+    .userFollowCards-right {
+      position: relative;
+      margin-left: 10px;
+      width: 100%;
+      .name {
+        color: #{$black};
+        font-weight: 700;
+      }
+      .account {
+        color: #{$tweet-grey};
+      }
+    }
+    .btn {
+      position: absolute;
+      right: 0;
+      font-size: 15px;
+      padding: 5px 15px;
+      width: 90px;
+    }
+    h5 {
+      line-height: 15px;
+    }
+    p {
+      margin-top: 5px;
+      line-height: 22px;
+    }
+  }
+}

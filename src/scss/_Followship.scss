@@ -1,33 +1,28 @@
 .followship-wrapper {
-  position: relative;
-  border-bottom: 1px solid #{$frameColor};
-  .arrow {
-    position: absolute;
-    left: 19px;
-    top: 8px;
-  }
-  h3 {
-    margin: 7px 0 0 79px;
-    font-weight: 900;
-  }
-  h6 {
-    margin-left: 79px;
-    line-height: 18px;
-  }
-  .followTabs {
-    color: #{$tweet-grey};
-    .followTab {
+  .followship-tabs {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid #{$frameColor};
+    .followship-tab {
       display:inline-block;
-      padding: 16px 43px;
       font-weight: 700;
-      text-decoration: none;
+      color: #{$tweet-grey};
+      &:hover {
+        color: #{$orange};
+      }
+      a {
+        text-decoration: none;
+        color: unset;
+        padding: 14px 44px;
+      }
+      .router-link-active {
+        padding: 14px 44px;
+        border-bottom: 2px solid #{$orange};
+        color: #{$orange};
+      }
     }
-    .followTab.router-link-active,
-    .followTab.router-link-exact-active {
-      padding-bottom: 16px;
-      border-bottom: 2px solid #{$orange};
-      color: #{$orange};
-    }
+    
   }
   .userFollowCards {
     display: flex;

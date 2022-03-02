@@ -1,20 +1,5 @@
 <template>
   <div class="followship-wrapper">
-    <img @click="$router.back()" class="arrow" />
-    <h3>使用者名稱</h3>
-    <h6>25篇推文</h6>
-    <div class="followTabs">
-      <router-link :to="{ name: 'user-followers', params: { id: 194 }}">
-        <h4 class="followTab">
-          追隨者
-        </h4>
-      </router-link>
-      <router-link :to="{ name: 'user-followings', params: { id: 194 }}">
-        <h4 class="followTab">
-          正在追隨
-        </h4>
-      </router-link>
-    </div>
     <div class="userFollowCards" 
       v-for="followCard in followCards" :key="followCard.id">
       <div class="userFollowCards-left avatar">
@@ -40,33 +25,34 @@
 
 <script>
 import usersAPI from "../apis/users";
+import { mapState } from "vuex";
 import { Toast } from "../utils/helpers";
 import { accountTagFilter, emptyImageFilter } from "../utils/mixins";
 
-const dummyData = [
-  {
-      "followerId": 184,
-      "account": "user1",
-      "email": "user1@example.com",
-      "name": "user1",
-      "avatar": "https://i.imgur.com/N0T4eAm.png",
-      "cover": "https://i.imgur.com/cWaKXW2.jpeg",
-      "introduction": "user1",
-      "isFollowed": false
-  }
-]
-
 export default {
   mixins: [accountTagFilter, emptyImageFilter],
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   data() {
     return {
+      paramsId: 0,
       followCards: []
     }
   },
   methods: {
-    fetchFollowCard() {
-      // TODO: API
-      this.followCards = [ ...dummyData ]
+    async fetchFollowCard(userId) {
+      try {
+        const { statusText, data } = await usersAPI.getFollowers({ userId })
+        if (statusText !== "OK") throw new Error()
+        this.followCards = [ ...data ]
+
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: error.message
+        })
+      }
     },
     async addFollow(id) {
       try {
@@ -110,7 +96,14 @@ export default {
     }
   },
   created() {
-    this.fetchFollowCard()
+    const { id } = this.$route.params
+    this.paramsId = Number(id)
+    this.fetchFollowCard(this.paramsId)
   },
+  beforeRouteUpdate() {
+    const { id } = this.$route.params
+    this.paramsId = Number(id)
+    this.fetchFollowCard(this.paramsId)
+  }
 }
 </script>

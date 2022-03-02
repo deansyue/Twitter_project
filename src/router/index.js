@@ -62,7 +62,19 @@ const routes = [
       {
         path: 'self',
         name: 'self',
-        component: () => import('../views/UserSelf.vue')
+        component: () => import('../views/UserSelf.vue'),
+        children: [
+          {
+            path: 'followers',
+            name: 'self-followers',
+            component: () => import('../components/FollowerCards.vue')
+          },
+          {
+            path: 'followings',
+            name: 'self-followings',
+            component: () => import('../components/FollowingCards.vue')
+          }
+        ]
       },
       {
         path: ':id',
@@ -71,13 +83,13 @@ const routes = [
         children: [
           {
             path: 'followers',
-            name: 'followers',
-            component: () => import('../components/FollowerCards')
+            name: 'other-followers',
+            component: () => import('../components/FollowerCards.vue')
           },
           {
             path: 'followings',
-            name: 'user-followings',
-            component: () => import('../components/FollowingCards')
+            name: 'other-followings',
+            component: () => import('../components/FollowingCards.vue')
           }
         ]
       }

@@ -60,6 +60,7 @@ const routes = [
       },
       {
         path: ':id',
+        name: 'users-info',
         component: () => import('../views/UserInfo.vue'),
         children: [
           {

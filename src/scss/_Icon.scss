@@ -21,6 +21,7 @@ $reply: url("./assets/icon/reply.png");
 $setting: url("./assets/icon/setting.png");
 $settingActive: url("./assets/icon/settingActive.png");
 $uploadPhoto: url("./assets/icon/uploadPhoto.png");
+$spinner: url("./assets/spinner.png");
 
 // 登入、管理者登入、註冊頁面使用
 .logo-big {
@@ -153,4 +154,22 @@ $uploadPhoto: url("./assets/icon/uploadPhoto.png");
   height: 23px;
   content: #{$uploadPhoto};
   cursor: pointer;
+}
+
+.spinner {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 20px auto;
+  content: #{$spinner};
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }

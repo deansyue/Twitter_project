@@ -1,50 +1,53 @@
 <template>
   <div>
-    <div class="tweet-wrapper">
-      <div class="tweet-title">
-        <img @click="$router.back()" class="arrow" />
-        <h3>推文</h3>
+    <img v-if="isLoading" class="spinner">
+    <div v-else>
+      <div class="tweet-wrapper">
+        <div class="tweet-title">
+          <img @click="$router.back()" class="arrow" />
+          <h3>推文</h3>
+        </div>
+        <div class="tweet-main">
+          <div class="card-head">
+            <div class="card-head-left avatar" @click="linkedUser(user.id)">
+              <img
+                class="avatar"
+                :src="user.avatar | emptyImage"
+              />
+            </div>
+            <div class="card-head-right">
+              <h5 @click="linkedUser(user.id)">{{ user.name }}</h5>
+              <h5>{{ user.account | accountTag }}</h5>
+            </div>
+          </div>
+          <div class="tweet-body">
+            <p>{{ repliedTweet.description }}</p>
+            <h5>{{ repliedTweet.createdAt | timeFormat }}</h5>
+          </div>
+          <div class="tweet-footer">
+            <div class="tweet-footer-info">
+              <h4><strong>{{ replyCards.length }}</strong> 回覆</h4>
+              <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
+            </div>
+            <div class="tweet-footer-buttons">
+              <img class="reply-big" @click="showReplyModal()" />
+              <img
+                v-if="repliedTweet.isLiked"
+                @click="deleteLike()"
+                class="heart-big-active"
+              />
+              <img v-else @click="addLike()" class="heart-big" />
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="tweet-main">
-        <div class="card-head">
-          <div class="card-head-left avatar" @click="linkedUser(user.id)">
-            <img
-              class="avatar"
-              :src="user.avatar | emptyImage"
-            />
-          </div>
-          <div class="card-head-right">
-            <h5 @click="linkedUser(user.id)">{{ user.name }}</h5>
-            <h5>{{ user.account | accountTag }}</h5>
-          </div>
-        </div>
-        <div class="tweet-body">
-          <p>{{ repliedTweet.description }}</p>
-          <h5>{{ repliedTweet.createdAt | timeFormat }}</h5>
-        </div>
-        <div class="tweet-footer">
-          <div class="tweet-footer-info">
-            <h4><strong>{{ replyCards.length }}</strong> 回覆</h4>
-            <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
-          </div>
-          <div class="tweet-footer-buttons">
-            <img class="reply-big" @click="showReplyModal()" />
-            <img
-              v-if="repliedTweet.isLiked"
-              @click="deleteLike()"
-              class="heart-big-active"
-            />
-            <img v-else @click="addLike()" class="heart-big" />
-          </div>
-        </div>
+      <div
+        class="tweet-replies"
+        v-for="replyCard in replyCards"
+        :key="replyCard.id"
+      >
+        <TweetReplyCard :reply-target="user" :reply-card="replyCard" />
       </div>
-    </div>
-    <div
-      class="tweet-replies"
-      v-for="replyCard in replyCards"
-      :key="replyCard.id"
-    >
-      <TweetReplyCard :reply-target="user" :reply-card="replyCard" />
     </div>
   </div>
 </template>
@@ -158,7 +161,7 @@ export default {
       }
     },
     linkedUser(userId) {
-      this.$router.push({ name: "user", params: { id: userId } });
+      this.$router.push({ name: "users-info", params: { id: userId }});
     },
     showReplyModal() {
       this.$modal.show("replyCreate");

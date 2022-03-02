@@ -5,6 +5,7 @@
       <div class="main-create" @click="showNewCreateModal()">
         <img class="avatar" :src="currentUser.avatar | emptyImage" />
         <p>有什麼新鮮事？</p>
+        
         <button class="btn active">推文</button>
       </div>
       <MainTweetCard/>

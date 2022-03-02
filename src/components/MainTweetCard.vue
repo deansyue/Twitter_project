@@ -1,6 +1,8 @@
 <template>
-  <div  class="main-wrapper">
+  <div class="main-wrapper">
+    <img v-if="isLoading" class="spinner">
     <div
+      v-else
       class="mainTweetCard-wrapper"
       v-for="tweetCard in tweetCards"
       :key="tweetCard.id">
@@ -27,7 +29,7 @@
           <p></p>
           <div class="card-foot">
             <img class="reply" @click="showReplyModal(tweetCard)" />
-            <h6>{{ tweetCard.replysCount }}</h6>
+            <h6>{{ tweetCard.replyCount }}</h6>
             <img
               v-if="tweetCard.isLiked"
               @click="deleteLikes(tweetCard.id)"
@@ -72,8 +74,6 @@ export default {
       try {
         this.isLoading = true;
         const { data, statusText } = await tweetsAPI.getAllTweets();
-        // console.log(data)
-        // console.log(statusText)
         if (statusText !== "OK") throw new Error(statusText);
         this.isLoading = false;
         this.tweetCards = [ ...data ];
@@ -141,11 +141,8 @@ export default {
       }
     },
     linkedUser(userId) {
-      if (userId === this.currentUser.id) {
-        this.$router.push({ name: "userSelf" });
-      } else {
-        this.$router.push({ name: "user", params: { id: userId }});
-      }
+      // TODO: CHECK
+      this.$router.push({ name: "users-info", params: { id: userId }});
     },
     linkedReply($event, id) {
       // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面

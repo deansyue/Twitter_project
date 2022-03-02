@@ -9,7 +9,8 @@
       </div>
       <div class="adminusers__container">
       <div class="adminuser__tweets"
-
+        v-for="user in users"
+        :key="user.id"
       >
         <AdminUserList :users="users"/>
       </div>
@@ -39,7 +40,7 @@ export default {
     this.fetchUsers();
   },
   methods: {
-    async fetchTweetCards() {
+    async fetchUsers() {
       try {
         const { data, statusText } = await adminAPI.getAdminUsers()
         if (statusText !== "OK") throw new Error(statusText)

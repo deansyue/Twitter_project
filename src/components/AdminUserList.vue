@@ -1,7 +1,5 @@
 <template>
   <div class="admintweetCard-wrapper">
-  <!-- v-for Start -->
-  <div v-for="user in users" :key="user.id" class="user-card">
     <!--UserAvatar-->
     <div class="adminuser__avatar">
       <img class="avatar" :src="user.avatar | emptyImage">
@@ -37,8 +35,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- v-for End -->
 
   </div>
 </template>

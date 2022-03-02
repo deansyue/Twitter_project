@@ -16,7 +16,7 @@
           </router-link>
         </div>
         <div class="selfTab">
-          <router-link class="navItem" to="/users/self">
+          <router-link class="navItem" :to="`/users/${currentUser.id}`">
             <div class="icon">
               <img class="person" alt="" />
             </div>
@@ -55,7 +55,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["isAuthenticated"]),
+    ...mapState(["currentUser","isAuthenticated"]),
   },
   methods: {
     logout() {

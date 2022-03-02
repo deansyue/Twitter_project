@@ -7,19 +7,19 @@
       <router-view />
     </div>
     <div class="right-container">
-      <!-- <Popular /> -->
+      <Popular />
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from "./../components/NavBar";
-// import Popular from "./../components/Popular";
+import Popular from "./../components/Popular";
 
 export default {
   components: {
     NavBar,
-    // Popular,
+    Popular,
   },
 }
 </script>

@@ -5,7 +5,6 @@
     height: 50px;
     border-bottom: 1px solid #{$frameColor};
     .followship-tab {
-      display:inline-block;
       font-weight: 700;
       color: #{$tweet-grey};
       &:hover {
@@ -17,7 +16,6 @@
         padding: 14px 44px;
       }
       .router-link-active {
-        padding: 14px 44px;
         border-bottom: 2px solid #{$orange};
         color: #{$orange};
       }

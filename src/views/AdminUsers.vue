@@ -9,9 +9,9 @@
       </div>
       <div class="adminusers__container">
       <div class="adminuser__tweets"
-        v-for="tweetCard in tweetCards" :key="tweetCard.id"
+
       >
-        <AdminUserList :tweet-card="tweetCard"/>
+        <AdminUserList :users="users"/>
       </div>
       </div>
     </div>
@@ -21,9 +21,8 @@
 <script>
 import AdminNavBar from '../components/AdminNavBar.vue';
 import AdminUserList from '../components/AdminUserList.vue';
-import { mapState } from "vuex";
-import tweetsAPI from "../apis/tweets";
 import { Toast } from '../utils/helpers';
+import adminAPI from "../apis/admin";
 
 
 export default {
@@ -33,32 +32,26 @@ export default {
   },
     data() {
     return {
-      tweetCards: [],
+      users:[],
     };
   },
-  computed: {
-    ...mapState(["currentUser"]),
+    created() {
+    this.fetchUsers();
   },
   methods: {
     async fetchTweetCards() {
       try {
-        const { data, statusText } = await tweetsAPI.getAllTweets()
-        // console.log(statusText)
-        // console.log(data)
-        // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
+        const { data, statusText } = await adminAPI.getAdminUsers()
         if (statusText !== "OK") throw new Error(statusText)
-        this.tweetCards = [ ...data ]
+        this.users = { ...data }
 
       } catch (error) {
         Toast.fire({
           icon: 'error',
-          title: '無法取得主頁資料，請稍後再試'
+          title: '無法成功載入使用者清單！'
         })
       }
     },
-  },
-  created() {
-    this.fetchTweetCards();
   },
 };
 </script>

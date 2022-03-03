@@ -9,7 +9,7 @@
         <div class="tweetCount">{{ userData.tweetCount }}推文</div>
       </div>
     </div>
-    <div class="user-wrapper">
+    <div class="user-wrapper" v-show="this.$route.name!==asd&&this.$route.name!==zxc">
       <img :src="userData.cover | emptyImage" alt="" class="cover" />
       <img :src="userData.avatar | emptyImage" alt="" class="avatar-big" />
       <button class="btn btn-edit" v-if="whichPage" @click="showEditModal()">
@@ -54,17 +54,17 @@
         <div class="introduce">{{ userData.introduction }}</div>
         <div class="follow">
           <router-link
-            :to="{ name: 'followings', params: { id: userData.id }}"
+            :to="{ name: 'followings', params: { id: userData.id } }"
             class="strong"
           >
             {{ userData.followingCount | numberFormatTC }}個
           </router-link>
           追隨中
           <router-link
-            :to="{ name: 'followers', params: { id: userData.id }}"
+            :to="{ name: 'followers', params: { id: userData.id } }"
             class="strong2"
             >{{ userData.follwerCount | numberFormatTC }}位
-            </router-link>
+          </router-link>
           追隨者
         </div>
       </div>
@@ -101,7 +101,7 @@ export default {
         followingCount: 0,
         follwerCount: 0,
         isFollowed: "",
-        tweetCount:0
+        tweetCount: 0,
       }),
     },
     whichPage: {
@@ -122,10 +122,12 @@ export default {
         followingCount: 0,
         follwerCount: 0,
         isFollowed: "",
-        tweetCount: 0
+        tweetCount: 0,
       },
       isNotice: true,
       isProcessing: false,
+      asd: "followers", //判斷用
+      zxc: "followings", //判斷用
     };
   },
   watch: {

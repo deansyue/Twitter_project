@@ -2,12 +2,12 @@
   <div>
     <div class="self-tweet" v-for="tweet in tweets" :key="tweet.id">
       <div class="tweetCard-wrapper">
-        <div class="card-left avatar" @click="linkedUser(tweet.UserId)">
+        <div class="card-left avatar" @click="linkedUser(tweet.User.id)">
           <img class="avatar" :src="tweet.User.avatar | emptyImage" />
         </div>
         <div class="card-right" @click="linkedReply($event, tweet.id)">
           <div class="card-head">
-            <h5 class="card-name" @click="linkedUser(tweet.UserId)">
+            <h5 class="card-name" @click="linkedUser(tweet.User.id)">
               {{ tweet.User.name }}
             </h5>
             <h5 class="card-account">

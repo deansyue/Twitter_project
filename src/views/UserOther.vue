@@ -7,21 +7,21 @@
     <div class="switchTabs" v-show="this.$route.name!==asd&&this.$route.name!==zxc">
       <div
         class="tweetTab"
-        :class="[{ activeTabs: tabNow === 1 }]"
+        :class="[{ activeTabs: this.$route.name===otherTweet }]"
         @click="$router.push({ name: 'otherTweet',params: { id: currentUserData.id }}),tabNow = 1"
       >
         推文
       </div>
       <div
         class="replyTab"
-        :class="[{ activeTabs:tabNow === 2 }]"
+        :class="[{ activeTabs:this.$route.name===otherReply }]"
         @click="$router.push({ name: 'otherReply',params: { id: currentUserData.id }}),tabNow = 2"
       >
         推文與回覆
       </div>
       <div
         class="likeTab"
-        :class="[{ activeTabs: tabNow === 3 }]"
+        :class="[{ activeTabs: this.$route.name===otherLike }]"
         @click="$router.push({ name: 'otherLike',params: { id: currentUserData.id }}),tabNow = 3"
       >
         喜歡的內容
@@ -45,6 +45,9 @@ export default {
       tabNow: 1, //1推文 2回復 3喜歡
       asd:"followers",//判斷用
       zxc:"followings",//判斷用
+      otherTweet:"otherTweet",//判斷用
+      otherReply:"otherReply",//判斷用
+      otherLike:"otherLike",//判斷用
       currentUserData: {
         id: 0,
         account: "",

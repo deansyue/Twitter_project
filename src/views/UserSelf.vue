@@ -1,28 +1,25 @@
 <template>
   <div class="middle-container">
-    <UserCard
-      :currentUserData="currentUserData"
-      :whichPage="whichPage"
-    />
+    <UserCard :currentUserData="currentUserData" :whichPage="whichPage" />
     <div class="switchTabs">
       <div
         class="tweetTab"
-        :class="[{ activeTabs: tabNow === 1 }]"
-        @click="$router.push({ name: 'selfTweet'}), tabNow=1"
+        :class="[{ activeTabs: this.$route.name === selfTweet }]"
+        @click="$router.push({ name: 'selfTweet' }), (tabNow = 1)"
       >
         推文
       </div>
       <div
         class="replyTab"
-        :class="[{ activeTabs: tabNow === 2 }]"
-        @click="$router.push({ name: 'reply'}), tabNow=2"
+        :class="[{ activeTabs: this.$route.name === reply }]"
+        @click="$router.push({ name: 'reply' }), (tabNow = 2)"
       >
         推文與回覆
       </div>
       <div
         class="likeTab"
-        :class="[{ activeTabs: tabNow === 3 }]"
-        @click="$router.push({ name: 'like'}), tabNow=3"
+        :class="[{ activeTabs: this.$route.name === like }]"
+        @click="$router.push({ name: 'like' }), (tabNow = 3)"
       >
         喜歡的內容
       </div>
@@ -43,6 +40,9 @@ export default {
     return {
       whichPage: true, //true代表個人false代表他人
       tabNow: 1, //1推文 2回復 3喜歡
+      selfTweet: "selfTweet", //判斷用
+      reply: "reply", //判斷用
+      like: "like", //判斷用
       currentUserData: {
         id: 0,
         account: "",
@@ -66,7 +66,7 @@ export default {
         const response = await usersAPI.getUser({
           userId: this.currentUser.id,
         });
-        
+
         this.currentUserData = {
           id: response.data.id,
           account: response.data.account,
@@ -77,7 +77,7 @@ export default {
           introduction: response.data.introduction,
           followingCount: response.data.followingCount,
           follwerCount: response.data.follwerCount,
-          tweetCount:response.data.tweetCount
+          tweetCount: response.data.tweetCount,
         };
       } catch (error) {
         Toast.fire({
@@ -90,7 +90,7 @@ export default {
   created() {
     this.fetchUser();
   },
-  
+
   watch: {
     currentUser(newValue) {
       // 監控 UserCardEdit 是否修改 vuex 資料

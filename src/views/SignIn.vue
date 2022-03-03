@@ -107,20 +107,20 @@ export default {
         });
         // 當串接失敗
         if (statusText !== "OK" || data.status !== "success") {
-          throw new Error(data.message);
+          throw new Error();
         }
         // 當串接成功：
         this.isProcessing = false;
         localStorage.setItem('token', data.token)
         this.$store.commit('setCurrentUser', data.user)
-        this.$router.push('/main')
+        this.$router.push('/users/main')
 
       } catch (error) {
         this.isProcessing = false;
         this.password.text = "";
         Toast.fire({
           icon: "error",
-          title: error,
+          title: error.message,
         });
       }
     },

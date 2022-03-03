@@ -40,34 +40,42 @@ const routes = [
     component: () => import('../views/SignUp.vue')
   },
   {
-    path: '/main',
-    name: 'main',
-    component: Main,
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/users/self',
-    name: 'userSelf',
-    component: () => import('../views/UserSelf.vue'),
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/users/:id',
-    name: 'user',
-    component: () => import('../views/UserOther.vue'),
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/users/:id/followers',
-    name: 'users-followers',
-    component: () => import('../views/UserFollowers'),
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/users/:id/followings',
-    name: 'users-followings',
-    component: () => import('../views/UserFollowings'),
-    beforeEnter: authorizeIsUser
+    path: '/users',
+    component: () => import('../views/Users.vue'),
+    beforeEnter: authorizeIsUser,
+    children: [
+      {
+        path: '',
+        redirect: '/users/main'
+      },
+      {
+        path: 'main',
+        name: 'main',
+        component: Main,
+      },
+      {
+        path: 'tweet/:id',
+        name: 'tweet',
+        component: () => import('../views/Tweet.vue'),
+      },
+      {
+        path: ':id',
+        name: 'users-info',
+        component: () => import('../views/UserInfo.vue'),
+        children: [
+          {
+            path: 'followers',
+            name: 'followers',
+            component: () => import('../components/FollowerCards.vue')
+          },
+          {
+            path: 'followings',
+            name: 'followings',
+            component: () => import('../components/FollowingCards.vue')
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/admin/signin',
@@ -93,12 +101,6 @@ const routes = [
     beforeEnter: authorizeIsUser
   },
   {
-    path: '/tweets/:id',
-    name: 'tweet',
-    component: () => import('../views/Tweet.vue'),
-    beforeEnter: authorizeIsUser
-  },
-  {
     path: '*',
     name: 'not-found',
     component: NotFound
@@ -121,7 +123,7 @@ router.beforeEach(async (to, from, next) => {
     isAuthenticated = await store.dispatch('fetchCurrentUser')
   }
   // 對於不需要驗證 token 的頁面
-  const pathsWithoutAuthentication = ['sign-up', 'sign-in','admin-signin']
+  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin-signin']
 
   // 如果 token 無效且進入需要驗證的頁面則轉址到登入頁
   if (

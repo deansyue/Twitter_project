@@ -1,5 +1,5 @@
 <template>
-  <div class="replyCard-wrapper">
+  <div class="tweetReplyCard-wrapper">
     <div class="card-left avatar" @click="linkedUser(userId)">
       <img class="avatar" :src="avatar | emptyImage" />
     </div>
@@ -79,11 +79,7 @@ export default {
       this.avatar = User.avatar
     },
     linkedUser(userId) {
-      if (userId === this.currentUser.id) {
-        this.$router.push({ name: "userSelf" });
-      } else {
-        this.$router.push({ name: "user", params: { id: userId } });
-      }
+      this.$router.push({ name: "users-info", params: { id: userId }});
     },
   },
   created() {

@@ -64,4 +64,11 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 帳號資料更改
+  SignEdit({ userId, account, name, email, password, checkPassword }) {
+    return apiHelper.put(`api/users/${userId}/edit`, { account, name, email, password, checkPassword }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+
+  },
 }

@@ -13,13 +13,7 @@ export default {
     return apiHelper.post('api/users', { account, name, email, password, checkPassword })
 
   },
-  // 帳號資料更改
-  SignEdit({ userId, account, name, email, password, checkPassword }) {
-    return apiHelper.put(`api/users/${userId}/edit`, { account, name, email, password, checkPassword }, {
-      headers: { Authorization: `Bearer ${getToken()}` }
-    })
-
-  },
+  
   // 管理者登入
   AdminSignIn({ account, password }) {
     return apiHelper.post('api/admin/signin', {

@@ -191,3 +191,12 @@ export default {
   
 };
 </script>
+<style lang="scss" scoped>
+.card-foot {
+        display: flex;
+        align-items: center;
+        h6 {
+          margin: 0 52px 0 12px;
+        }
+      }
+</style>

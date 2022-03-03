@@ -4,7 +4,7 @@
       :currentUserData="currentUserData"
       :whichPage="whichPage"
     />
-    <div class="switchTabs">
+    <div class="switchTabs" v-show="this.$route.name!==asd&&this.$route.name!==zxc">
       <div
         class="tweetTab"
         :class="[{ activeTabs: tabNow === 1 }]"
@@ -43,6 +43,8 @@ export default {
     return {
       whichPage: false, //true代表個人false代表他人
       tabNow: 1, //1推文 2回復 3喜歡
+      asd:"followers",//判斷用
+      zxc:"followings",//判斷用
       currentUserData: {
         id: 0,
         account: "",

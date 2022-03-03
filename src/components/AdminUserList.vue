@@ -2,6 +2,7 @@
   <div class="admintweetCard-wrapper">
     <!--UserAvatar-->
     <div class="adminuser__avatar">
+      <img class="cover" :src="user.cover | emptyImage">
       <img class="avatar" :src="user.avatar | emptyImage" />
     </div>
 

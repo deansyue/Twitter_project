@@ -54,16 +54,18 @@
         <div class="introduce">{{ userData.introduction }}</div>
         <div class="follow">
           <router-link
-            :to="{ name: 'users-followings', params: { id: userData.id } }"
+            :to="{ name: 'followings', params: { id: userData.id }}"
             class="strong"
           >
             {{ userData.followingCount | numberFormatTC }}個
           </router-link>
-          追隨中<router-link
-            :to="{ name: 'users-followers', params: { id: userData.id } }"
+          追隨中
+          <router-link
+            :to="{ name: 'followers', params: { id: userData.id }}"
             class="strong2"
-            >{{ userData.follwerCount | numberFormatTC }}位</router-link
-          >追隨者
+            >{{ userData.follwerCount | numberFormatTC }}位
+            </router-link>
+          追隨者
         </div>
       </div>
     </div>

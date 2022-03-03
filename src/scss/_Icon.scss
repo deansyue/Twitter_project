@@ -7,6 +7,7 @@ $logo: url("./assets/icon/Logo.png");
 $arrow: url("./assets/icon/arrow.png");
 $cross-or: url("./assets/icon/cross-or.png");
 $cross-wt: url("./assets/icon/cross-wt.png");
+$cross-gr: url("./assets/icon/cross-gr.png");
 $heartActive: url("./assets/icon/heartActive.png");
 $heart: url("./assets/icon/heart.png");
 $home: url("./assets/icon/home.png");
@@ -146,6 +147,13 @@ $spinner: url("./assets/spinner.png");
   width: 15px;
   height: 15px;
   content: #{$cross-wt};
+  cursor: pointer;
+}
+
+.cross-grey {
+  width: 15px;
+  height: 15px;
+  content: #{$cross-gr};
   cursor: pointer;
 }
 

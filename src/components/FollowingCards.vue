@@ -22,14 +22,14 @@
         <button
           @click="deleteFollow(followCard.followingId)"
           v-if="followCard.isFollowed"
-          v-show="currentUser.id !== followCard.isFollowed"
+          v-show="currentUser.id !== followCard.followingId"
           class="btn active"
           :disabled="isProcessing"
         >正在跟隨</button>
         <button 
           @click="addFollow(followCard.followingId)"
           v-else
-          v-show="currentUser.id !== followCard.isFollowed"
+          v-show="currentUser.id !== followCard.followingId"
           class="btn"
           :disabled="isProcessing"
         >跟隨</button>

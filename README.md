@@ -109,6 +109,6 @@ user5
 
 - [Joy-Chang](https://github.com/Joy-Chang-2021)
 - [MuChuan-Hung](https://github.com/muchuanhung)
-- [Iun](https://github.com/zheRoom)
+- [Lun](https://github.com/zheRoom)
 - [Lena](https://lighthouse.alphacamp.co/users/6721)
 - [薛詠駿](https://lighthouse.alphacamp.co/users/6509)

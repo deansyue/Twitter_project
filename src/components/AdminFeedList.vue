@@ -19,8 +19,8 @@
           <img @click="deleteCard(id)" class="cross-grey">
         </div>
       </div>
-      <div>
-        {{ description }}
+      <div class="card-description">
+        {{ description | wordLimit }}
       </div>
     </div>
   </div>
@@ -76,6 +76,12 @@ export default {
   },
   created() {
     this.fetchTweetCard()
+  },
+  filters: {
+    wordLimit(text) {
+      return text.length > 50 ? 
+        text.substring(0, 49) + '...' : text
+    }
   }
 }
 </script>

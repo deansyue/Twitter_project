@@ -1,5 +1,17 @@
 <template>
   <div class="followship-wrapper">
+    <ul class="followship-tabs">
+      <li class="followship-tab">
+        <router-link :to="{ name: 'followers', params: { id: paramsId }}">
+          追隨者
+        </router-link>
+      </li>
+      <li class="followship-tab">
+        <router-link :to="{ name: 'followings', params: { id: paramsId }}">
+          正在追隨
+        </router-link>
+      </li>
+    </ul>
     <img v-if="isLoading" class="spinner">
     <div  v-else class="userFollowCards"
       v-for="followCard in followCards" :key="followCard.id">

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img v-if="isLoading" class="spinner">
     <div class="self-reply" v-for="reply in replys" :key="reply.id">
       <div class="tweetReplyCard-wrapper">
         <div class="card-left avatar" @click="linkedUser(reply.User.id)">
@@ -47,6 +48,7 @@ export default {
   data() {
     return {
       replys: [],
+      isLoading:false
     };
   },
   computed: {
@@ -55,14 +57,17 @@ export default {
   methods: {
   async fetchUserReplies(userId) {
       try {
+        this.isLoading = true;
         const response = await usersAPI.getUserReplies({
           userId:
             this.$route.name === "reply"
               ? this.currentUser.id
               : userId,
         });
+        this.isLoading = false;
         this.replys = response.data;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得所有回文資料，請稍後再試",

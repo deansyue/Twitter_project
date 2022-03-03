@@ -88,6 +88,7 @@
 <script>
 import { Toast } from "../utils/helpers";
 import authorizationAPI from "../apis/authorization";
+import usersAPI from "../apis/users";
 export default {
   props: {
     currentUser: {
@@ -242,7 +243,7 @@ export default {
           });
 
         this.isProcessing = true;
-        const { data } = await authorizationAPI.SignEdit({
+        const { data } = await usersAPI.SignEdit({
           userId,
           account,
           name,

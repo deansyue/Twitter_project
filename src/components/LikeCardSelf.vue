@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img v-if="isLoading" class="spinner">
     <div class="self-like" v-for="likeTweet in likeTweets" :key="likeTweet.id">
       <div class="tweetCard-wrapper">
         <div class="card-left avatar" @click="linkedUser(likeTweet.Tweet.UserId)">
@@ -74,6 +75,7 @@ export default {
     return {
       isProcessing: false,
       likeTweets: [],
+      isLoading:false
     };
   },
   computed: {
@@ -82,11 +84,14 @@ export default {
   methods: {
     async fetchLikeTweets(userId) {
       try {
+        this.isLoading = true;
         const response = await usersAPI.getUserLikes({
           userId: this.$route.name === "like" ? this.currentUser.id : userId,
         });
+        this.isLoading = false;
         this.likeTweets = response.data;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得最愛貼文資料，請稍後再試",

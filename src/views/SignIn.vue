@@ -1,6 +1,5 @@
 <template>
   <div class="signin-wrapper">
-    <!-- todo: 從共用scss變數中引用icon -->
     <img class="logo-big" alt="" />
     <h2>登入 Alphaitter</h2>
     <div class="form-wrapper">

@@ -243,7 +243,7 @@ export default {
           });
 
         this.isProcessing = true;
-        const { data } = await usersAPI.SignEdit({
+        const { data } = await usersAPI.signEdit({
           userId,
           account,
           name,

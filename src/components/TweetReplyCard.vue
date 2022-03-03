@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     fetchReplyCard() {
-      // 被回覆的對象 // TODO: 個人頁面待 API 加入此值
+      // 被回覆的對象
       this.targetAccount = this.replyTarget.account;
       this.targetUserId = this.replyTarget.id;
       // 此卡片的其他資料

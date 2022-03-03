@@ -6,7 +6,7 @@
       </button>
       <div class="name-wrapper">
         {{ userData.name }}
-        <div class="tweetCount">{{ tweets.length }}推文</div>
+        <div class="tweetCount">{{ userData.tweetCount }}推文</div>
       </div>
     </div>
     <div class="user-wrapper">
@@ -99,11 +99,8 @@ export default {
         followingCount: 0,
         follwerCount: 0,
         isFollowed: "",
+        tweetCount:0
       }),
-    },
-    tweets: {
-      type: Array,
-      require: true,
     },
     whichPage: {
       type: Boolean,
@@ -123,6 +120,7 @@ export default {
         followingCount: 0,
         follwerCount: 0,
         isFollowed: "",
+        tweetCount: 0
       },
       isNotice: true,
       isProcessing: false,
@@ -151,6 +149,7 @@ export default {
       this.userData.followingCount = this.currentUserData.followingCount;
       this.userData.follwerCount = this.currentUserData.follwerCount;
       this.userData.isFollowed = this.currentUserData.isFollowed;
+      this.userData.tweetCount = this.currentUserData.tweetCount;
     },
     showEditModal() {
       // 打開 modal

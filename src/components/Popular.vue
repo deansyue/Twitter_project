@@ -4,7 +4,11 @@
     <img v-if="isLoading" class="spinner">
     <div v-else class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
-        <img :src="user.avatar | emptyImage" alt="" @click="linkedUser(user.id)" />
+        <img
+          :src="user.avatar | emptyImage"
+          alt=""
+          @click="linkedUser(user.id)"
+        />
       </div>
       <div class="name-wrapper" @click="linkedUser(user.id)">
         {{ user.name }}
@@ -66,7 +70,7 @@ export default {
       }
     },
     linkedUser(userId) {
-      this.$router.push({ name: "users-info", params: { id: userId }});
+      this.$router.push({ name: "otherTweet", params: { id: userId } });
     },
     async addFollow(userId) {
       try {

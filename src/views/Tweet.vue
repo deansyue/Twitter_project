@@ -161,7 +161,11 @@ export default {
       }
     },
     linkedUser(userId) {
-      this.$router.push({ name: "users-info", params: { id: userId }});
+       if (userId === this.currentUser.id) {
+        this.$router.push({ name: "self" });
+      } else {
+        this.$router.push({ name: "other", params: { id: userId } });
+      }
     },
     showReplyModal() {
       this.$modal.show("replyCreate");

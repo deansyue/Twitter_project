@@ -116,7 +116,7 @@ export default {
           else return {
             ...card,
             isLiked: true,
-            likeCount: card.likeCount++
+            likeCount: card.likeCount + 1
           }
         })
       } catch (error) {
@@ -141,7 +141,7 @@ export default {
           else return {
             ...card,
             isLiked: false,
-            likeCount: card.likeCount--
+            likeCount: card.likeCount - 1
           }
         })
       } catch (error) {

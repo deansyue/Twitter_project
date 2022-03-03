@@ -62,9 +62,9 @@ export default {
     },
     linkedUser(userId) {
       if (userId === this.currentUser.id) {
-        this.$router.push({ name: "userSelf" });
+        this.$router.push({ name: "selfTweet" });
       } else {
-        this.$router.push({ name: "user", params: { id: userId } });
+        this.$router.push({ name: "otherTweet", params: { id: userId } });
       }
     },
     async addFollow(userId) {

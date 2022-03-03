@@ -16,7 +16,7 @@
           </router-link>
         </div>
         <div class="selfTab">
-          <router-link class="navItem" to="/users/self">
+          <router-link class="navItem" to="/users/self/tweet">
             <div class="icon">
               <img class="person" alt="" />
             </div>

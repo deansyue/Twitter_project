@@ -171,7 +171,7 @@ export default {
       }
     },
     linkedUser(userId) {
-      this.$router.push({ name: "user", params: { id: userId } });
+      this.$router.push({ name: "other", params: { id: userId } });
     },
     showReplyModal() {
       this.$modal.show("replyCreate");

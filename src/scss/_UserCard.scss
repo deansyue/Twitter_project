@@ -61,12 +61,16 @@
       top: 190px;
       display: flex;
       .btnDeleteFollow{
+        font-weight: 700;
         width: 95px;
+        font-size: 14px;
         background: #{$orange};
         color: #{$white};
         margin-left: 10px;
       }
       .btnAddFollow{
+        font-weight: 700;
+        font-size: 14px;
         width: 65px;
         margin-left: 10px;
       }

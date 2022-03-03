@@ -20,13 +20,13 @@
       </div>
       <div class="userFollowCards-right">
         <button
-          @click="deleteFollow(followCard.followingId)"
+          @click="deleteFollow(followCard.followerId)"
           v-if="followCard.isFollowed"
           class="btn active"
           :disabled="isProcessing"
         >正在跟隨</button>
         <button 
-          @click="addFollow(followCard.followingId)"
+          @click="addFollow(followCard.followerId)"
           v-else
           class="btn"
           :disabled="isProcessing"

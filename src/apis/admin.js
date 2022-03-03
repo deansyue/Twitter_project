@@ -17,7 +17,7 @@ export default {
   },
   // 取得管理員可見的所有用戶清單
   getAdminUsers() {
-    return apiHelper.get(`api/admin/users`, {
+    return apiHelper.get('api/admin/users', {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   }

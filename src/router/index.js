@@ -183,8 +183,15 @@ router.beforeEach(async (to, from, next) => {
   // 如果 token 有效且進入不需要驗證到頁面則轉址到首頁
   if (
     isAuthenticated &&
+    store.state.currentUser.role === "user" &&
     pathsWithoutAuthentication.includes(to.name)
   ) return next('/users/main')
+
+  if (
+    isAuthenticated &&
+    store.state.currentUser.role === "admin" &&
+    pathsWithoutAuthentication.includes(to.name)
+  ) return next('/admin/tweets')
 
   next()
 })

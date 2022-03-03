@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 const authorizeIsAdmin = (to, from, next) => {
   const currentUser = store.state.currentUser
   if (currentUser && currentUser.role === "user") {
-    return next('/404')
+    return next('/signin')
   }
   next()
 }
@@ -18,7 +18,7 @@ const authorizeIsAdmin = (to, from, next) => {
 const authorizeIsUser = (to, from, next) => {
   const currentUser = store.state.currentUser
   if (currentUser && currentUser.role === "admin") {
-    return next('/404')
+    return next('/admin/signin')
   }
   next()
 }
@@ -39,12 +39,7 @@ const routes = [
     name: 'sign-up',
     component: () => import('../views/SignUp.vue')
   },
-  {
-    path: '/main',
-    name: 'main',
-    component: Main,
-    beforeEnter: authorizeIsUser
-  },
+
   {
     path: '/users',
     name: 'users',
@@ -53,7 +48,17 @@ const routes = [
     children: [
       {
         path: "",
-        redirect: { name: "self" }
+        redirect: { name: "main" }
+      },
+      {
+        path: 'main',
+        name: 'main',
+        component: Main,
+      },
+      {
+        path: 'tweet/:id',
+        name: 'tweet',
+        component: () => import('../views/Tweet.vue'),
       },
       {
         path: "self",
@@ -62,7 +67,7 @@ const routes = [
         children: [
           {
             path: "",
-            redirect: { name: "tweet" }
+            redirect: { name: "selfTweet" }
           },
           {
             path: "tweet",
@@ -105,22 +110,22 @@ const routes = [
             name: "otherLike",
             component: () => import('../components/LikeCardSelf.vue'),
           },
+          {
+            path: 'followers',
+            name: 'followers',
+            component: () => import('../components/FollowerCards.vue')
+          },
+          {
+            path: 'followings',
+            name: 'followings',
+            component: () => import('../components/FollowingCards.vue')
+          }
         ]
       }
     ]
   },
-  {
-    path: '/users/:id/followers',
-    name: 'users-followers',
-    component: () => import('../views/UserFollowers'),
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/users/:id/followings',
-    name: 'users-followings',
-    component: () => import('../views/UserFollowings'),
-    beforeEnter: authorizeIsUser
-  },
+
+
   {
     path: '/admin/signin',
     name: 'admin-signin',
@@ -142,12 +147,6 @@ const routes = [
     path: '/setting',
     name: 'setting',
     component: () => import('../views/Setting.vue'),
-    beforeEnter: authorizeIsUser
-  },
-  {
-    path: '/tweets/:id',
-    name: 'tweet',
-    component: () => import('../views/Tweet.vue'),
     beforeEnter: authorizeIsUser
   },
   {
@@ -173,7 +172,7 @@ const router = new VueRouter({
     isAuthenticated = await store.dispatch('fetchCurrentUser')
   }
   // 對於不需要驗證 token 的頁面
-  const pathsWithoutAuthentication = ['sign-up', 'sign-in']
+  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin-signin']
 
   // 如果 token 無效且進入需要驗證的頁面則轉址到登入頁
   if (
@@ -185,7 +184,7 @@ const router = new VueRouter({
   if (
     isAuthenticated &&
     pathsWithoutAuthentication.includes(to.name)
-  ) return next('/main')
+  ) return next('/users/main')
 
   next()
 })**/

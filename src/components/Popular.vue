@@ -1,7 +1,8 @@
 <template>
   <div class="popular-wrapper">
     <div class="title">Popular</div>
-    <div class="popularCard" v-for="user in popularUser" :key="user.id">
+    <img v-if="isLoading" class="spinner">
+    <div v-else class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
         <img
           :src="user.avatar | emptyImage"
@@ -44,6 +45,7 @@ export default {
     return {
       popularUser: [],
       isProcessing: false,
+      isLoading: false
     };
   },
   created() {
@@ -55,9 +57,12 @@ export default {
   methods: {
     async fetchPopular() {
       try {
+        this.isLoading = true;
         const response = await usersAPI.getTopUser();
+        this.isLoading = false;
         this.popularUser = response.data;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得熱門使用者資料，請稍後再試",

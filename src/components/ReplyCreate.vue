@@ -87,14 +87,13 @@ export default {
         this.isProcessing = true;
         const { statusText, data } = await tweetsAPI.addNewReply({
           tweetId: this.tweetReplyTarget.id,
-          comment: this.comment,
-        });
-        if (statusText !== "OK" || data.status !== "success") throw new Error();
-        this.isProcessing = false;
-        this.$store.commit("passReplyCreate", data.reply);
-        this.hideReplyModal();
-        if (this.$route.name === "main")
-          this.$router.push(`/tweets/${data.reply.TweetId}`);
+          comment: this.comment
+        })
+        if (statusText !== "OK" || data.status !== "success") throw new Error()
+        this.isProcessing = false
+        this.$store.commit("passReplyCreate", data.reply)
+        this.hideReplyModal()
+        if (this.$route.name === "main") this.$router.push(`/users/tweet/${data.reply.TweetId}`)
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({

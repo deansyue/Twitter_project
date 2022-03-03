@@ -8,10 +8,12 @@
         <h3 class="main-title">使用者清單</h3>
       </div>
       <div class="adminusers__container">
-      <div class="adminuser__tweets"
-        v-for="tweetCard in tweetCards" :key="tweetCard.id"
+      <img v-if="isLoading" class="spinner">
+      <div v-else class="adminuser__tweets"
+        v-for="user in users"
+        :key="user.id"
       >
-        <AdminUserList :tweet-card="tweetCard"/>
+        <AdminUserList :user="user"/>
       </div>
       </div>
     </div>
@@ -21,10 +23,8 @@
 <script>
 import AdminNavBar from '../components/AdminNavBar.vue';
 import AdminUserList from '../components/AdminUserList.vue';
-import { mapState } from "vuex";
-import tweetsAPI from "../apis/tweets";
 import { Toast } from '../utils/helpers';
-
+import adminAPI from "../apis/admin";
 
 export default {
   components: {
@@ -33,32 +33,29 @@ export default {
   },
     data() {
     return {
-      tweetCards: [],
+      users:[],
+      isLoading: false
     };
   },
-  computed: {
-    ...mapState(["currentUser"]),
+    created() {
+    this.fetchUsers();
   },
   methods: {
-    async fetchTweetCards() {
+    async fetchUsers() {
       try {
-        const { data, statusText } = await tweetsAPI.getAllTweets()
-        // console.log(statusText)
-        // console.log(data)
-        // todo: 注意資料是否新增 likedCount、repliedCount、isLiked 屬性
+        this.isLoading = true
+        const { data, statusText } = await adminAPI.getAdminUsers()
+        this.isLoading = false
         if (statusText !== "OK") throw new Error(statusText)
-        this.tweetCards = [ ...data ]
-
+        this.users = { ...data }
       } catch (error) {
+        this.isLoading = false
         Toast.fire({
           icon: 'error',
-          title: '無法取得主頁資料，請稍後再試'
+          title: '無法成功載入使用者清單！'
         })
       }
     },
-  },
-  created() {
-    this.fetchTweetCards();
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img v-if="isLoading" class="spinner" />
     <div class="self-tweet" v-for="tweet in tweets" :key="tweet.id">
       <div class="tweetCard-wrapper">
         <div class="card-left avatar" @click="linkedUser(tweet.User.id)">
@@ -71,6 +72,7 @@ export default {
     return {
       isProcessing: false,
       tweets: [],
+      isLoading: false,
     };
   },
   computed: {
@@ -78,14 +80,16 @@ export default {
   },
   methods: {
     async fetchUserTweets(userId) {
-      
       try {
+        this.isLoading = true;
         const response = await usersAPI.getUserTweets({
-          userId: this.$route.name === "selfTweet" ? this.currentUser.id : userId,
+          userId:
+            this.$route.name === "selfTweet" ? this.currentUser.id : userId,
         });
+        this.isLoading = false;
         this.tweets = response.data;
-        
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得最愛貼文資料，請稍後再試",
@@ -179,7 +183,6 @@ export default {
       };
       this.$store.commit("setTweetReplyTarget", replyTargetData);
     },
-    
   },
   created() {
     this.fetchUserTweets(this.$route.params.id);
@@ -188,15 +191,14 @@ export default {
     this.fetchUserTweets(to.params.id);
     next();
   },
-  
 };
 </script>
 <style lang="scss" scoped>
 .card-foot {
-        display: flex;
-        align-items: center;
-        h6 {
-          margin: 0 52px 0 12px;
-        }
-      }
+  display: flex;
+  align-items: center;
+  h6 {
+    margin: 0 52px 0 12px;
+  }
+}
 </style>

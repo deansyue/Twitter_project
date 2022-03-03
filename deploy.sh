@@ -25,3 +25,5 @@ git commit -m 'deploy'
 git push -f https://github.com/Joy-Chang-2021/Twitter_project.git main:gh-pages
 
 cd -
+
+# 於跟目錄使用指令 ./deploy.sh

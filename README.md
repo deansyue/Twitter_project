@@ -76,7 +76,7 @@ user1
    password：12345678
 
 user2
-   account：user1
+   account：user2
    password：12345678
 
 user3

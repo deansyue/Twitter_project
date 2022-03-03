@@ -26,7 +26,7 @@
                 type="file"
                 id="cover"
                 name="cover"
-                accept="image/png"
+                accept="image/*"
                 @change="handleFileChange($event, 'cover')">
               <img class="cross-white cancel" @click="clearCover()"/>
             </div>
@@ -37,6 +37,7 @@
                 type="file"
                 id="avatar"
                 name="avatar"
+                accept="image/*"
                 @change="handleFileChange($event, 'avatar')">
             </div>
           </div>

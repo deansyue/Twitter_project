@@ -22,12 +22,14 @@
         <button
           @click="deleteFollow(followCard.followingId)"
           v-if="followCard.isFollowed"
+          v-show="currentUser.id !== followCard.isFollowed"
           class="btn active"
           :disabled="isProcessing"
         >正在跟隨</button>
         <button 
           @click="addFollow(followCard.followingId)"
           v-else
+          v-show="currentUser.id !== followCard.isFollowed"
           class="btn"
           :disabled="isProcessing"
         >跟隨</button>
@@ -41,11 +43,15 @@
 
 <script>
 import usersAPI from "../apis/users";
+import { mapState } from "vuex";
 import { Toast } from "../utils/helpers";
 import { accountTagFilter, emptyImageFilter } from "../utils/mixins";
 
 export default {
   mixins: [accountTagFilter, emptyImageFilter],
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   data() {
     return {
       paramsId: 0,

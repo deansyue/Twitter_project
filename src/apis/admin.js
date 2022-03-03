@@ -10,9 +10,6 @@ export default {
      })
   },
    // 刪除使用者的推文
-  //  deleteTweet({ tweetId }) {
-  //   return apiHelper.delete(`/admin/tweets/${tweetId}`)
-  // },
    deleteTweet({ tweetId }) {
     return apiHelper.delete(`api/admin/tweets/${tweetId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
@@ -20,7 +17,9 @@ export default {
   },
   // 取得管理員可見的所有用戶清單
   getAdminUsers() {
-    return apiHelper.get(`api/admin/users`)
+    return apiHelper.get('api/admin/users', {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
   }
 }
 

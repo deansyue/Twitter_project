@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 const authorizeIsAdmin = (to, from, next) => {
   const currentUser = store.state.currentUser
   if (currentUser && currentUser.role === "user") {
-    return next('/404')
+    return next('/signin')
   }
   next()
 }
@@ -18,7 +18,7 @@ const authorizeIsAdmin = (to, from, next) => {
 const authorizeIsUser = (to, from, next) => {
   const currentUser = store.state.currentUser
   if (currentUser && currentUser.role === "admin") {
-    return next('/404')
+    return next('/admin/signin')
   }
     next()
 }
@@ -135,7 +135,7 @@ router.beforeEach(async (to, from, next) => {
   if (
     isAuthenticated &&
     pathsWithoutAuthentication.includes(to.name)
-  ) return next('/main')
+  ) return next('/users/main')
 
   next()
 })

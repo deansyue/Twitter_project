@@ -105,33 +105,45 @@ export default {
     async addLikes(id) {
       try {
         this.isProcessing = true;
-        const { statusText, data } = await tweetsAPI.addLike({
+        const { data } = await tweetsAPI.addLike({
           tweetId: id,
         });
-        if (statusText !== "OK" || data.status !== "success")
-          throw new Error(statusText);
+        if (data.status !== "success") throw new Error(data.message);
         this.isProcessing = false;
-        this.tweetCard.isLiked = true;
-        this.tweetCard.likeCount++;
+
+        this.tweetCards = this.tweetCards.map(card => {
+          if (card.id !== id) return card
+          else return {
+            ...card,
+            isLiked: true,
+            likeCount: card.likeCount++
+          }
+        })
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
           icon: "error",
-          title: "無法加入最愛，請稍後再試",
+          title: error.message,
         });
       }
     },
     async deleteLikes(id) {
       try {
         this.isProcessing = true;
-        const { statusText, data } = await tweetsAPI.deleteLike({
+        const { data } = await tweetsAPI.deleteLike({
           tweetId: id,
         });
-        if (statusText !== "OK" || data.status !== "success")
-          throw new Error(statusText);
+        if (data.status !== "success") throw new Error(data.message);
         this.isProcessing = false;
-        this.tweetCard.isLiked = false;
-        this.tweetCard.likeCount--;
+
+        this.tweetCards = this.tweetCards.map(card => {
+          if (card.id !== id) return card
+          else return {
+            ...card,
+            isLiked: false,
+            likeCount: card.likeCount--
+          }
+        })
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({

@@ -5,7 +5,14 @@ moment.locale('zh-tw');
 export const fromNowFilter = {
   filters: {
     fromNow(datetime) {
-      return datetime ? moment(datetime).startOf('minute').fromNow() : '-'
+      const beforeRaw = new Date(datetime)
+      const before = beforeRaw.getTime()
+      const nowRaw = new Date()
+      const now = nowRaw.getTime()
+      const hours = (now - before) / (24 * 3600 * 1000)
+      return hours > 1 ? 
+        moment(datetime).format("MMM Do") :
+        moment(datetime).startOf('minute').fromNow()
     }
   }
 }

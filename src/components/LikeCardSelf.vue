@@ -187,7 +187,7 @@ export default {
     this.fetchLikeTweets(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    this.fetchLikeTweets(this.$route.params.id);
+    this.fetchLikeTweets(to.params.id);
     next();
   },
 };

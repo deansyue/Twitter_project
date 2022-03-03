@@ -83,7 +83,7 @@ export default {
     this.fetchUserReplies(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    this.fetchUserReplies(this.$route.params.id);
+    this.fetchUserReplies(to.params.id);
     next();
   },
 };

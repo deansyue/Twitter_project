@@ -185,8 +185,9 @@ export default {
     this.fetchUserTweets(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    this.fetchUserTweets(this.$route.params.id);
+    this.fetchUserTweets(to.params.id);
     next();
   },
+  
 };
 </script>

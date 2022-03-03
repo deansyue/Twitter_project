@@ -3,7 +3,11 @@
     <div class="title">Popular</div>
     <div class="popularCard" v-for="user in popularUser" :key="user.id">
       <div class="avatar-wrapper">
-        <img :src="user.avatar | emptyImage" alt="" @click="linkedUser(user.id)" />
+        <img
+          :src="user.avatar | emptyImage"
+          alt=""
+          @click="linkedUser(user.id)"
+        />
       </div>
       <div class="name-wrapper" @click="linkedUser(user.id)">
         {{ user.name }}
@@ -61,11 +65,7 @@ export default {
       }
     },
     linkedUser(userId) {
-      if (userId === this.currentUser.id) {
-        this.$router.push({ name: "selfTweet" });
-      } else {
-        this.$router.push({ name: "otherTweet", params: { id: userId } });
-      }
+      this.$router.push({ name: "otherTweet", params: { id: userId } });
     },
     async addFollow(userId) {
       try {

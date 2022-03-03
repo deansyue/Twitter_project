@@ -60,10 +60,10 @@ export default {
   },
   
   methods: {
-    async fetchUser() {
+    async fetchUser(userId) {
       try {
         const response = await usersAPI.getUser({
-          userId: this.$route.params.id,
+          userId: userId?userId:this.$route.params.id,
         });
         
         this.currentUserData = {
@@ -99,6 +99,10 @@ export default {
         ...newValue,
       };
     },
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchUser(to.params.id);
+    next();
   },
   
     

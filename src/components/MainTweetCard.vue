@@ -153,8 +153,12 @@ export default {
       }
     },
     linkedUser(userId) {
-      // TODO: CHECK
-      this.$router.push({ name: "users-info", params: { id: userId }});
+      console.log(userId)
+      if (userId === this.currentUser.id) {
+        this.$router.push({ name: "selfTweet" });
+      } else {
+        this.$router.push({ name: "otherTweet", params: { id: userId } });
+      }
     },
     linkedReply($event, id) {
       // 點擊卡片可進入瀏覽回覆頁面、若點擊到愛心則不跳轉畫面

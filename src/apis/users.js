@@ -45,15 +45,18 @@ export default {
     })
   },
   // 修改個人帳號密碼
-  
-
-  // 追隨 todo: 待確認送出的資料內容，formData
+  signEdit({ userId, account, name, email, password, checkPassword }) {
+    return apiHelper.put(`api/users/${userId}/edit`, { account, name, email, password, checkPassword }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  // 追隨
   addFollow({ id }) {
     return apiHelper.post('/api/followships', { id }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  // 取消追隨 todo: 待確認送出的資料內容 followingId ??
+  // 取消追隨
   deleteFollow({ followingId }) {
     return apiHelper.delete(`api/followships/${followingId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
@@ -64,12 +67,5 @@ export default {
     return apiHelper.get("api/users/top", {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
-  },
-  // 帳號資料更改
-  SignEdit({ userId, account, name, email, password, checkPassword }) {
-    return apiHelper.put(`api/users/${userId}/edit`, { account, name, email, password, checkPassword }, {
-      headers: { Authorization: `Bearer ${getToken()}` }
-    })
-
   },
 }

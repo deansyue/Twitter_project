@@ -153,7 +153,6 @@ export default {
       }
     },
     linkedUser(userId) {
-      console.log(userId)
       if (userId === this.currentUser.id) {
         this.$router.push({ name: "selfTweet" });
       } else {

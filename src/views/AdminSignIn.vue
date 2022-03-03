@@ -1,6 +1,5 @@
 <template>
   <div class="signin-wrapper">
-    <!-- todo: 從共用scss變數中引用icon -->
     <img class="logo-big" alt="">
     <h2>後台登入</h2>
     <div class="form-wrapper">
@@ -110,13 +109,11 @@ export default {
           password
         });
         // 當串接失敗
-        console.log(data)
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(data.message);
         }
         // 當串接成功：
         this.isProcessing = false;
-        // todo: 待確認 data 階層是否修改
         localStorage.setItem('token', data.token)
         this.$store.commit('setCurrentUser', data.user)
         this.$router.push('/admin/tweets')

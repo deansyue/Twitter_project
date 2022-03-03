@@ -154,7 +154,6 @@ export default {
         const formData = new FormData(form)
 
         this.isProcessing = true
-        // TODO: 處理圖片上傳資料
         const { statusText , data } = await usersAPI.editInformation({
           id,
           formData,

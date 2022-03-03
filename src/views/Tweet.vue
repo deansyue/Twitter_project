@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-if="isLoading" class="spinner">
+    <img v-if="isLoading" class="spinner" />
     <div v-else>
       <div class="tweet-wrapper">
         <div class="tweet-title">
@@ -10,10 +10,7 @@
         <div class="tweet-main">
           <div class="card-head">
             <div class="card-head-left avatar" @click="linkedUser(user.id)">
-              <img
-                class="avatar"
-                :src="user.avatar | emptyImage"
-              />
+              <img class="avatar" :src="user.avatar | emptyImage" />
             </div>
             <div class="card-head-right">
               <h5 @click="linkedUser(user.id)">{{ user.name }}</h5>
@@ -26,8 +23,12 @@
           </div>
           <div class="tweet-footer">
             <div class="tweet-footer-info">
-              <h4><strong>{{ replyCards.length }}</strong> 回覆</h4>
-              <h4><strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數</h4>
+              <h4>
+                <strong>{{ replyCards.length }}</strong> 回覆
+              </h4>
+              <h4>
+                <strong>{{ repliedTweet.likeCount }}</strong> 喜歡次數
+              </h4>
             </div>
             <div class="tweet-footer-buttons">
               <img class="reply-big" @click="showReplyModal()" />
@@ -54,10 +55,14 @@
 
 <script>
 import TweetReplyCard from "../components/TweetReplyCard.vue";
-import tweetsAPI from "../apis/tweets"
-import { mapState } from "vuex"
-import { accountTagFilter, timeFormatFilter, emptyImageFilter } from "../utils/mixins";
-import { Toast } from "../utils/helpers"
+import tweetsAPI from "../apis/tweets";
+import { mapState } from "vuex";
+import {
+  accountTagFilter,
+  timeFormatFilter,
+  emptyImageFilter,
+} from "../utils/mixins";
+import { Toast } from "../utils/helpers";
 
 export default {
   name: "Tweet",
@@ -82,86 +87,92 @@ export default {
     async fetchRepliedTweet(paramsId) {
       // 主貼文資料：
       try {
-        this.isLoading = true
-        const { data, statusText } = await tweetsAPI.getRepliedTweet({ tweetId: paramsId })
-        if (statusText !== "OK") throw new Error(statusText)
-        this.isLoading = false
-        this.user = data.User
-        this.repliedTweet = { ...data }
+        this.isLoading = true;
+        const { data, statusText } = await tweetsAPI.getRepliedTweet({
+          tweetId: paramsId,
+        });
+        if (statusText !== "OK") throw new Error(statusText);
+        this.isLoading = false;
+        this.user = data.User;
+        this.repliedTweet = { ...data };
       } catch (error) {
-        this.isLoading = false
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
-          title: "無法取得推文內容，請稍後再試"
-        })
+          title: "無法取得推文內容，請稍後再試",
+        });
       }
     },
     async fetchTweetReplyCards(paramsId) {
       // 所有回覆卡片的陣列
       try {
-        this.isLoading = true
-        const { data, statusText } = await tweetsAPI.getAllReplies({ tweetId: paramsId })
-        if (statusText !== "OK") throw new Error(statusText)
-        this.isLoading = false
-        this.replyCards = [ ...data ]
+        this.isLoading = true;
+        const { data, statusText } = await tweetsAPI.getAllReplies({
+          tweetId: paramsId,
+        });
+        if (statusText !== "OK") throw new Error(statusText);
+        this.isLoading = false;
+        this.replyCards = [...data];
       } catch (error) {
-        this.isLoading = false
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
-          title: "無法取得回覆推文，請稍後再試"
-        })
+          title: "無法取得回覆推文，請稍後再試",
+        });
       }
     },
     afterSubmitReplyCreate(data) {
       this.replyCards.unshift({
         comment: data.comment,
-        id: data.id, 
+        id: data.id,
         createdAt: data.createdAt,
         User: {
           avatar: this.currentUser.avatar,
           account: this.currentUser.account,
-          name: this.currentUser.name
-        }
-      })
+          name: this.currentUser.name,
+        },
+      });
     },
     async addLike() {
       try {
-        this.isProcessing = true
+        this.isProcessing = true;
         const { statusText, data } = await tweetsAPI.addLike({
-          tweetId: this.paramsId
-        })
-        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
-        this.isProcessing = false
+          tweetId: this.paramsId,
+        });
+        if (statusText !== "OK" || data.status !== "success")
+          throw new Error(statusText);
+        this.isProcessing = false;
         this.repliedTweet.isLiked = true;
-        this.repliedTweet.likeCount ++
+        this.repliedTweet.likeCount++;
       } catch (error) {
-        this.isProcessing = false
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
-          title: "無法加入最愛，請稍後再試"
-        })
+          title: "無法加入最愛，請稍後再試",
+        });
       }
     },
     async deleteLike() {
       try {
-        this.isProcessing = true
-        const { statusText, data } = await tweetsAPI.deleteLike({ 
-          tweetId: this.paramsId
-        })
-        if (statusText !== "OK" || data.status !== "success") throw new Error(statusText)
-        this.isProcessing = false
+        this.isProcessing = true;
+        const { statusText, data } = await tweetsAPI.deleteLike({
+          tweetId: this.paramsId,
+        });
+        if (statusText !== "OK" || data.status !== "success")
+          throw new Error(statusText);
+        this.isProcessing = false;
         this.repliedTweet.isLiked = false;
-        this.repliedTweet.likeCount --
+        this.repliedTweet.likeCount--;
       } catch (error) {
-        this.isProcessing = false
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
-          title: "無法取消最愛，請稍後再試"
-        })
+          title: "無法取消最愛，請稍後再試",
+        });
       }
     },
     linkedUser(userId) {
-       if (userId === this.currentUser.id) {
+      if (userId === this.currentUser.id) {
         this.$router.push({ name: "self" });
       } else {
         this.$router.push({ name: "other", params: { id: userId } });
@@ -169,7 +180,7 @@ export default {
     },
     showReplyModal() {
       this.$modal.show("replyCreate");
-      const { id, User, description, createdAt } = this.repliedTweet
+      const { id, User, description, createdAt } = this.repliedTweet;
       const replyTargetData = {
         id,
         name: User.name,
@@ -178,27 +189,27 @@ export default {
         avatar: User.avatar,
         description,
         createdAt,
-      }
-      this.$store.commit("setTweetReplyTarget", replyTargetData)
+      };
+      this.$store.commit("setTweetReplyTarget", replyTargetData);
     },
   },
   created() {
-    const { id } = this.$route.params
-    this.paramsId = Number(id)
-    this.fetchRepliedTweet(this.paramsId)
+    const { id } = this.$route.params;
+    this.paramsId = Number(id);
+    this.fetchRepliedTweet(this.paramsId);
     this.fetchTweetReplyCards(this.paramsId);
   },
-  beforeRouteUpdate (to, from, next) {
-    const { id } = to.params
-    this.paramsId = Number(id)
-    this.fetchRepliedTweet(this.paramsId)
-    this.fetchTweetReplyCards(this.paramsId)
-    next()
+  beforeRouteUpdate(to, from, next) {
+    const { id } = to.params;
+    this.paramsId = Number(id);
+    this.fetchRepliedTweet(this.paramsId);
+    this.fetchTweetReplyCards(this.paramsId);
+    next();
   },
   watch: {
-    replyCreate (newValue) {
-      this.afterSubmitReplyCreate(newValue)
-    }
-  }
+    replyCreate(newValue) {
+      this.afterSubmitReplyCreate(newValue);
+    },
+  },
 };
 </script>

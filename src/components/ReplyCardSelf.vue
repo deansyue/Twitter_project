@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="self-reply" v-for="reply in replys" :key="reply.id">
-      <div class="replyCard-wrapper">
+      <div class="tweetReplyCard-wrapper">
         <div class="card-left avatar" @click="linkedUser(reply.UserId)">
           <img class="avatar" :src="reply.User.avatar | emptyImage" />
         </div>

@@ -174,6 +174,7 @@ export default {
         this.userData = {
           ...this.userData,
           isFollowed: true,
+          follwerCount: this.userData.follwerCount+1,
         };
       } catch (error) {
         this.isProcessing = false;
@@ -195,6 +196,7 @@ export default {
         this.userData = {
           ...this.userData,
           isFollowed: false,
+          follwerCount: this.userData.follwerCount-1,
         };
       } catch (error) {
         this.isProcessing = false;

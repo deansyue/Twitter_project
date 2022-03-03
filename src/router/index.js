@@ -160,7 +160,7 @@ const router = new VueRouter({
   routes
 })
 
-/*router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   // 從 localStorage 和 vuex 取出 token
   const token = localStorage.getItem('token')
   const tokenInStore = store.state.token
@@ -187,6 +187,6 @@ const router = new VueRouter({
   ) return next('/users/main')
 
   next()
-})**/
+})
 
 export default router

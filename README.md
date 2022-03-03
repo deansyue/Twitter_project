@@ -11,67 +11,87 @@
 #### 一般使用者：
 
 - 註冊 - 未擁有帳號之使用者，可註冊帳號 ( 帳號、信箱不可重複 )
-- 登入 - 使用者可以帳號及密碼登入系統（使用者身分驗證隨登入登出改動 )
-- 發送推文與回覆 - 可於頁面進行推文與回覆之發送，並頁面會隨即更新
-- 修改資料 - 使用者可修改帳戶資料、自我介紹、照片及背景
-- 使用者可追蹤他人 - 有頁面顯示追蹤與被追蹤之狀態
-- 使用者可按推文讚 - 有頁面顯示使用者以按讚推文
+- 登入- 使用者可以帳號及密碼登入系統（使用者身分驗證隨登入登出改動 )
+- 瀏覽推文與回覆 - 使用者可檢視所有推文與回覆
+- 發送推文與回覆 - 使用者可新增推文與回覆指定推文，頁面即時更新
+- 修改資料 - 使用者可修改帳號資料、照片、背景及自我介紹
+- 使用者可追蹤、取消追蹤他人 – 追蹤狀態頁面按鈕顯示追蹤與被追蹤之狀態
+- 使用者可喜歡、取消喜歡推文 – 個人頁面顯示使用者按讚推文
 
 #### 後台管理員：
 
-- 後台管理員不可註冊 - 由後端直接寫入資料庫
-- 管理員可由後台入口登入 ( 使用頁面與一般使用者不同 )
-- 管理員可刪除推文
-- 管理員可瀏覽使用者之各式數據 ( 僅能瀏覽 )
+- 後台管理員由後端直接寫入資料庫、不可註冊
+- 管理員可由後台入口登入、無法進入前台網頁
+- 管理員可瀏覽所有貼文、刪除指定推文
+- 管理員可瀏覽使用者之各式數據 ( 僅可瀏覽 )
 
-#### 使用技術：
+## ❖ 環境建置：
 
-- Vue.js 框架 - 拆分頁面元件 ( component )，有效管理程式碼
-- Vuex 狀態管理 - 使用者權限認證，並可對整體頁面之連動性進行控制
-- Vue router - 實現單頁式應用網站 ( SPA )，可提升使用者體驗，降低伺服器負擔
-- API 串接 - 透過 API 與後端提取資料，並渲染畫面
+- Vue.js
+- Vuex
+- Vue router
+- Axios
+- SASS
 
-## ❖ 如何使用
+## ❖ 專案安裝流程
 
-### Step 1 . Please clone the repository
-
-```bash
-git clone -b main https://github.com/Joy-Chang-2021/Twitter_project.git
-```
-
-### Step 2 . Project Setup
-
-- Install dependencies
+1. 打開您的終端機(terminal)，複製(clone)專案至本機
 
 ```bash
-npm install
+git clone https://github.com/Joy-Chang-2021/Twitter_project.git
 ```
-
-- Note: You need to change the default API baseURL in `./src/utils/helper.js` if you want to user your own API server.  
-   (若想連接本地端的資料庫，請在 `./src/utils/helper.js` 調整 baseURL 參數)
-
-```JS
-const baseURL = 'https://....' // modify this line
-```
-
-### Step 3. Project Run
-
-- Run Server (若資料載於 local，則需同時啟動後端伺服器)
+2. 進入存放此專案之資料夾
 
 ```bash
 cd Twitter_project
 ```
+3. 安裝 npm 套件
+
+```bash
+npm install
+```
+4. 啟動專案
 
 ```bash
 npm run serve
 ```
+5. 根據終端機(terminal)指示，使用網址 http://localhost:8080 查看網站
 
-- Open the browser and navigate to http://localhost:8080 👀 （打開瀏覽器並於 http://localhost:8080 查看）
 
-### 快速瀏覽專案
+## ❖ 種子資料使用者
 
-- 前台測試帳號： account：user1 / password：12345678
-- 後台測試帳號： account：root / password：12345678
+可使用種子資料新增的使用者操作本專案
+
+### 後台帳號
+```bash
+admin
+   account：root
+   password：12345678
+```
+### 前台帳號
+
+```bash
+user1
+   account：user1
+   password：12345678
+
+user2
+   account：user1
+   password：12345678
+
+user3
+   account：user3
+   password：12345678
+
+user4
+   account：user4
+   password：12345678
+
+user5
+   account：user5
+   password：12345678
+
+```
 
 ## ❖ 相關連結
 
@@ -83,7 +103,7 @@ npm run serve
 ### 後端
 
 - github：https://github.com/hmrvc/twitter-api-2020
-- Heroku：
+- Heroku：https://thawing-citadel-19528.herokuapp.com/
 
 ## ❖ Team / 團隊成員
 

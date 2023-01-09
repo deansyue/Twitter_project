@@ -38,7 +38,7 @@
 1. 打開您的終端機(terminal)，複製(clone)專案至本機
 
 ```bash
-git clone https://github.com/Joy-Chang-2021/Twitter_project.git
+git clone https://github.com/deansyue/Twitter_project.git
 ```
 2. 進入存放此專案之資料夾
 
@@ -97,13 +97,13 @@ user5
 
 ### 前端
 
-- github：https://github.com/Joy-Chang-2021/Twitter_project.git
-- Github Page：https://Joy-Chang-2021.github.io/Twitter_project/
+- github：https://github.com/deansyue/Twitter_project.git
+- Github Page：https://deansyue.github.io/Twitter_project/
 
 ### 後端
 
-- github：https://github.com/hmrvc/twitter-api-2020
-- Heroku：https://thawing-citadel-19528.herokuapp.com/
+- github：https://github.com/deansyue/twitter-api-2020.git
+- Heroku：https://calm-cliffs-38682.herokuapp.com/
 
 ## ❖ Team / 團隊成員
 

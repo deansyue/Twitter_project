@@ -22,7 +22,7 @@ git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.Github.io/<REPO>
 # git push -f https://github.com/<USERNAME>/<REPO>.git main:gh-pages
-git push -f https://github.com/Joy-Chang-2021/Twitter_project.git main:gh-pages
+git push -f https://github.com/deansyue/Twitter_project.git main:gh-pages
 
 cd -
 
